@@ -8,10 +8,7 @@ export function stupidCase(str) {
 export const normalize = (content) =>
   content.normalize("NFD").replace(/[^\p{ASCII}]/gu, "");
 
-export const captures = (regex, str) => {
-  const match = regex.exec(str);
-  return match ? match.slice(1) : [];
-};
+export const captures = (regex, str) => regex.exec(str)?.slice(1) ?? [];
 
 export const allCaptures = (regexes, str) =>
   regexes.map((regex) => captures(regex, str)).flat();
