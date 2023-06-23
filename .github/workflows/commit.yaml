@@ -1,0 +1,38 @@
+name: commit stage
+
+on:
+  push:
+    branches: ["main"]
+  workflow_call:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 20.x
+          cache: npm
+      - run: npm install --ci
+      - run: npm run test
+
+  gitleaks:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      - uses: gitleaks/gitleaks-action@v2
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+  release:
+    needs: [test, gitleaks]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: joaofnds/semantic-release-action@v1.1.0
+        with:
+          plugins: "conventional-changelog-conventionalcommits"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

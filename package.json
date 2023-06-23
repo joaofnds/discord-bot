@@ -1,0 +1,17 @@
+{
+  "name": "reply-bot",
+  "version": "1.0.0",
+  "description": "discord bot with pre-programmed replies",
+  "main": "index.js",
+  "engines": {
+    "node": "20.x"
+  },
+  "scripts": {
+    "test": "node --test"
+  },
+  "author": "João Fernandes",
+  "license": "ISC",
+  "dependencies": {
+    "discord.js": "^14.11.0"
+  }
+}
