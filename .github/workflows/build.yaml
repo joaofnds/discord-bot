@@ -1,0 +1,62 @@
+name: build
+
+on:
+  push:
+    tags:
+      - "**"
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - uses: docker/login-action@v2
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - uses: docker/metadata-action@v4
+        id: meta
+        with:
+          images: ghcr.io/${{ github.repository }}
+          tags: |
+            type=sha,prefix=,format=short
+            type=semver,pattern={{version}}
+
+      - uses: docker/build-push-action@v4
+        with:
+          push: true
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: production
+      url: https://dbtb-bot.fly.dev/
+    steps:
+      - uses: docker/metadata-action@v3
+        id: meta
+        with:
+          images: ghcr.io/${{ github.repository }}
+          tags: |
+            type=sha,prefix=,format=short
+            type=semver,pattern={{version}}
+
+      - uses: superfly/flyctl-actions/setup-flyctl@master
+        env:
+          FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
+
+      - run: flyctl deploy --app dbtb-bot --image $IMAGE --image-label $VERSION
+        env:
+          FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
+          IMAGE: ${{ fromJSON(steps.meta.outputs.json).tags[0] }}
+          VERSION: ${{ fromJSON(steps.meta.outputs.json).labels['org.opencontainers.image.version'] }}
+
+      - name: rollback
+        if: failure()
+        run: fly deploy --app dbtb-bot --image `fly releases --app dbtb-bot -j | jq ".[1].ImageRef" -r`
