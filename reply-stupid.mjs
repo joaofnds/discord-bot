@@ -12,6 +12,7 @@ export class ReplyStupid {
     /(Http)/g,
     /(Api)/g,
     /(Dto)/g,
+    /(light mode)/gi,
   ];
 
   async perform(message) {
