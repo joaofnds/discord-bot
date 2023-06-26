@@ -19,7 +19,7 @@ client.on(Events.ClientReady, () => {
 
 client.on(Events.MessageCreate, async (message) => {
   if (message.author.bot) return;
-  await Chain.fromArray([new ReplyStupid()]).perform(message);
+  await Chain.fromArray([new ReplyStupid()]).handle(message);
 });
 
 client.login(process.env.TOKEN);
