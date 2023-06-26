@@ -1,7 +1,7 @@
 import { Client, Events, GatewayIntentBits } from "discord.js";
-import { Chain } from "./chain.mjs";
 import { preflight } from "./preflight.mjs";
 import { ReplyStupid } from "./reply-stupid.mjs";
+import { linkChain } from "./util.mjs";
 
 preflight();
 
@@ -19,7 +19,7 @@ client.on(Events.ClientReady, () => {
 
 client.on(Events.MessageCreate, async (message) => {
   if (message.author.bot) return;
-  await Chain.fromArray([new ReplyStupid()]).handle(message);
+  await linkChain([new ReplyStupid()]).handle(message);
 });
 
 client.login(process.env.TOKEN);

@@ -1,10 +1,10 @@
 import assert from "node:assert";
 import { test } from "node:test";
 import { RememberWhenCalled } from "../test/remember-when-called.mjs";
-import { Chain } from "./chain.mjs";
 import { stupid } from "./emojis.mjs";
 import { MessageMock } from "./message-mock.mjs";
 import { ReplyStupid } from "./reply-stupid.mjs";
+import { linkChain } from "./util.mjs";
 
 test(ReplyStupid.name, async (t) => {
   await t.test("when string is non-stupid", async (t) => {
@@ -22,7 +22,7 @@ test(ReplyStupid.name, async (t) => {
       const nextInChain = new RememberWhenCalled();
       const message = new MessageMock("JSON HTTP API");
 
-      await Chain.fromArray([sut, nextInChain]).handle(message);
+      await linkChain([sut, nextInChain]).handle(message);
 
       assert.ok(nextInChain.called);
     });

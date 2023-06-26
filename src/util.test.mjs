@@ -1,6 +1,13 @@
 import assert from "node:assert";
 import { test } from "node:test";
-import { allCaptures, captures, normalize, stupidCase } from "./util.mjs";
+import { ReturnWhenEqual } from "../test/return-when-equal.mjs";
+import {
+  allCaptures,
+  captures,
+  linkChain,
+  normalize,
+  stupidCase,
+} from "./util.mjs";
 
 test("stupidCase", async (t) => {
   const testCases = [
