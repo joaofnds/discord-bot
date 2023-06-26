@@ -1,6 +1,6 @@
 import assert from "node:assert";
 import { test } from "node:test";
-import { allCaptures, captures, stupidCase, normalize } from "./util.mjs";
+import { allCaptures, captures, normalize, stupidCase } from "./util.mjs";
 
 test("stupidCase", async (t) => {
   const testCases = [

@@ -1,8 +1,9 @@
+import { Chain } from "./chain.mjs";
 import { stupid } from "./emojis.mjs";
 import { allCaptures, normalize, stupidCase } from "./util.mjs";
 
-export class ReplyStupid {
-  regexes = [
+export class ReplyStupid extends Chain {
+  regexes = Object.freeze([
     /(padrao)/gi,
     /(padroes)/gi,
     /(pattern)/gi,
@@ -13,14 +14,15 @@ export class ReplyStupid {
     /(Api)/g,
     /(Dto)/g,
     /(light mode)/gi,
-  ];
+  ]);
 
-  async perform(message) {
-    const captures = allCaptures(this.regexes, normalize(message.content));
-    if (captures.length === 0) return;
+  async handle(message) {
+    const str = normalize(message.content);
+    const captures = allCaptures(this.regexes, str);
+    if (captures.length === 0) return this.next?.handle(message);
 
     await message.reply(
-      `${captures.map((w) => stupidCase(w)).join(", ")}  ${stupid}`
+      `${captures.map((w) => stupidCase(w)).join(", ")} ${stupid}`
     );
   }
 }
