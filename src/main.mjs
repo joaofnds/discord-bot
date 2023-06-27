@@ -16,9 +16,8 @@ const client = new Client({
 
 client.on(Events.ClientReady, () => console.log("Bot is ready"));
 
-client.on(
-  Events.MessageCreate,
-  linkChain([new BotAuthorGuard(), new ReplyStupid()]).handle
-);
+client.on(Events.MessageCreate, async (message) => {
+  await linkChain([new BotAuthorGuard(), new ReplyStupid()]).handle(message);
+});
 
 client.login(process.env.TOKEN);
