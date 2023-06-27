@@ -1,8 +1,8 @@
 import assert from "node:assert";
 import { test } from "node:test";
+import { MessageMock } from "../test/message-mock.mjs";
 import { RememberWhenCalled } from "../test/remember-when-called.mjs";
 import { stupid } from "./emojis.mjs";
-import { MessageMock } from "./message-mock.mjs";
 import { ReplyStupid } from "./reply-stupid.mjs";
 import { linkChain } from "./util.mjs";
 
