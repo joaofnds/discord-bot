@@ -7,11 +7,7 @@ import { linkChain } from "./util.mjs";
 
 preflight();
 
-const handler = linkChain([
-  new BotAuthorGuard(),
-  new Reply(),
-  new ReplyStupid(),
-]);
+const handler = linkChain(new BotAuthorGuard(), new Reply(), new ReplyStupid());
 
 new Client({
   intents: [

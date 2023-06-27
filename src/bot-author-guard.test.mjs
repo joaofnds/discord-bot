@@ -13,7 +13,7 @@ test(BotAuthorGuard.name, async (t) => {
       const message = new MessageMock();
       message.author.bot = true;
 
-      await linkChain([botGuard, remember]).handle(message);
+      await linkChain(botGuard, remember).handle(message);
 
       assert(!remember.called);
     });
@@ -25,7 +25,7 @@ test(BotAuthorGuard.name, async (t) => {
       const remember = new RememberWhenCalled();
       const message = new MessageMock();
 
-      await linkChain([botGuard, remember]).handle(message);
+      await linkChain(botGuard, remember).handle(message);
 
       assert(!message.author.bot);
       assert(remember.called);

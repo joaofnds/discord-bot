@@ -14,7 +14,7 @@ export const allCaptures = (regexes, str) => {
   return regexes.map((regex) => captures(regex, str)).flat();
 };
 
-export function linkChain(links) {
+export function linkChain(...links) {
   links.reduce((previous, current) => {
     previous.setNext(current);
     return current;

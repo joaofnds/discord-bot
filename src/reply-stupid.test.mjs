@@ -22,7 +22,7 @@ test(ReplyStupid.name, async (t) => {
       const nextInChain = new RememberWhenCalled();
       const message = new MessageMock("JSON HTTP API");
 
-      await linkChain([sut, nextInChain]).handle(message);
+      await linkChain(sut, nextInChain).handle(message);
 
       assert.ok(nextInChain.called);
     });

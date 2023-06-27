@@ -6,10 +6,10 @@ import { linkChain } from "./util.mjs";
 
 test(Chain.name, async (t) => {
   await t.test("handle", async (t) => {
-    const chain = linkChain([
+    const chain = linkChain(
       new ReturnWhenEqual({ match: "first", value: "from first" }),
-      new ReturnWhenEqual({ match: "second", value: "from second" }),
-    ]);
+      new ReturnWhenEqual({ match: "second", value: "from second" })
+    );
 
     assert.equal(await chain.handle("first"), "from first");
     assert.equal(await chain.handle("second"), "from second");

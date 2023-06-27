@@ -29,7 +29,7 @@ test(Reply.name, async (t) => {
     const remember = new RememberWhenCalled();
     const message = new MessageMock("foo");
 
-    await linkChain([reply, remember]).handle(message);
+    await linkChain(reply, remember).handle(message);
 
     assert.deepEqual(message.replies, []);
     assert(remember.called);
