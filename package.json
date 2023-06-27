@@ -2,7 +2,7 @@
   "name": "reply-bot",
   "version": "1.0.0",
   "description": "discord bot with pre-programmed replies",
-  "main": "index.js",
+  "main": "src/main.mjs",
   "engines": {
     "node": "20.x"
   },

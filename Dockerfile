@@ -10,4 +10,4 @@ USER 1000
 WORKDIR /app
 COPY --from=deps /app/node_modules/ ./node_modules
 COPY ./src ./src
-CMD ["src/index.mjs"]
+CMD ["src/main.mjs"]
