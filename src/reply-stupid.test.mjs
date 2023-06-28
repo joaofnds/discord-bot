@@ -72,4 +72,18 @@ test(ReplyStupid.name, async (t) => {
       });
     }
   });
+
+  await t.test("does not reply non-stupid words", async (t) => {
+    const testCases = ["simplesmente"];
+
+    for (const input of testCases) {
+      await t.test(`for '${input}', does not reply`, async () => {
+        const message = new MessageMock(input);
+
+        await new ReplyStupid().handle(message);
+
+        assert(message.replies.length === 0);
+      });
+    }
+  });
 });

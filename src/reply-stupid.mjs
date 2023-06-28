@@ -8,7 +8,7 @@ export class ReplyStupid extends Chain {
     /(padroes)/gi,
     /(pattern)/gi,
     /(firebase)/gi,
-    /(simples)/gi,
+    /(simples\b)/gi,
     /(Json)/g,
     /(Http)/g,
     /(Api)/g,
