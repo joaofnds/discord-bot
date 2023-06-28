@@ -11,8 +11,6 @@ export class Reply extends Chain {
       const match = captures(regex, str);
       if (match.length === 0) continue;
 
-      console.log({ match });
-
       return message.reply(fn(...match));
     }
 
