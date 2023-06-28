@@ -15,6 +15,7 @@ export class ReplyStupid extends Chain {
     /(Dto)/g,
     /(Url)/g,
     /(light mode)/gi,
+    /(decorator)/g,
   ]);
 
   async handle(message) {
