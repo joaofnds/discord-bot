@@ -9,14 +9,14 @@ export class ReplyStupid extends Chain {
     /(pattern)/gi,
     /(firebase)/gi,
     /(simples\b)/gi,
+    /(deadline)/gi,
+    /(light mode)/gi,
     /(Json)/g,
     /(Http)/g,
     /(Api)/g,
     /(Dto)/g,
     /(Url)/g,
-    /(light mode)/gi,
     /(decorator)/g,
-    /(deadline)/g,
   ]);
 
   async handle(message) {
