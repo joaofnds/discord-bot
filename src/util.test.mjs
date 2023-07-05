@@ -1,13 +1,6 @@
 import assert from "node:assert";
 import { test } from "node:test";
-import {
-  allCaptures,
-  captures,
-  fromASCII,
-  normalize,
-  stupidCase,
-  toASCII,
-} from "./util.mjs";
+import { allCaptures, captures, normalize, stupidCase } from "./util.mjs";
 
 test("stupidCase", async (t) => {
   const testCases = [
@@ -49,16 +42,4 @@ test("allCaptures", () => {
     allCaptures([/(123)/, /(321)/, /(abc)/, /(cba)/], "123abc"),
     ["123", "abc"]
   );
-});
-
-test("toASCII", () => {
-  assert.deepEqual(toASCII("abc"), [97, 98, 99]);
-});
-
-test("fromASCII", () => {
-  assert.deepEqual(fromASCII([97, 98, 99]), "abc");
-});
-
-test("to and from ASCII", () => {
-  assert.equal(fromASCII(toASCII("abc")), "abc");
 });
