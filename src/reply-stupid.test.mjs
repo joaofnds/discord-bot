@@ -58,6 +58,7 @@ test(ReplyStupid.name, async (t) => {
       ["Api", "ApI " + stupid],
       ["Dto", "DtO " + stupid],
       ["Url", "UrL " + stupid],
+      ["Uuid", "UuId " + stupid],
       ["light mode", "LiGhT MoDe " + stupid],
       ["decorator", "DeCoRaToR " + stupid],
       ["deadline", "DeAdLiNe " + stupid],

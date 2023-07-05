@@ -16,6 +16,7 @@ export class ReplyStupid extends Chain {
     /(Api)/g,
     /(Dto)/g,
     /(Url)/g,
+    /(Uuid)/g,
     /(decorator)/g,
   ]);
 
