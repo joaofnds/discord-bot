@@ -2,6 +2,7 @@ import assert from "node:assert";
 import { test } from "node:test";
 import { MessageMock } from "../test/message-mock.mjs";
 import { RememberWhenCalled } from "../test/remember-when-called.mjs";
+import { randomFolk } from "./emojis.mjs";
 import { Reply } from "./reply.mjs";
 import { linkChain } from "./util.mjs";
 
@@ -11,6 +12,9 @@ test(Reply.name, async (t) => {
       ["bolsonaro", "e o PT hein? e o lula?"],
       ["Bolsonaro", "e o PT hein? e o lula?"],
       ["BOLSONARO", "e o PT hein? e o lula?"],
+      ["citando aleatoriamente", randomFolk],
+      ["CiTaNdO AlEaToRiAmEnTe", randomFolk],
+      ["CITANDO ALEATORIAMENTE", randomFolk],
     ];
 
     for (const [input, expected] of testCases) {

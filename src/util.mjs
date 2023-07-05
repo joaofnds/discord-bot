@@ -21,3 +21,7 @@ export function linkChain(...links) {
   });
   return links[0];
 }
+
+export const toASCII = (str) => str.split("").map((c) => c.charCodeAt(0));
+export const fromASCII = (arr) =>
+  arr.map((c) => String.fromCharCode(c)).join("");
