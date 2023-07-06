@@ -1,5 +1,6 @@
 export class MessageMock {
   replies = [];
+  reacts = [];
   author = { bot: false };
 
   constructor(content) {
@@ -8,5 +9,9 @@ export class MessageMock {
 
   reply(message) {
     this.replies.push(message);
+  }
+
+  react(message) {
+    this.reacts.push(message);
   }
 }

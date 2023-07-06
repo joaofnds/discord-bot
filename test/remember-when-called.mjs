@@ -9,4 +9,8 @@ export class RememberWhenCalled extends Chain {
   async handle(_message) {
     this.called = true;
   }
+
+  reset() {
+    this.called = false;
+  }
 }
