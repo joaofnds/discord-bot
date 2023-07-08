@@ -65,6 +65,7 @@ test(ReplyStupid.name, async (t) => {
       ["legado", "LeGaDo " + stupid],
       ["lEgAdO", "LeGaDo " + stupid],
       ["LEGADO", "LeGaDo " + stupid],
+      ["Http Dto Api", "HtTp, ApI, DtO " + stupid],
     ];
 
     for (const [input, expected] of testCases) {
