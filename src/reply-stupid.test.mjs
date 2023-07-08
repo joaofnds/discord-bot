@@ -62,6 +62,9 @@ test(ReplyStupid.name, async (t) => {
       ["light mode", "LiGhT MoDe " + stupid],
       ["decorator", "DeCoRaToR " + stupid],
       ["deadline", "DeAdLiNe " + stupid],
+      ["legado", "LeGaDo " + stupid],
+      ["lEgAdO", "LeGaDo " + stupid],
+      ["LEGADO", "LeGaDo " + stupid],
     ];
 
     for (const [input, expected] of testCases) {
