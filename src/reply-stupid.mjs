@@ -8,7 +8,7 @@ export class ReplyStupid extends Chain {
     /(firebase)/gi,
     /(legado)/gi,
     /(light mode)/gi,
-    /(mapea\w+)/gi,
+    /(mape[ai]\w+)/gi,
     /(padrao)/gi,
     /(padroes)/gi,
     /(pattern)/gi,
@@ -29,7 +29,7 @@ export class ReplyStupid extends Chain {
     if (captures.length === 0) return this.next?.handle(message);
 
     await message.reply(
-      `${captures.map((w) => stupidCase(w)).join(", ")} ${stupid}`,
+      `${captures.map((w) => stupidCase(w)).join(", ")} ${stupid}`
     );
   }
 }
