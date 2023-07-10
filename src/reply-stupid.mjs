@@ -5,12 +5,12 @@ import { allCaptures, normalize, stupidCase } from "./util.mjs";
 export class ReplyStupid extends Chain {
   regexes = Object.freeze([
     /(deadline)/gi,
+    /(decorator)/gi,
     /(firebase)/gi,
     /(legado)/gi,
     /(light mode)/gi,
     /(mape[ai]\w+)/gi,
-    /(padrao)/gi,
-    /(padroes)/gi,
+    /(padra?o\w*)/gi,
     /(pattern)/gi,
     /(simples\b)/gi,
 
@@ -20,7 +20,6 @@ export class ReplyStupid extends Chain {
     /(Json)/g,
     /(Url)/g,
     /(Uuid)/g,
-    /(decorator)/g,
   ]);
 
   async handle(message) {

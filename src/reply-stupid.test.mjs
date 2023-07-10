@@ -49,22 +49,43 @@ test(ReplyStupid.name, async (t) => {
   await t.test("stupid words", async (t) => {
     const testCases = [
       ["padrao", "PaDrAo " + stupid],
+      ["PADRAO", "PaDrAo " + stupid],
+
       ["padroes", "PaDrOeS " + stupid],
+      ["PADROES", "PaDrOeS " + stupid],
+
+      ["padronização", "PaDrOnIzAcAo " + stupid],
+      ["PADRONIZAÇÃO", "PaDrOnIzAcAo " + stupid],
+
       ["pattern", "PaTtErN " + stupid],
+      ["PATTERN", "PaTtErN " + stupid],
+
       ["firebase", "FiReBaSe " + stupid],
+      ["FIREBASE", "FiReBaSe " + stupid],
+
       ["simples", "SiMpLeS " + stupid],
+      ["SIMPLES", "SiMpLeS " + stupid],
+
       ["Json", "JsOn " + stupid],
       ["Http", "HtTp " + stupid],
       ["Api", "ApI " + stupid],
       ["Dto", "DtO " + stupid],
       ["Url", "UrL " + stupid],
       ["Uuid", "UuId " + stupid],
+
       ["light mode", "LiGhT MoDe " + stupid],
+      ["LIGHT MODE", "LiGhT MoDe " + stupid],
+
       ["decorator", "DeCoRaToR " + stupid],
+      ["DECORATOR", "DeCoRaToR " + stupid],
+
       ["deadline", "DeAdLiNe " + stupid],
+      ["DEADLINE", "DeAdLiNe " + stupid],
+
       ["legado", "LeGaDo " + stupid],
       ["lEgAdO", "LeGaDo " + stupid],
       ["LEGADO", "LeGaDo " + stupid],
+
       ["mapear", "MaPeAr " + stupid],
       ["MAPEAR", "MaPeAr " + stupid],
       ["mapeamento", "MaPeAmEnTo " + stupid],
@@ -73,6 +94,7 @@ test(ReplyStupid.name, async (t) => {
       ["MAPEADO", "MaPeAdO " + stupid],
       ["mapeio", "MaPeIo " + stupid],
       ["MAPEIO", "MaPeIo " + stupid],
+
       ["Http Dto Api", "ApI, DtO, HtTp " + stupid],
     ];
 
