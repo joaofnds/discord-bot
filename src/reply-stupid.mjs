@@ -4,21 +4,22 @@ import { allCaptures, normalize, stupidCase } from "./util.mjs";
 
 export class ReplyStupid extends Chain {
   regexes = Object.freeze([
+    /(deadline)/gi,
+    /(firebase)/gi,
+    /(legado)/gi,
+    /(light mode)/gi,
     /(padrao)/gi,
     /(padroes)/gi,
     /(pattern)/gi,
-    /(firebase)/gi,
     /(simples\b)/gi,
-    /(deadline)/gi,
-    /(light mode)/gi,
-    /(Json)/g,
-    /(Http)/g,
+
     /(Api)/g,
     /(Dto)/g,
+    /(Http)/g,
+    /(Json)/g,
     /(Url)/g,
     /(Uuid)/g,
     /(decorator)/g,
-    /(legado)/gi,
   ]);
 
   async handle(message) {
@@ -27,7 +28,7 @@ export class ReplyStupid extends Chain {
     if (captures.length === 0) return this.next?.handle(message);
 
     await message.reply(
-      `${captures.map((w) => stupidCase(w)).join(", ")} ${stupid}`,
+      `${captures.map((w) => stupidCase(w)).join(", ")} ${stupid}`
     );
   }
 }

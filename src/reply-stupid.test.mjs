@@ -34,7 +34,7 @@ test(ReplyStupid.name, async (t) => {
 
     await sut.handle(message);
 
-    assert.deepEqual(message.replies, [`JsOn, HtTp, ApI ${stupid}`]);
+    assert.deepEqual(message.replies, [`ApI, HtTp, JsOn ${stupid}`]);
   });
 
   await t.test("ignores non-stupid words", async (t) => {
@@ -43,7 +43,7 @@ test(ReplyStupid.name, async (t) => {
 
     await sut.handle(message);
 
-    assert.deepEqual(message.replies, [`JsOn, ApI ${stupid}`]);
+    assert.deepEqual(message.replies, [`ApI, JsOn ${stupid}`]);
   });
 
   await t.test("stupid words", async (t) => {
@@ -65,7 +65,7 @@ test(ReplyStupid.name, async (t) => {
       ["legado", "LeGaDo " + stupid],
       ["lEgAdO", "LeGaDo " + stupid],
       ["LEGADO", "LeGaDo " + stupid],
-      ["Http Dto Api", "HtTp, ApI, DtO " + stupid],
+      ["Http Dto Api", "ApI, DtO, HtTp " + stupid],
     ];
 
     for (const [input, expected] of testCases) {
