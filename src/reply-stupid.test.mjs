@@ -69,6 +69,8 @@ test(ReplyStupid.name, async (t) => {
       ["MAPEAR", "MaPeAr " + stupid],
       ["mapeamento", "MaPeAmEnTo " + stupid],
       ["MAPEAMENTO", "MaPeAmEnTo " + stupid],
+      ["mapeado", "MaPeAdO " + stupid],
+      ["MAPEADO", "MaPeAdO " + stupid],
       ["Http Dto Api", "ApI, DtO, HtTp " + stupid],
     ];
 
