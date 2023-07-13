@@ -86,8 +86,9 @@ test(ReplyStupid.name, async (t) => {
       ["lEgAdO", "LeGaDo "],
       ["LEGADO", "LeGaDo "],
 
-      ["seguranca", "SeGuRanCa "],
-      ["SEGURANCA", "SeGuRanCa "],
+
+      ["seguranca", "SeGuRaNcA "],
+      ["SEGURANCA", "SeGuRaNcA "],
 
       ["mapear", "MaPeAr "],
       ["MAPEAR", "MaPeAr "],
@@ -107,7 +108,7 @@ test(ReplyStupid.name, async (t) => {
 
         await new ReplyStupid().handle(message);
 
-        assert.deepEqual(message.replies, [expected]);
+        assert.deepEqual(message.replies, [expected.concat(stupid)]);
       });
     }
   });
