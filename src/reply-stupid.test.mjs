@@ -48,63 +48,66 @@ test(ReplyStupid.name, async (t) => {
 
   await t.test("stupid words", async (t) => {
     const testCases = [
-      ["padrao", "PaDrAo " + stupid],
-      ["PADRAO", "PaDrAo " + stupid],
+      ["padrao", "PaDrAo"],
+      ["PADRAO", "PaDrAo"],
 
-      ["padroes", "PaDrOeS " + stupid],
-      ["PADROES", "PaDrOeS " + stupid],
+      ["padroes", "PaDrOeS"],
+      ["PADROES", "PaDrOeS"],
 
-      ["padronização", "PaDrOnIzAcAo " + stupid],
-      ["PADRONIZAÇÃO", "PaDrOnIzAcAo " + stupid],
+      ["padronização", "PaDrOnIzAcAo"],
+      ["PADRONIZAÇÃO", "PaDrOnIzAcAo"],
 
-      ["pattern", "PaTtErN " + stupid],
-      ["PATTERN", "PaTtErN " + stupid],
+      ["pattern", "PaTtErN"],
+      ["PATTERN", "PaTtErN"],
 
-      ["firebase", "FiReBaSe " + stupid],
-      ["FIREBASE", "FiReBaSe " + stupid],
+      ["firebase", "FiReBaSe"],
+      ["FIREBASE", "FiReBaSe"],
 
-      ["simples", "SiMpLeS " + stupid],
-      ["SIMPLES", "SiMpLeS " + stupid],
+      ["simples", "SiMpLeS"],
+      ["SIMPLES", "SiMpLeS"],
 
-      ["Json", "JsOn " + stupid],
-      ["Http", "HtTp " + stupid],
-      ["Api", "ApI " + stupid],
-      ["Dto", "DtO " + stupid],
-      ["Url", "UrL " + stupid],
-      ["Uuid", "UuId " + stupid],
+      ["Json", "JsOn"],
+      ["Http", "HtTp"],
+      ["Api", "ApI"],
+      ["Dto", "DtO"],
+      ["Url", "UrL"],
+      ["Uuid", "UuId"],
 
-      ["light mode", "LiGhT MoDe " + stupid],
-      ["LIGHT MODE", "LiGhT MoDe " + stupid],
+      ["light mode", "LiGhT MoDe"],
+      ["LIGHT MODE", "LiGhT MoDe"],
 
-      ["decorator", "DeCoRaToR " + stupid],
-      ["DECORATOR", "DeCoRaToR " + stupid],
+      ["decorator", "DeCoRaToR"],
+      ["DECORATOR", "DeCoRaToR"],
 
-      ["deadline", "DeAdLiNe " + stupid],
-      ["DEADLINE", "DeAdLiNe " + stupid],
+      ["deadline", "DeAdLiNe"],
+      ["DEADLINE", "DeAdLiNe"],
 
-      ["legado", "LeGaDo " + stupid],
-      ["lEgAdO", "LeGaDo " + stupid],
-      ["LEGADO", "LeGaDo " + stupid],
+      ["legado", "LeGaDo"],
+      ["lEgAdO", "LeGaDo"],
+      ["LEGADO", "LeGaDo"],
 
-      ["mapear", "MaPeAr " + stupid],
-      ["MAPEAR", "MaPeAr " + stupid],
-      ["mapeamento", "MaPeAmEnTo " + stupid],
-      ["MAPEAMENTO", "MaPeAmEnTo " + stupid],
-      ["mapeado", "MaPeAdO " + stupid],
-      ["MAPEADO", "MaPeAdO " + stupid],
-      ["mapeio", "MaPeIo " + stupid],
-      ["MAPEIO", "MaPeIo " + stupid],
+      ["seguranca", "SeGuRaNcA"],
+      ["SEGURANCA", "SeGuRaNcA"],
 
-      ["Http Dto Api", "ApI, DtO, HtTp " + stupid],
+      ["mapear", "MaPeAr"],
+      ["MAPEAR", "MaPeAr"],
+      ["mapeamento", "MaPeAmEnTo"],
+      ["MAPEAMENTO", "MaPeAmEnTo"],
+      ["mapeado", "MaPeAdO"],
+      ["MAPEADO", "MaPeAdO"],
+      ["mapeio", "MaPeIo"],
+      ["MAPEIO", "MaPeIo"],
+
+      ["Http Dto Api", "ApI, DtO, HtTp"],
     ];
 
     for (const [input, expected] of testCases) {
-      await t.test(`for '${input}' returns '${expected}'`, async () => {
+      await t.test(`for '${input}' returns '${expected} ${stupid}'`, async () => {
         const message = new MessageMock(input);
 
         await new ReplyStupid().handle(message);
 
-        assert.deepEqual(message.replies, [expected]);
+        assert.deepEqual(message.replies, [`${expected} ${stupid}`]);
       });
     }
   });
