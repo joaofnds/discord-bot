@@ -103,7 +103,7 @@ test(ReplyStupid.name, async (t) => {
     ];
 
     for (const [input, expected] of testCases) {
-      await t.test(`for '${input}' returns '${expected + stupid}'`, async () => {
+      await t.test(`for '${input}' returns '${expected.concat(stupid)}'`, async () => {
         const message = new MessageMock(input);
 
         await new ReplyStupid().handle(message);
