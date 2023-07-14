@@ -98,17 +98,24 @@ test(ReplyStupid.name, async (t) => {
       ["mapeio", "MaPeIo"],
       ["MAPEIO", "MaPeIo"],
 
+      ["entregar valor", "EnTrEgAr vAlOr"],
+      ["eNtReGaR VaLoR", "EnTrEgAr vAlOr"],
+      ["ENTREGAR VALOR", "EnTrEgAr vAlOr"],
+
       ["Http Dto Api", "ApI, DtO, HtTp"],
     ];
 
     for (const [input, expected] of testCases) {
-      await t.test(`for '${input}' returns '${expected} ${stupid}'`, async () => {
-        const message = new MessageMock(input);
+      await t.test(
+        `for '${input}' returns '${expected} ${stupid}'`,
+        async () => {
+          const message = new MessageMock(input);
 
-        await new ReplyStupid().handle(message);
+          await new ReplyStupid().handle(message);
 
-        assert.deepEqual(message.replies, [`${expected} ${stupid}`]);
-      });
+          assert.deepEqual(message.replies, [`${expected} ${stupid}`]);
+        },
+      );
     }
   });
 
