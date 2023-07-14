@@ -105,17 +105,16 @@ test(ReplyStupid.name, async (t) => {
       ["Http Dto Api", "ApI, DtO, HtTp"],
     ];
 
-    for (const [input, expected] of testCases) {
-      await t.test(
-        `for '${input}' returns '${expected} ${stupid}'`,
-        async () => {
-          const message = new MessageMock(input);
+    for (const [input, expectedTransformation] of testCases) {
+      const expected = `${expectedTransformation} ${stupid}`;
 
-          await new ReplyStupid().handle(message);
+      await t.test(`for '${input}' returns '${expected}'`, async () => {
+        const message = new MessageMock(input);
 
-          assert.deepEqual(message.replies, [`${expected} ${stupid}`]);
-        },
-      );
+        await new ReplyStupid().handle(message);
+
+        assert.deepEqual(message.replies, [expected]);
+      });
     }
   });
 
