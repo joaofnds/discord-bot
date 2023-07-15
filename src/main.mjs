@@ -1,4 +1,5 @@
 import { Client, Events, GatewayIntentBits } from "discord.js";
+import { Abbrev } from "./abbrev.mjs";
 import { BotAuthorGuard } from "./bot-author-guard.mjs";
 import { preflight } from "./preflight.mjs";
 import { ReplyStupid } from "./reply-stupid.mjs";
@@ -11,9 +12,10 @@ preflight();
 
 const handler = linkChain(
   new BotAuthorGuard(),
+  new Abbrev(),
   new Timeout(timeSpanInMs(10, "minutes")),
   new Reply(),
-  new ReplyStupid(),
+  new ReplyStupid()
 );
 
 new Client({
