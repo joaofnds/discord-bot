@@ -1,4 +1,3 @@
-import { randomFolk } from "../emojis.mjs";
 import { captures } from "../lib/captures.mjs";
 import { normalize } from "../lib/normalize.mjs";
 import { Chain } from "./chain.mjs";
