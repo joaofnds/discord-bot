@@ -1,4 +1,4 @@
-import assert from "node:assert";
+import { mustGetEnv } from "./lib/must-get-env.mjs";
 
 export class Config {
   constructor({ token, randomFolk }) {
@@ -7,15 +7,9 @@ export class Config {
   }
 
   static fromEnv() {
-    assert(process.env.TOKEN, "TOKEN environment variable is required");
-    assert(
-      process.env.RANDOM_FOLK,
-      "RANDOM_FOLK environment variable is required"
-    );
-
     return new Config({
-      token: process.env.TOKEN,
-      randomFolk: process.env.RANDOM_FOLK,
+      token: mustGetEnv("TOKEN"),
+      randomFolk: mustGetEnv("RANDOM_FOLK"),
     });
   }
 }
