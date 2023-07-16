@@ -4,9 +4,14 @@ import { normalize } from "../lib/normalize.mjs";
 import { Chain } from "./chain.mjs";
 
 export class Reply extends Chain {
+  constructor({ randomFolk }) {
+    super();
+    this.randomFolk = randomFolk;
+  }
+
   responses = [
     { regex: /(bolsonaro)/gi, fn: () => "e o PT hein? e o lula?" },
-    { regex: /(citando aleatoriamente)/gi, fn: () => randomFolk },
+    { regex: /(citando aleatoriamente)/gi, fn: () => this.randomFolk },
   ];
 
   async handle(message) {

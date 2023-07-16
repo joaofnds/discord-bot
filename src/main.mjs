@@ -5,6 +5,7 @@ import { linkChain } from "./chain/link-chain.mjs";
 import { ReplyStupid } from "./chain/reply-stupid.mjs";
 import { Reply } from "./chain/reply.mjs";
 import { Timeout } from "./chain/timeout.mjs";
+import { randomFolk } from "./emojis.mjs";
 import * as time from "./lib/time.mjs";
 import { preflight } from "./preflight.mjs";
 
@@ -14,7 +15,7 @@ const handler = linkChain(
   new BotAuthorGuard(),
   new Abbrev(),
   new Timeout(10 * time.Minute),
-  new Reply(),
+  new Reply({ randomFolk }),
   new ReplyStupid()
 );
 
