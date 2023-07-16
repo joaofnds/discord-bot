@@ -22,7 +22,7 @@ test(Reply.name, async (t) => {
       await t.test(`for '${input}' returns '${expected}'`, async () => {
         const message = new MessageMock(input);
 
-        await new Reply({ randomFolk }).handle(message);
+        await new Reply(randomFolk).handle(message);
 
         assert.deepEqual(message.replies, [expected]);
       });
@@ -30,7 +30,7 @@ test(Reply.name, async (t) => {
   });
 
   await t.test("calls next when it does not match", async (t) => {
-    const reply = new Reply({ randomFolk });
+    const reply = new Reply(randomFolk);
     const remember = new RememberWhenCalled();
     const message = new MessageMock("foo");
 

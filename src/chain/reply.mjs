@@ -3,7 +3,7 @@ import { normalize } from "../lib/normalize.mjs";
 import { Chain } from "./chain.mjs";
 
 export class Reply extends Chain {
-  constructor({ randomFolk }) {
+  constructor(randomFolk) {
     super();
     this.randomFolk = randomFolk;
   }
