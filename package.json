@@ -1,5 +1,5 @@
 {
-  "name": "reply-bot",
+  "name": "discord-bot",
   "version": "1.0.0",
   "description": "discord bot with pre-programmed replies",
   "main": "src/main.mjs",
