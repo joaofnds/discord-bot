@@ -1,14 +1,14 @@
 import assert from "node:assert";
 import { test } from "node:test";
-import { MessageMock } from "../test/message-mock.mjs";
-import { RememberWhenCalled } from "../test/remember-when-called.mjs";
-import { timeSpanInMs } from "./time.mjs";
+import { MessageMock } from "../../test/message-mock.mjs";
+import { RememberWhenCalled } from "../../test/remember-when-called.mjs";
+import * as time from "../lib/time.mjs";
+import { linkChain } from "./link-chain.mjs";
 import { Timeout } from "./timeout.mjs";
-import { linkChain } from "./util.mjs";
 
 test(Timeout.name, async (t) => {
   await t.test("calls next when it does not match", async (t) => {
-    const timeoutDuration = timeSpanInMs(5, "milliseconds");
+    const timeoutDuration = 5 * time.Millisecond;
     const timeout = new Timeout(timeoutDuration);
     const remember = new RememberWhenCalled();
     const handler = linkChain(timeout, remember);

@@ -1,14 +1,14 @@
 import assert from "node:assert";
 import { test } from "node:test";
-import { ReturnWhenEqual } from "../test/return-when-equal.mjs";
+import { ReturnWhenEqual } from "../../test/return-when-equal.mjs";
 import { Chain } from "./chain.mjs";
-import { linkChain } from "./util.mjs";
+import { linkChain } from "./link-chain.mjs";
 
 test(Chain.name, async (t) => {
   await t.test("handle", async (t) => {
     const chain = linkChain(
       new ReturnWhenEqual({ match: "first", value: "from first" }),
-      new ReturnWhenEqual({ match: "second", value: "from second" }),
+      new ReturnWhenEqual({ match: "second", value: "from second" })
     );
 
     assert.equal(await chain.handle("first"), "from first");

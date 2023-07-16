@@ -1,9 +1,9 @@
 import assert from "node:assert";
 import { test } from "node:test";
-import { MessageMock } from "../test/message-mock.mjs";
-import { RememberWhenCalled } from "../test/remember-when-called.mjs";
+import { MessageMock } from "../../test/message-mock.mjs";
+import { RememberWhenCalled } from "../../test/remember-when-called.mjs";
 import { Abbrev } from "./abbrev.mjs";
-import { linkChain } from "./util.mjs";
+import { linkChain } from "./link-chain.mjs";
 
 test(Abbrev.name, async (t) => {
   await t.test("matches", async (t) => {

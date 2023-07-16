@@ -1,9 +1,9 @@
 import assert from "node:assert";
 import { test } from "node:test";
-import { MessageMock } from "../test/message-mock.mjs";
-import { RememberWhenCalled } from "../test/remember-when-called.mjs";
+import { MessageMock } from "../../test/message-mock.mjs";
+import { RememberWhenCalled } from "../../test/remember-when-called.mjs";
 import { BotAuthorGuard } from "./bot-author-guard.mjs";
-import { linkChain } from "./util.mjs";
+import { linkChain } from "./link-chain.mjs";
 
 test(BotAuthorGuard.name, async (t) => {
   await t.test("when message is from bot", async (t) => {

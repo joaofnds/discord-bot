@@ -1,10 +1,10 @@
 import assert from "node:assert";
 import { test } from "node:test";
-import { MessageMock } from "../test/message-mock.mjs";
-import { RememberWhenCalled } from "../test/remember-when-called.mjs";
-import { stupid } from "./emojis.mjs";
+import { MessageMock } from "../../test/message-mock.mjs";
+import { RememberWhenCalled } from "../../test/remember-when-called.mjs";
+import { stupid } from "../emojis.mjs";
+import { linkChain } from "./link-chain.mjs";
 import { ReplyStupid } from "./reply-stupid.mjs";
-import { linkChain } from "./util.mjs";
 
 test(ReplyStupid.name, async (t) => {
   await t.test("when string is non-stupid", async (t) => {

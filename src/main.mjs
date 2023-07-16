@@ -1,19 +1,19 @@
 import { Client, Events, GatewayIntentBits } from "discord.js";
-import { Abbrev } from "./abbrev.mjs";
-import { BotAuthorGuard } from "./bot-author-guard.mjs";
+import { Abbrev } from "./chain/abbrev.mjs";
+import { BotAuthorGuard } from "./chain/bot-author-guard.mjs";
+import { linkChain } from "./chain/link-chain.mjs";
+import { ReplyStupid } from "./chain/reply-stupid.mjs";
+import { Reply } from "./chain/reply.mjs";
+import { Timeout } from "./chain/timeout.mjs";
+import * as time from "./lib/time.mjs";
 import { preflight } from "./preflight.mjs";
-import { ReplyStupid } from "./reply-stupid.mjs";
-import { Reply } from "./reply.mjs";
-import { timeSpanInMs } from "./time.mjs";
-import { Timeout } from "./timeout.mjs";
-import { linkChain } from "./util.mjs";
 
 preflight();
 
 const handler = linkChain(
   new BotAuthorGuard(),
   new Abbrev(),
-  new Timeout(timeSpanInMs(10, "minutes")),
+  new Timeout(10 * time.Minute),
   new Reply(),
   new ReplyStupid()
 );

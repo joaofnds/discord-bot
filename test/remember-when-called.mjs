@@ -1,4 +1,4 @@
-import { Chain } from "../src/chain.mjs";
+import { Chain } from "../src/chain/chain.mjs";
 
 export class RememberWhenCalled extends Chain {
   constructor() {

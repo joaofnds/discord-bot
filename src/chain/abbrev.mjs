@@ -1,5 +1,5 @@
+import { normalize } from "../lib/normalize.mjs";
 import { Chain } from "./chain.mjs";
-import { normalize } from "./util.mjs";
 
 export class Abbrev extends Chain {
   command = /^!abbrev/gi;
