@@ -8,15 +8,15 @@ export class ReplyStupid extends Chain {
   regexes = Object.freeze([
     /(deadline)/gi,
     /(decorator)/gi,
+    /(entregar valor)/gi,
     /(firebase)/gi,
     /(legado)/gi,
     /(light mode)/gi,
     /(mape[ai]\w+)/gi,
     /(padra?o\w*)/gi,
     /(pattern)/gi,
-    /(simples\b)/gi,
     /(seguranca)/gi,
-    /(entregar valor)/gi,
+    /(simples\b)/gi,
 
     /(Api)/g,
     /(Dto)/g,
