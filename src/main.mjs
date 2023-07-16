@@ -15,7 +15,7 @@ const handler = linkChain(
   new Abbrev(),
   new Timeout(10 * time.Minute),
   new Reply({ randomFolk: config.randomFolk }),
-  new ReplyStupid()
+  new ReplyStupid(),
 );
 
 new Client({
