@@ -5,17 +5,16 @@ import { linkChain } from "./chain/link-chain.mjs";
 import { ReplyStupid } from "./chain/reply-stupid.mjs";
 import { Reply } from "./chain/reply.mjs";
 import { Timeout } from "./chain/timeout.mjs";
-import { randomFolk } from "./emojis.mjs";
+import { Config } from "./config.mjs";
 import * as time from "./lib/time.mjs";
-import { preflight } from "./preflight.mjs";
 
-preflight();
+const config = Config.fromEnv();
 
 const handler = linkChain(
   new BotAuthorGuard(),
   new Abbrev(),
   new Timeout(10 * time.Minute),
-  new Reply({ randomFolk }),
+  new Reply({ randomFolk: config.randomFolk }),
   new ReplyStupid()
 );
 
@@ -28,4 +27,4 @@ new Client({
 })
   .on(Events.ClientReady, () => console.log("bot is ready"))
   .on(Events.MessageCreate, async (message) => await handler.handle(message))
-  .login(process.env.TOKEN);
+  .login(config.token);
