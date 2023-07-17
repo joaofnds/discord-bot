@@ -4,6 +4,7 @@ import { Chain } from "./chain.mjs";
 export class Timeout extends Chain {
   #duration;
   #timeoutUntil = Date.now();
+  #shutCommand = /^!shut/i;
 
   constructor(duration) {
     super();
@@ -29,7 +30,7 @@ export class Timeout extends Chain {
   }
 
   #isSettingTimeout(content) {
-    return /^!shut/i.test(content);
+    return this.#shutCommand.test(content);
   }
 
   #isRemovingTimeout(content) {
