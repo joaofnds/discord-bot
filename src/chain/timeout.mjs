@@ -11,7 +11,14 @@ export class Timeout extends Chain {
   }
 
   async handle(message) {
-    if (normalize(message.content).includes("!shut")) {
+    const content = normalize(message.content);
+
+    if (this.isRemovingTimeout(content)) {
+      this.#timeoutUntil = Date.now();
+      return message.react("🙇");
+    }
+
+    if (this.isSettingTimeout(content)) {
       this.#timeoutUntil = Date.now() + this.#duration;
       return message.react("🙇");
     }
@@ -20,5 +27,13 @@ export class Timeout extends Chain {
     if (timeUntilTimeout < 0) return;
 
     return this.next?.handle(message);
+  }
+
+  isSettingTimeout(content) {
+    return content.includes("!shut");
+  }
+
+  isRemovingTimeout(content) {
+    return content.includes("!!shut");
   }
 }
