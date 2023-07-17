@@ -3,7 +3,7 @@ import { Chain } from "./chain.mjs";
 
 export class Timeout extends Chain {
   #duration;
-  #timeoutUntil = new Date();
+  #timeoutUntil = Date.now();
 
   constructor(duration) {
     super();
