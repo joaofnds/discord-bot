@@ -13,30 +13,30 @@ export class Timeout extends Chain {
   async handle(message) {
     const content = normalize(message.content);
 
-    if (this.isRemovingTimeout(content)) {
+    if (this.#isRemovingTimeout(content)) {
       this.#timeoutUntil = Date.now();
       return message.react("🙇");
     }
 
-    if (this.isSettingTimeout(content)) {
+    if (this.#isSettingTimeout(content)) {
       this.#timeoutUntil = Date.now() + this.#duration;
       return message.react("🙇");
     }
 
-    if (!this.isTimeoutExpired()) return;
+    if (!this.#isTimeoutExpired()) return;
 
     return this.next?.handle(message);
   }
 
-  isSettingTimeout(content) {
+  #isSettingTimeout(content) {
     return /^!shut/i.test(content);
   }
 
-  isRemovingTimeout(content) {
+  #isRemovingTimeout(content) {
     return /^!!shut/i.test(content);
   }
 
-  isTimeoutExpired() {
+  #isTimeoutExpired() {
     return Date.now() >= this.#timeoutUntil;
   }
 }
