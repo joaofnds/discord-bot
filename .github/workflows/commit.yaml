@@ -35,4 +35,4 @@ jobs:
         with:
           plugins: "conventional-changelog-conventionalcommits"
         env:
-          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.PERSONAL_TOKEN }}
