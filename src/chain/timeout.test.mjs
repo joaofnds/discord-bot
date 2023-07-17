@@ -22,16 +22,18 @@ test(Timeout.name, async (t) => {
     assert(remember.called);
   });
 
-  await t.test("guard responses when in timeout", async (t) => {
-    let message = new MessageMock("!shut");
-    await handler.handle(message);
-    assert.deepEqual(message.reacts, ["🙇"]);
-    assert(!remember.called);
+  for (const msg of ["!shut", "!SHUT", "!ShUt"]) {
+    await t.test(`starts timeout when using ${msg}`, async (t) => {
+      let message = new MessageMock(msg);
+      await handler.handle(message);
+      assert.deepEqual(message.reacts, ["🙇"]);
+      assert(!remember.called);
 
-    message = new MessageMock("foo");
-    await handler.handle(message);
-    assert(!remember.called);
-  });
+      message = new MessageMock("foo");
+      await handler.handle(message);
+      assert(!remember.called);
+    });
+  }
 
   await t.test("removes timeout", async (t) => {
     let message = new MessageMock("!shut");
@@ -46,19 +48,30 @@ test(Timeout.name, async (t) => {
     assert(remember.called);
   });
 
-  await t.test("manually remove timeout", async (t) => {
-    let message = new MessageMock("!shut");
-    await handler.handle(message);
-    assert.deepEqual(message.reacts, ["🙇"]);
-    assert(!remember.called);
+  for (const msg of ["!!shut", "!!SHUT", "!!ShUt"]) {
+    await t.test(`manually remove timeout using ${msg}`, async (t) => {
+      let message = new MessageMock("!shut");
+      await handler.handle(message);
+      assert.deepEqual(message.reacts, ["🙇"]);
+      assert(!remember.called);
 
-    message = new MessageMock("!!shut");
-    await handler.handle(message);
-    assert.deepEqual(message.reacts, ["🙇"]);
-    assert(!remember.called);
+      message = new MessageMock(msg);
+      await handler.handle(message);
+      assert.deepEqual(message.reacts, ["🙇"]);
+      assert(!remember.called);
 
-    message = new MessageMock("foo");
-    await handler.handle(message);
-    assert(remember.called);
-  });
+      message = new MessageMock("foo");
+      await handler.handle(message);
+      assert(remember.called);
+    });
+  }
+
+  const ignores = ["something !shut", "something else !!shut"];
+  for (const msg of ignores) {
+    await t.test(`ignores ${msg}`, async (t) => {
+      let message = new MessageMock(msg);
+      await handler.handle(message);
+      assert.deepEqual(message.reacts, []);
+    });
+  }
 });

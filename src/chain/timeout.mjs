@@ -23,17 +23,20 @@ export class Timeout extends Chain {
       return message.react("🙇");
     }
 
-    const timeUntilTimeout = Date.now() - this.#timeoutUntil;
-    if (timeUntilTimeout < 0) return;
+    if (!this.isTimeoutExpired()) return;
 
     return this.next?.handle(message);
   }
 
   isSettingTimeout(content) {
-    return content.includes("!shut");
+    return /^!shut/i.test(content);
   }
 
   isRemovingTimeout(content) {
-    return content.includes("!!shut");
+    return /^!!shut/i.test(content);
+  }
+
+  isTimeoutExpired() {
+    return Date.now() >= this.#timeoutUntil;
   }
 }
