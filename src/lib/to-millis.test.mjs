@@ -1,8 +1,8 @@
 import assert from "node:assert";
-import { test } from "node:test";
+import { describe, it } from "node:test";
 import { toMillis } from "./to-millis.mjs";
 
-test("toMillis", async (t) => {
+describe("toMillis", async () => {
   const testCases = [
     [1, "ms", 1],
     [1, "millisecond", 1],
@@ -21,7 +21,7 @@ test("toMillis", async (t) => {
   ];
 
   for (const [amount, unit, expected] of testCases) {
-    await t.test(`${amount} ${unit} = ${expected}ms`, () => {
+    it(`${amount} ${unit} = ${expected}ms`, () => {
       assert.strictEqual(toMillis(amount, unit), expected);
     });
   }

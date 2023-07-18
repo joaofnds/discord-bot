@@ -1,8 +1,8 @@
 import assert from "node:assert";
-import { test } from "node:test";
+import { describe, it } from "node:test";
 import { parseDuration } from "./parse-duration.mjs";
 
-test("parseDuration", async (t) => {
+describe("parseDuration", async () => {
   const testCases = [
     ["1ms", 1],
     ["1 millisecond", 1],
@@ -25,7 +25,7 @@ test("parseDuration", async (t) => {
   ];
 
   for (const [input, expected] of testCases) {
-    await t.test(`parseDuration('${input}') == ${expected}`, () => {
+    it(`parseDuration('${input}') == ${expected}`, () => {
       assert.equal(parseDuration(input), expected);
     });
   }

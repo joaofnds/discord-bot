@@ -1,8 +1,8 @@
 import assert from "node:assert";
-import { test } from "node:test";
+import { describe, it } from "node:test";
 import { normalize } from "./normalize.mjs";
 
-test("normalize", async (t) => {
+describe("normalize", async () => {
   const testCases = [
     ["não", "nao"],
     ["café", "cafe"],
@@ -12,7 +12,7 @@ test("normalize", async (t) => {
   ];
 
   for (const [input, expected] of testCases) {
-    await t.test(`for '${input}' returns '${expected}'`, () => {
+    it(`for '${input}' returns '${expected}'`, () => {
       assert.equal(normalize(input), expected);
     });
   }

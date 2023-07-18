@@ -1,8 +1,8 @@
 import assert from "node:assert";
-import { test } from "node:test";
+import { describe, it } from "node:test";
 import { stupidCase } from "./stupid-case.mjs";
 
-test("stupidCase", async (t) => {
+describe("stupidCase", async () => {
   const testCases = [
     ["http", "HtTp"],
     ["json", "JsOn"],
@@ -11,7 +11,7 @@ test("stupidCase", async (t) => {
   ];
 
   for (const [input, expected] of testCases) {
-    await t.test(`for '${input}' returns '${expected}'`, () => {
+    it(`for '${input}' returns '${expected}'`, () => {
       assert.equal(stupidCase(input), expected);
     });
   }

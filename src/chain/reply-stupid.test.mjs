@@ -1,14 +1,14 @@
 import assert from "node:assert";
-import { test } from "node:test";
+import { describe, it } from "node:test";
 import { MessageMock } from "../../test/message-mock.mjs";
 import { RememberWhenCalled } from "../../test/remember-when-called.mjs";
 import { stupid } from "../emojis.mjs";
 import { linkChain } from "./link-chain.mjs";
 import { ReplyStupid } from "./reply-stupid.mjs";
 
-test(ReplyStupid.name, async (t) => {
-  await t.test("when string is non-stupid", async (t) => {
-    await t.test("does not reply", async (t) => {
+describe(ReplyStupid.name, async () => {
+  describe("when string is non-stupid", async () => {
+    it("does not reply", async () => {
       const sut = new ReplyStupid();
       const message = new MessageMock("JSON HTTP API");
 
@@ -17,7 +17,7 @@ test(ReplyStupid.name, async (t) => {
       assert.deepEqual(message.replies, []);
     });
 
-    await t.test("calls next", async (t) => {
+    it("calls next", async () => {
       const sut = new ReplyStupid();
       const nextInChain = new RememberWhenCalled();
       const message = new MessageMock("JSON HTTP API");
@@ -28,7 +28,7 @@ test(ReplyStupid.name, async (t) => {
     });
   });
 
-  await t.test("replies when string is stupid", async (t) => {
+  it("replies when string is stupid", async () => {
     const sut = new ReplyStupid();
     const message = new MessageMock("Json Http Api");
 
@@ -37,7 +37,7 @@ test(ReplyStupid.name, async (t) => {
     assert.deepEqual(message.replies, [`ApI, HtTp, JsOn ${stupid}`]);
   });
 
-  await t.test("ignores non-stupid words", async (t) => {
+  it("ignores non-stupid words", async () => {
     const sut = new ReplyStupid();
     const message = new MessageMock("Json HTTP Api");
 
@@ -46,7 +46,7 @@ test(ReplyStupid.name, async (t) => {
     assert.deepEqual(message.replies, [`ApI, JsOn ${stupid}`]);
   });
 
-  await t.test("stupid words", async (t) => {
+  describe("stupid words", async () => {
     const testCases = [
       ["padrao", "PaDrAo"],
       ["PADRAO", "PaDrAo"],
@@ -108,7 +108,7 @@ test(ReplyStupid.name, async (t) => {
     for (const [input, expectedTransformation] of testCases) {
       const expected = `${expectedTransformation} ${stupid}`;
 
-      await t.test(`for '${input}' returns '${expected}'`, async () => {
+      it(`for '${input}' returns '${expected}'`, async () => {
         const message = new MessageMock(input);
 
         await new ReplyStupid().handle(message);
@@ -118,11 +118,11 @@ test(ReplyStupid.name, async (t) => {
     }
   });
 
-  await t.test("does not reply non-stupid words", async (t) => {
+  describe("non-stupid words", async () => {
     const testCases = ["simplesmente"];
 
     for (const input of testCases) {
-      await t.test(`for '${input}', does not reply`, async () => {
+      it(`for '${input}', does not reply`, async () => {
         const message = new MessageMock(input);
 
         await new ReplyStupid().handle(message);
