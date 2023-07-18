@@ -1,4 +1,5 @@
 import { normalize } from "../lib/normalize.mjs";
+import { parseDuration } from "../lib/parse-duration.mjs";
 import { Chain } from "./chain.mjs";
 
 export class Timeout extends Chain {
@@ -20,7 +21,8 @@ export class Timeout extends Chain {
     }
 
     if (this.#isSettingTimeout(content)) {
-      this.#timeoutUntil = Date.now() + this.#duration;
+      const duration = this.#getTimeoutDuration(message);
+      this.#timeoutUntil = Date.now() + duration;
       return message.react("🙇");
     }
 
@@ -39,5 +41,15 @@ export class Timeout extends Chain {
 
   #isTimeoutExpired() {
     return Date.now() >= this.#timeoutUntil;
+  }
+
+  #getTimeoutDuration(message) {
+    const messageWithoutCommand = message.content
+      .replace(this.#shutCommand, "")
+      .trim();
+
+    if (!messageWithoutCommand) return this.#duration;
+
+    return parseDuration(messageWithoutCommand) || this.#duration;
   }
 }

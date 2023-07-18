@@ -1,29 +1,34 @@
 import assert from "node:assert";
-import { test } from "node:test";
+import { beforeEach, describe, it } from "node:test";
 import { MessageMock } from "../../test/message-mock.mjs";
 import { RememberWhenCalled } from "../../test/remember-when-called.mjs";
+import { parseDuration } from "../lib/parse-duration.mjs";
 import * as time from "../lib/time.mjs";
 import { linkChain } from "./link-chain.mjs";
 import { Timeout } from "./timeout.mjs";
 
-test(Timeout.name, async (t) => {
+describe(Timeout.name, () => {
   let timeout, remember, handler;
   const timeoutDuration = 10 * time.Millisecond;
+  const customDurationString = "20ms";
+  const customDuration = parseDuration(customDurationString);
 
-  t.beforeEach(() => {
+  const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+
+  beforeEach(() => {
     timeout = new Timeout(timeoutDuration);
     remember = new RememberWhenCalled();
     handler = linkChain(timeout, remember);
   });
 
-  await t.test("calls next when it does not match", async (t) => {
+  it("calls next when it does not match", async () => {
     let message = new MessageMock("foo");
     await handler.handle(message);
     assert(remember.called);
   });
 
   for (const msg of ["!shut", "!SHUT", "!ShUt"]) {
-    await t.test(`starts timeout when using ${msg}`, async (t) => {
+    it(`starts timeout when using ${msg}`, async () => {
       let message = new MessageMock(msg);
       await handler.handle(message);
       assert.deepEqual(message.reacts, ["🙇"]);
@@ -35,13 +40,13 @@ test(Timeout.name, async (t) => {
     });
   }
 
-  await t.test("removes timeout", async (t) => {
+  it("removes timeout", async () => {
     let message = new MessageMock("!shut");
     await handler.handle(message);
     assert.deepEqual(message.reacts, ["🙇"]);
     assert(!remember.called);
 
-    await new Promise((resolve) => setTimeout(resolve, timeoutDuration));
+    await sleep(timeoutDuration);
 
     message = new MessageMock("foo");
     await handler.handle(message);
@@ -49,7 +54,7 @@ test(Timeout.name, async (t) => {
   });
 
   for (const msg of ["!!shut", "!!SHUT", "!!ShUt"]) {
-    await t.test(`manually remove timeout using ${msg}`, async (t) => {
+    it(`manually remove timeout using ${msg}`, async () => {
       let message = new MessageMock("!shut");
       await handler.handle(message);
       assert.deepEqual(message.reacts, ["🙇"]);
@@ -66,12 +71,50 @@ test(Timeout.name, async (t) => {
     });
   }
 
-  const ignores = ["something !shut", "something else !!shut"];
-  for (const msg of ignores) {
-    await t.test(`ignores ${msg}`, async (t) => {
+  for (const msg of ["something !shut", "something else !!shut"]) {
+    it(`ignores ${msg}`, async () => {
       let message = new MessageMock(msg);
       await handler.handle(message);
       assert.deepEqual(message.reacts, []);
     });
   }
+
+  describe("custom timeout duration", () => {
+    it("sets the provided duration", async () => {
+      let message = new MessageMock(`!shut ${customDurationString}`);
+      await handler.handle(message);
+      assert.deepEqual(message.reacts, ["🙇"]);
+      assert(!remember.called);
+
+      await sleep(timeoutDuration);
+      message = new MessageMock("foo");
+      await handler.handle(message);
+      assert(!remember.called);
+
+      await sleep(customDuration);
+
+      message = new MessageMock("foo");
+      await handler.handle(message);
+      assert(remember.called);
+    });
+
+    describe("when duration is invalid", () => {
+      it("uses default duration", async () => {
+        let message = new MessageMock("!shut foo");
+        await handler.handle(message);
+        assert.deepEqual(message.reacts, ["🙇"]);
+        assert(!remember.called);
+
+        message = new MessageMock("foo");
+        await handler.handle(message);
+        assert(!remember.called);
+
+        await sleep(timeoutDuration);
+
+        message = new MessageMock("foo");
+        await handler.handle(message);
+        assert(remember.called);
+      });
+    });
+  });
 });
