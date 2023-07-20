@@ -2,6 +2,7 @@ import assert from "node:assert";
 import { describe, it } from "node:test";
 import { MessageMock } from "../../test/message-mock.mjs";
 import { RememberWhenCalled } from "../../test/remember-when-called.mjs";
+import { devops } from "../const.mjs";
 import { linkChain } from "./link-chain.mjs";
 import { Reply } from "./reply.mjs";
 
@@ -13,9 +14,18 @@ describe(Reply.name, async () => {
       ["bolsonaro", "e o PT hein? e o lula?"],
       ["Bolsonaro", "e o PT hein? e o lula?"],
       ["BOLSONARO", "e o PT hein? e o lula?"],
+
       ["citando aleatoriamente", randomFolk],
       ["CiTaNdO AlEaToRiAmEnTe", randomFolk],
       ["CITANDO ALEATORIAMENTE", randomFolk],
+
+      ["fulano é devops", devops],
+      ["FuLaNo É DeVoPs", devops],
+      ["FULANO É DEVOPS", devops],
+
+      ["estão contratando devops", devops],
+      ["contrataram DevOps", devops],
+      ["contratar dEVoPS", devops],
     ];
 
     for (const [input, expected] of testCases) {

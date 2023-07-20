@@ -1,3 +1,4 @@
+import { devops } from "../const.mjs";
 import { captures } from "../lib/captures.mjs";
 import { normalize } from "../lib/normalize.mjs";
 import { Chain } from "./chain.mjs";
@@ -11,6 +12,8 @@ export class Reply extends Chain {
   responses = [
     { regex: /(bolsonaro)/gi, fn: () => "e o PT hein? e o lula?" },
     { regex: /(citando aleatoriamente)/gi, fn: () => this.randomFolk },
+    { regex: /(e devops)/gi, fn: () => devops },
+    { regex: /(contrata\w* devops)/gi, fn: () => devops },
   ];
 
   async handle(message) {

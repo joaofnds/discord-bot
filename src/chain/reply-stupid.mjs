@@ -1,4 +1,4 @@
-import { stupid } from "../emojis.mjs";
+import { stupid } from "../const.mjs";
 import { allCaptures } from "../lib/all-captures.mjs";
 import { normalize } from "../lib/normalize.mjs";
 import { stupidCase } from "../lib/stupid-case.mjs";
@@ -32,7 +32,7 @@ export class ReplyStupid extends Chain {
     if (captures.length === 0) return this.next?.handle(message);
 
     await message.reply(
-      `${captures.map((w) => stupidCase(w)).join(", ")} ${stupid}`,
+      `${captures.map((w) => stupidCase(w)).join(", ")} ${stupid}`
     );
   }
 }
