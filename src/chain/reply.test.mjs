@@ -40,15 +40,19 @@ describe(Reply.name, async () => {
   });
 
   describe("when does not match", async () => {
-    it("calls next", async () => {
-      const reply = new Reply(randomFolk);
-      const remember = new RememberWhenCalled();
-      const message = new MessageMock("foo");
+    const testCases = ["foo", "the devops movement"];
 
-      await linkChain(reply, remember).handle(message);
+    for (const input of testCases) {
+      it(`does not reply: ${input}`, async () => {
+        const reply = new Reply(randomFolk);
+        const remember = new RememberWhenCalled();
+        const message = new MessageMock(input);
 
-      assert.deepEqual(message.replies, []);
-      assert(remember.called);
-    });
+        await linkChain(reply, remember).handle(message);
+
+        assert.deepEqual(message.replies, []);
+        assert(remember.called);
+      });
+    }
   });
 });
