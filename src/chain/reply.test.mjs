@@ -2,7 +2,7 @@ import assert from "node:assert";
 import { beforeEach, describe, it } from "node:test";
 import { MessageMock } from "../../test/message-mock.mjs";
 import { RememberWhenCalled } from "../../test/remember-when-called.mjs";
-import { devops, linux, stupid } from "../const.mjs";
+import { devops, eopt, linux, stupid } from "../const.mjs";
 import { linkChain } from "./link-chain.mjs";
 import { Reply } from "./reply.mjs";
 
@@ -16,9 +16,9 @@ describe(Reply.name, async () => {
 
   describe("when matches", async () => {
     const testCases = [
-      ["bolsonaro", "e o PT hein? e o lula?"],
-      ["Bolsonaro", "e o PT hein? e o lula?"],
-      ["BOLSONARO", "e o PT hein? e o lula?"],
+      ["bolsonaro", eopt],
+      ["Bolsonaro", eopt],
+      ["BOLSONARO", eopt],
 
       ["citando aleatoriamente", randomFolk],
       ["CiTaNdO AlEaToRiAmEnTe", randomFolk],
