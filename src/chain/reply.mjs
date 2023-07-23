@@ -31,7 +31,7 @@ export class Reply extends Chain {
         /(Http)/g,
         /(Json)/g,
         /(Url)/g,
-        /(Uuid)/g
+        /(Uuid)/g,
       ),
     ];
   }
