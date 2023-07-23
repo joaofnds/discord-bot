@@ -1,29 +1,26 @@
-import { devops } from "../const.mjs";
-import { captures } from "../lib/captures.mjs";
+import { devops, linux } from "../const.mjs";
 import { normalize } from "../lib/normalize.mjs";
 import { Chain } from "./chain.mjs";
+import { PlainResponse } from "./plain-response.mjs";
+import { ProbPlainResponse } from "./prob-plain-response.mjs";
 
 export class Reply extends Chain {
   constructor(randomFolk) {
     super();
-    this.randomFolk = randomFolk;
+    this.responses = [
+      new PlainResponse("e o PT hein? e o lula?", /(bolsonaro)/gi),
+      new PlainResponse(randomFolk, /(citando aleatoriamente)/gi),
+      new PlainResponse(devops, /( e devops)/gi, /(contrat\w* devops)/gi),
+      new ProbPlainResponse(0.1, linux, /((?<!\/)linux)/gi),
+    ];
   }
-
-  responses = [
-    { regex: /(bolsonaro)/gi, fn: () => "e o PT hein? e o lula?" },
-    { regex: /(citando aleatoriamente)/gi, fn: () => this.randomFolk },
-    { regex: /( e devops)/gi, fn: () => devops },
-    { regex: /(contrat\w* devops)/gi, fn: () => devops },
-  ];
 
   async handle(message) {
     const str = normalize(message.content);
 
-    for (const { regex, fn } of this.responses) {
-      const match = captures(regex, str);
-      if (match.length === 0) continue;
-
-      return message.reply(fn(...match));
+    for (const response of this.responses) {
+      const reply = response.replyIfMatches(str);
+      if (reply) return message.reply(reply);
     }
 
     this.next?.handle(message);

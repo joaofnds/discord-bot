@@ -32,7 +32,7 @@ export class ReplyStupid extends Chain {
     if (captures.length === 0) return this.next?.handle(message);
 
     await message.reply(
-      `${captures.map((w) => stupidCase(w)).join(", ")} ${stupid}`
+      `${captures.map((w) => stupidCase(w)).join(", ")} ${stupid}`,
     );
   }
 }

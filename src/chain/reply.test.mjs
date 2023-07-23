@@ -2,7 +2,7 @@ import assert from "node:assert";
 import { describe, it } from "node:test";
 import { MessageMock } from "../../test/message-mock.mjs";
 import { RememberWhenCalled } from "../../test/remember-when-called.mjs";
-import { devops } from "../const.mjs";
+import { devops, linux } from "../const.mjs";
 import { linkChain } from "./link-chain.mjs";
 import { Reply } from "./reply.mjs";
 
@@ -35,6 +35,55 @@ describe(Reply.name, async () => {
         await new Reply(randomFolk).handle(message);
 
         assert.deepEqual(message.replies, [expected]);
+      });
+    }
+  });
+
+  describe("probable responses", async () => {
+    const testCases = [
+      ["linux", linux],
+      ["LiNuX", linux],
+      ["LINUX", linux],
+    ];
+
+    for (const [input, expected] of testCases) {
+      it(`does not always reply: ${input}`, async () => {
+        const message = new MessageMock(input);
+
+        let previousLength = message.replies.length;
+        while (true) {
+          await new Reply(randomFolk).handle(message);
+          if (message.replies.length === previousLength) break;
+          previousLength = message.replies.length;
+        }
+      });
+
+      it(`for '${input}', eventually replies '${expected}'`, async () => {
+        const message = new MessageMock(input);
+
+        while (message.replies.length === 0) {
+          await new Reply(randomFolk).handle(message);
+        }
+
+        assert.deepEqual(message.replies, [expected]);
+      });
+    }
+
+    const negativeTestCases = [
+      ["gnu/linux", linux],
+      ["GNU/Linux", linux],
+      ["GNU/LINUX", linux],
+    ];
+
+    for (const [input, expected] of negativeTestCases) {
+      const attempts = 100;
+      it(`does not reply ${input} in ${attempts} attempts`, async () => {
+        const message = new MessageMock(input);
+
+        for (let i = 0; i < attempts; i++)
+          await new Reply(randomFolk).handle(message);
+
+        assert.deepEqual(message.replies, []);
       });
     }
   });
