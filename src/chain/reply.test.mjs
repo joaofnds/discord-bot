@@ -34,7 +34,7 @@ describe(Reply.name, async () => {
     ];
 
     for (const [input, expected] of testCases) {
-      it(`for '${input}' replier with '${expected}'`, async () => {
+      it(`for '${input}' replies with '${expected}'`, async () => {
         const message = new MessageMock(input);
 
         await sut.handle(message);
