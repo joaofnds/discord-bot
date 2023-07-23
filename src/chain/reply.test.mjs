@@ -1,13 +1,18 @@
 import assert from "node:assert";
-import { describe, it } from "node:test";
+import { beforeEach, describe, it } from "node:test";
 import { MessageMock } from "../../test/message-mock.mjs";
 import { RememberWhenCalled } from "../../test/remember-when-called.mjs";
-import { devops, linux } from "../const.mjs";
+import { devops, linux, stupid } from "../const.mjs";
 import { linkChain } from "./link-chain.mjs";
 import { Reply } from "./reply.mjs";
 
 describe(Reply.name, async () => {
+  let sut;
   const randomFolk = "chuck tesla!";
+
+  beforeEach(() => {
+    sut = new Reply(randomFolk);
+  });
 
   describe("when matches", async () => {
     const testCases = [
@@ -32,7 +37,79 @@ describe(Reply.name, async () => {
       it(`for '${input}' returns '${expected}'`, async () => {
         const message = new MessageMock(input);
 
-        await new Reply(randomFolk).handle(message);
+        await sut.handle(message);
+
+        assert.deepEqual(message.replies, [expected]);
+      });
+    }
+  });
+
+  describe("stupid responses", async () => {
+    const testCases = [
+      ["padrao", "PaDrAo"],
+      ["PADRAO", "PaDrAo"],
+
+      ["padroes", "PaDrOeS"],
+      ["PADROES", "PaDrOeS"],
+
+      ["padronização", "PaDrOnIzAcAo"],
+      ["PADRONIZAÇÃO", "PaDrOnIzAcAo"],
+
+      ["pattern", "PaTtErN"],
+      ["PATTERN", "PaTtErN"],
+
+      ["firebase", "FiReBaSe"],
+      ["FIREBASE", "FiReBaSe"],
+
+      ["simples", "SiMpLeS"],
+      ["SIMPLES", "SiMpLeS"],
+
+      ["Json", "JsOn"],
+      ["Http", "HtTp"],
+      ["Api", "ApI"],
+      ["Dto", "DtO"],
+      ["Url", "UrL"],
+      ["Uuid", "UuId"],
+
+      ["light mode", "LiGhT MoDe"],
+      ["LIGHT MODE", "LiGhT MoDe"],
+
+      ["decorator", "DeCoRaToR"],
+      ["DECORATOR", "DeCoRaToR"],
+
+      ["deadline", "DeAdLiNe"],
+      ["DEADLINE", "DeAdLiNe"],
+
+      ["legado", "LeGaDo"],
+      ["lEgAdO", "LeGaDo"],
+      ["LEGADO", "LeGaDo"],
+
+      ["seguranca", "SeGuRaNcA"],
+      ["SEGURANCA", "SeGuRaNcA"],
+
+      ["mapear", "MaPeAr"],
+      ["MAPEAR", "MaPeAr"],
+      ["mapeamento", "MaPeAmEnTo"],
+      ["MAPEAMENTO", "MaPeAmEnTo"],
+      ["mapeado", "MaPeAdO"],
+      ["MAPEADO", "MaPeAdO"],
+      ["mapeio", "MaPeIo"],
+      ["MAPEIO", "MaPeIo"],
+
+      ["entregar valor", "EnTrEgAr vAlOr"],
+      ["eNtReGaR VaLoR", "EnTrEgAr vAlOr"],
+      ["ENTREGAR VALOR", "EnTrEgAr vAlOr"],
+
+      ["Http Dto Api", "ApI, DtO, HtTp"],
+    ];
+
+    for (const [input, expectedTransformation] of testCases) {
+      const expected = `${expectedTransformation} ${stupid}`;
+
+      it(`for '${input}' replies with '${expected}'`, async () => {
+        const message = new MessageMock(input);
+
+        await sut.handle(message);
 
         assert.deepEqual(message.replies, [expected]);
       });
@@ -52,7 +129,7 @@ describe(Reply.name, async () => {
 
         let previousLength = message.replies.length;
         while (true) {
-          await new Reply(randomFolk).handle(message);
+          await sut.handle(message);
           if (message.replies.length === previousLength) break;
           previousLength = message.replies.length;
         }
@@ -62,26 +139,21 @@ describe(Reply.name, async () => {
         const message = new MessageMock(input);
 
         while (message.replies.length === 0) {
-          await new Reply(randomFolk).handle(message);
+          await sut.handle(message);
         }
 
         assert.deepEqual(message.replies, [expected]);
       });
     }
 
-    const negativeTestCases = [
-      ["gnu/linux", linux],
-      ["GNU/Linux", linux],
-      ["GNU/LINUX", linux],
-    ];
+    const negativeTestCases = ["gnu/linux", "GNU/Linux", "GNU/LINUX"];
 
-    for (const [input, expected] of negativeTestCases) {
+    for (const input of negativeTestCases) {
       const attempts = 100;
       it(`does not reply ${input} in ${attempts} attempts`, async () => {
         const message = new MessageMock(input);
 
-        for (let i = 0; i < attempts; i++)
-          await new Reply(randomFolk).handle(message);
+        for (let i = 0; i < attempts; i++) await sut.handle(message);
 
         assert.deepEqual(message.replies, []);
       });
@@ -93,7 +165,7 @@ describe(Reply.name, async () => {
 
     for (const input of testCases) {
       it(`does not reply: ${input}`, async () => {
-        const reply = new Reply(randomFolk);
+        const reply = sut;
         const remember = new RememberWhenCalled();
         const message = new MessageMock(input);
 

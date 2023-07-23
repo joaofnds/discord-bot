@@ -2,7 +2,6 @@ import { Client, Events, GatewayIntentBits } from "discord.js";
 import { Abbrev } from "./chain/abbrev.mjs";
 import { BotAuthorGuard } from "./chain/bot-author-guard.mjs";
 import { linkChain } from "./chain/link-chain.mjs";
-import { ReplyStupid } from "./chain/reply-stupid.mjs";
 import { Reply } from "./chain/reply.mjs";
 import { Timeout } from "./chain/timeout.mjs";
 import { Config } from "./config.mjs";
@@ -14,8 +13,7 @@ const handler = linkChain(
   new BotAuthorGuard(),
   new Abbrev(),
   new Timeout(10 * time.Minute),
-  new Reply(config.randomFolk),
-  new ReplyStupid(),
+  new Reply(config.randomFolk)
 );
 
 new Client({
