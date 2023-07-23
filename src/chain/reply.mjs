@@ -9,10 +9,10 @@ export class Reply extends Chain {
   constructor(randomFolk) {
     super();
     this.responses = [
-      new PlainReplier("e o PT hein? e o lula?", /(bolsonaro)/gi),
-      new PlainReplier(randomFolk, /(citando aleatoriamente)/gi),
-      new PlainReplier(devops, /( e devops)/gi, /(contrat\w* devops)/gi),
-      new ProbPlainReplier(0.1, linux, /((?<!\/)linux)/gi),
+      new PlainReplier("e o PT hein? e o lula?", /bolsonaro/gi),
+      new PlainReplier(randomFolk, /citando aleatoriamente/gi),
+      new PlainReplier(devops, / e devops/gi, /contrat\w* devops/gi),
+      new ProbPlainReplier(0.1, linux, /(?<!\/)linux/gi),
       new StupidReplier(
         /(deadline)/gi,
         /(decorator)/gi,

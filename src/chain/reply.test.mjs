@@ -147,9 +147,9 @@ describe(Reply.name, async () => {
     }
 
     const negativeTestCases = ["gnu/linux", "GNU/Linux", "GNU/LINUX"];
+    const attempts = 100;
 
     for (const input of negativeTestCases) {
-      const attempts = 100;
       it(`does not reply ${input} in ${attempts} attempts`, async () => {
         const message = new MessageMock(input);
 
