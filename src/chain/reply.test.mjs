@@ -2,7 +2,7 @@ import assert from "node:assert";
 import { beforeEach, describe, it } from "node:test";
 import { MessageMock } from "../../test/message-mock.mjs";
 import { RememberWhenCalled } from "../../test/remember-when-called.mjs";
-import { devops, eopt, linux, stupid } from "../const.mjs";
+import { anonymous, devops, eopt, linux, stupid } from "../const.mjs";
 import { linkChain } from "./link-chain.mjs";
 import { Reply } from "./reply.mjs";
 
@@ -31,6 +31,14 @@ describe(Reply.name, async () => {
       ["estão contratando devops", devops],
       ["contrataram DevOps", devops],
       ["contratar dEVoPS", devops],
+
+      ["anonymous", anonymous],
+      ["AnOnYmOuS", anonymous],
+      ["ANONYMOUS", anonymous],
+
+      ["anonimo", anonymous],
+      ["AnOnImO", anonymous],
+      ["ANONIMO", anonymous],
     ];
 
     for (const [input, expected] of testCases) {
