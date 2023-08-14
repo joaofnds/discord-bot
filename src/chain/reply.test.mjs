@@ -82,9 +82,6 @@ describe(Reply.name, async () => {
       ["light mode", "LiGhT MoDe"],
       ["LIGHT MODE", "LiGhT MoDe"],
 
-      ["decorator", "DeCoRaToR"],
-      ["DECORATOR", "DeCoRaToR"],
-
       ["deadline", "DeAdLiNe"],
       ["DEADLINE", "DeAdLiNe"],
 

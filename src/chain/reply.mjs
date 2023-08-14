@@ -16,7 +16,6 @@ export class Reply extends Chain {
       new ProbPlainReplier(0.1, linux, /(?<!\/)linux/gi),
       new StupidReplier(
         /(deadline)/gi,
-        /(decorator)/gi,
         /(entregar valor)/gi,
         /(firebase)/gi,
         /(legado)/gi,
