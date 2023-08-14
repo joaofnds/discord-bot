@@ -66,9 +66,6 @@ describe(Reply.name, async () => {
       ["pattern", "PaTtErN"],
       ["PATTERN", "PaTtErN"],
 
-      ["firebase", "FiReBaSe"],
-      ["FIREBASE", "FiReBaSe"],
-
       ["simples", "SiMpLeS"],
       ["SIMPLES", "SiMpLeS"],
 

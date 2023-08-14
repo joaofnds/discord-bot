@@ -17,7 +17,6 @@ export class Reply extends Chain {
       new StupidReplier(
         /(deadline)/gi,
         /(entregar valor)/gi,
-        /(firebase)/gi,
         /(legado)/gi,
         /(light mode)/gi,
         /(mape[ai]\w+)/gi,
