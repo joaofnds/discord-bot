@@ -11,7 +11,7 @@ export class Reply extends Chain {
     this.responses = [
       new PlainReplier(eopt, /bolsonaro/gi),
       new PlainReplier(randomFolk, /citando aleatoriamente/gi),
-      new PlainReplier(devops, / e devops/gi, /contrat\w* devops/gi),
+      new PlainReplier(devops, / (e|sou|os) devops/gi, /contrat\w* devops/gi),
       new PlainReplier(anonymous, /anonymous/gi, /anonimo/gi),
       new ProbPlainReplier(0.1, linux, /(?<!\/)linux/gi),
       new StupidReplier(

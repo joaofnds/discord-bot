@@ -28,6 +28,14 @@ describe(Reply.name, async () => {
       ["FuLaNo É DeVoPs", devops],
       ["FULANO É DEVOPS", devops],
 
+      ["eu sou devops", devops],
+      ["eU SoU DeVoPs", devops],
+      ["EU SOU DEVOPS", devops],
+
+      ["sou os devops", devops],
+      ["sOu oS DeVoPs", devops],
+      ["SOU OS DEVOPS", devops],
+
       ["estão contratando devops", devops],
       ["contrataram DevOps", devops],
       ["contratar dEVoPS", devops],
