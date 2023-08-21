@@ -10,6 +10,7 @@ export class Reply extends Chain {
     super();
     this.responses = [
       new PlainReplier(eopt, /bolsonaro/gi),
+      new PlainReplier("Barros!", /e o pedro/gi),
       new PlainReplier(randomFolk, /citando aleatoriamente/gi),
       new PlainReplier(devops, / (e|sou|os) devops/gi, /contrat\w* devops/gi),
       new PlainReplier(anonymous, /anonymous/gi, /anonimo/gi),

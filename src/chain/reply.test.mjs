@@ -47,6 +47,10 @@ describe(Reply.name, async () => {
       ["anonimo", anonymous],
       ["AnOnImO", anonymous],
       ["ANONIMO", anonymous],
+
+      ["e o pedro", "Barros!"],
+      ["E o PeDrO", "Barros!"],
+      ["E O PEDRO", "Barros!"],
     ];
 
     for (const [input, expected] of testCases) {
