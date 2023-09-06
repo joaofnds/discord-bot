@@ -51,6 +51,7 @@ describe(Reply.name, async () => {
       ["e o pedro", "Barros!"],
       ["E o PeDrO", "Barros!"],
       ["E O PEDRO", "Barros!"],
+      ["mas e o pedro hein", "Barros!"],
 
       ["Mas e o pt hein", eopt],
       ["mas e o pt hein", eopt],

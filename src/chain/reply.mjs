@@ -9,8 +9,8 @@ export class Reply extends Chain {
   constructor(randomFolk) {
     super();
     this.responses = [
-      new PlainReplier(eopt, /bolsonaro/gi),
       new PlainReplier("Barros!", /e o pedro/gi),
+      new PlainReplier(eopt, /bolsonaro/gi, /mas e [oa] .* hein/gi),
       new PlainReplier(randomFolk, /citando aleatoriamente/gi),
       new PlainReplier(devops, / (e|sou|os) devops/gi, /contrat\w* devops/gi),
       new PlainReplier(anonymous, /anonymous/gi, /anonimo/gi),
@@ -31,9 +31,8 @@ export class Reply extends Chain {
         /(Http)/g,
         /(Json)/g,
         /(Url)/g,
-        /(Uuid)/g,
+        /(Uuid)/g
       ),
-      new PlainReplier(eopt, /(M|m)as e (o|a) (\w* *)* hein/gi),
     ];
   }
 
