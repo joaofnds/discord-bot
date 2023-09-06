@@ -8,6 +8,7 @@ import { Config } from "./config.mjs";
 import { DadJokeBot } from "./crons/dad-joke-bot.mjs";
 import { DevDadJokeBot } from "./crons/dev-dad-joke-bot.mjs";
 import { PragTipBot } from "./crons/prag-tip-bot.mjs";
+import { RatesBot } from "./crons/rates-bot.mjs";
 import { Stanley5pmCron } from "./crons/stanley-5pm.mjs";
 import { ClientWrapper } from "./discord/client-wrapper.mjs";
 import { WebhookBot } from "./discord/webhook-bot.mjs";
@@ -45,6 +46,12 @@ const crons = [
     "https://v2.jokeapi.dev/joke/Programming"
   ),
   new PragTipBot(new WebhookBot(config.pragTipBotURL)),
+  new RatesBot(
+    new WebhookBot(config.richDadBotURL),
+    new WebhookBot(config.poorDadBotURL),
+    "http://api.exchangeratesapi.io/v1/latest",
+    config.exchangeRatesAPIKey
+  ),
 ];
 
 await client
