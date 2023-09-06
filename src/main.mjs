@@ -5,11 +5,12 @@ import { linkChain } from "./chain/link-chain.mjs";
 import { Reply } from "./chain/reply.mjs";
 import { Timeout } from "./chain/timeout.mjs";
 import { Config } from "./config.mjs";
+import { DadJokeBot } from "./crons/dad-joke-bot.mjs";
+import { DevDadJokeBot } from "./crons/dev-dad-joke-bot.mjs";
 import { Stanley5pmCron } from "./crons/stanley-5pm.mjs";
 import { ClientWrapper } from "./discord/client-wrapper.mjs";
 import { WebhookBot } from "./discord/webhook-bot.mjs";
 import * as time from "./lib/time.mjs";
-import { DadJokeBot } from "./crons/dad-joke-bot.mjs";
 
 const config = Config.fromEnv();
 
@@ -37,6 +38,10 @@ const crons = [
     new WebhookBot(config.dadBotURL),
     config.rapidAPIURL,
     config.rapidAPIKey
+  ),
+  new DevDadJokeBot(
+    new WebhookBot(config.dadBotURL),
+    "https://v2.jokeapi.dev/joke/Programming"
   ),
 ];
 
