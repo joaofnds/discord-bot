@@ -8,7 +8,7 @@ import { Reply } from "./reply.mjs";
 
 describe(Reply.name, async () => {
   let sut;
-  const randomFolk = "chuck tesla!";
+  const randomFolk = "chuck testa!";
 
   beforeEach(() => {
     sut = new Reply(randomFolk);
