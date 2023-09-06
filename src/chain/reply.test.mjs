@@ -2,7 +2,15 @@ import assert from "node:assert";
 import { beforeEach, describe, it } from "node:test";
 import { MessageMock } from "../../test/message-mock.mjs";
 import { RememberWhenCalled } from "../../test/remember-when-called.mjs";
-import { anonymous, devops, eopt, linux, nani, stupid } from "../const.mjs";
+import {
+  anonymous,
+  devops,
+  eopt,
+  feijoada,
+  linux,
+  nani,
+  stupid,
+} from "../const.mjs";
 import { linkChain } from "./link-chain.mjs";
 import { Reply } from "./reply.mjs";
 
@@ -58,7 +66,18 @@ describe(Reply.name, async () => {
       ["mas e a dilma hein", eopt],
       ["Mas e o lula e a dilma hein", eopt],
 
-      ["???", nani]
+      ["???", nani],
+
+      ["feijao", feijoada],
+      ["feijoada", feijoada],
+      ["FeIjOaDa", feijoada],
+      ["FEIJOADA", feijoada],
+      ["feijão", feijoada],
+      ["FeIjÃo", feijoada],
+      ["FEIJÃO", feijoada],
+      ["nada acontece", feijoada],
+      ["nada acontece feijão", feijoada],
+      ["nada acontece feijoada", feijoada],
     ];
 
     for (const [input, expected] of testCases) {

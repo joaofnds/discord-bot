@@ -1,4 +1,4 @@
-import { anonymous, devops, eopt, linux, nani } from "../const.mjs";
+import { anonymous, devops, eopt, feijoada, linux, nani } from "../const.mjs";
 import { normalize } from "../lib/normalize.mjs";
 import { PlainReplier } from "../replier/plain-replier.mjs";
 import { ProbPlainReplier } from "../replier/prob-plain-replier.mjs";
@@ -15,6 +15,7 @@ export class Reply extends Chain {
       new PlainReplier(devops, / (e|sou|os) devops/gi, /contrat\w* devops/gi),
       new PlainReplier(anonymous, /anonymous/gi, /anonimo/gi),
       new PlainReplier(nani, /\?\?\?/),
+      new PlainReplier(feijoada, /feij\w+/gi, /nada acontece/gi),
       new ProbPlainReplier(0.1, linux, /(?<!\/)linux/gi),
       new StupidReplier(
         /(deadline)/gi,
