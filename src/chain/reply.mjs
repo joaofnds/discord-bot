@@ -33,6 +33,7 @@ export class Reply extends Chain {
         /(Url)/g,
         /(Uuid)/g,
       ),
+      new PlainReplier(eopt, /(M|m)as e (o|a) (\w* *)* hein/gi),
     ];
   }
 
