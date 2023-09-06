@@ -5,6 +5,9 @@ import { linkChain } from "./chain/link-chain.mjs";
 import { Reply } from "./chain/reply.mjs";
 import { Timeout } from "./chain/timeout.mjs";
 import { Config } from "./config.mjs";
+import { Stanley5pmCron } from "./crons/stanley-5pm.mjs";
+import { ClientWrapper } from "./discord/client-wrapper.mjs";
+import { WebhookBot } from "./discord/webhook-bot.mjs";
 import * as time from "./lib/time.mjs";
 
 const config = Config.fromEnv();
@@ -24,7 +27,17 @@ const handler = linkChain(
   new Reply(config.randomFolk)
 );
 
+const crons = [
+  new Stanley5pmCron(
+    new ClientWrapper(client),
+    new WebhookBot(config.stanleyBotURL)
+  ),
+];
+
 await client
-  .on(Events.ClientReady, () => console.log("bot is ready"))
+  .on(Events.ClientReady, () => {
+    crons.forEach((cron) => cron.start());
+    console.log("bot is ready");
+  })
   .on(Events.MessageCreate, async (m) => await handler.handle(m))
   .login(config.token);

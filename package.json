@@ -12,6 +12,7 @@
   "author": "João Fernandes",
   "license": "ISC",
   "dependencies": {
+    "cron": "^2.4.3",
     "discord.js": "^14.11.0"
   }
 }
