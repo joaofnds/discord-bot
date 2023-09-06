@@ -12,6 +12,7 @@ export class Config {
     richDadBotURL,
     poorDadBotURL,
     exchangeRatesAPIKey,
+    sundayBotURL,
   }) {
     this.token = token;
     this.randomFolk = randomFolk;
@@ -23,6 +24,7 @@ export class Config {
     this.richDadBotURL = richDadBotURL;
     this.poorDadBotURL = poorDadBotURL;
     this.exchangeRatesAPIKey = exchangeRatesAPIKey;
+    this.sundayBotURL = sundayBotURL;
   }
 
   static fromEnv() {
@@ -37,6 +39,7 @@ export class Config {
       richDadBotURL: mustGetEnv("RICH_DAD_BOT_URL"),
       poorDadBotURL: mustGetEnv("POOR_DAD_BOT_URL"),
       exchangeRatesAPIKey: mustGetEnv("EXCHANGE_RATES_API_KEY"),
+      sundayBotURL: mustGetEnv("SUNDAY_BOT_URL"),
     });
   }
 }

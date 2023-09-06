@@ -13,6 +13,7 @@ import { Stanley5pmCron } from "./crons/stanley-5pm.mjs";
 import { ClientWrapper } from "./discord/client-wrapper.mjs";
 import { WebhookBot } from "./discord/webhook-bot.mjs";
 import * as time from "./lib/time.mjs";
+import { SundayBot } from "./crons/sunday-bot.mjs";
 
 const config = Config.fromEnv();
 
@@ -52,6 +53,7 @@ const crons = [
     "http://api.exchangeratesapi.io/v1/latest",
     config.exchangeRatesAPIKey
   ),
+  new SundayBot(new WebhookBot(config.sundayBotURL)),
 ];
 
 await client
