@@ -1,9 +1,9 @@
 import { CronJob } from "cron";
 
 export class Stanley5pmCron {
-  constructor(client, webhookBot) {
+  constructor(client, bot) {
     this.client = client;
-    this.bot = webhookBot;
+    this.bot = bot;
     this.cron = new CronJob({
       cronTime: "0 18 * * 1-5",
       timeZone: "America/Sao_Paulo",

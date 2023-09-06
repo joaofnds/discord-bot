@@ -9,6 +9,7 @@ import { Stanley5pmCron } from "./crons/stanley-5pm.mjs";
 import { ClientWrapper } from "./discord/client-wrapper.mjs";
 import { WebhookBot } from "./discord/webhook-bot.mjs";
 import * as time from "./lib/time.mjs";
+import { DadJokeBot } from "./crons/dad-joke-bot.mjs";
 
 const config = Config.fromEnv();
 
@@ -31,6 +32,11 @@ const crons = [
   new Stanley5pmCron(
     new ClientWrapper(client),
     new WebhookBot(config.stanleyBotURL)
+  ),
+  new DadJokeBot(
+    new WebhookBot(config.dadBotURL),
+    config.rapidAPIURL,
+    config.rapidAPIKey
   ),
 ];
 
