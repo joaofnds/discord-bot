@@ -8,6 +8,7 @@ export class Config {
     dadBotURL,
     rapidAPIURL,
     rapidAPIKey,
+    pragTipBotURL,
   }) {
     this.token = token;
     this.randomFolk = randomFolk;
@@ -15,6 +16,7 @@ export class Config {
     this.dadBotURL = dadBotURL;
     this.rapidAPIURL = rapidAPIURL;
     this.rapidAPIKey = rapidAPIKey;
+    this.pragTipBotURL = pragTipBotURL;
   }
 
   static fromEnv() {
@@ -25,6 +27,7 @@ export class Config {
       dadBotURL: mustGetEnv("DAD_BOT_URL"),
       rapidAPIURL: mustGetEnv("RAPID_API_URL"),
       rapidAPIKey: mustGetEnv("RAPID_API_KEY"),
+      pragTipBotURL: mustGetEnv("PRAGTIP_BOT_URL"),
     });
   }
 }

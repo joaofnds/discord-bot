@@ -7,6 +7,7 @@ import { Timeout } from "./chain/timeout.mjs";
 import { Config } from "./config.mjs";
 import { DadJokeBot } from "./crons/dad-joke-bot.mjs";
 import { DevDadJokeBot } from "./crons/dev-dad-joke-bot.mjs";
+import { PragTipBot } from "./crons/prag-tip-bot.mjs";
 import { Stanley5pmCron } from "./crons/stanley-5pm.mjs";
 import { ClientWrapper } from "./discord/client-wrapper.mjs";
 import { WebhookBot } from "./discord/webhook-bot.mjs";
@@ -43,6 +44,7 @@ const crons = [
     new WebhookBot(config.dadBotURL),
     "https://v2.jokeapi.dev/joke/Programming"
   ),
+  new PragTipBot(new WebhookBot(config.pragTipBotURL)),
 ];
 
 await client
