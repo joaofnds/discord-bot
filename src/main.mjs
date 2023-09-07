@@ -5,15 +5,17 @@ import { linkChain } from "./chain/link-chain.mjs";
 import { Reply } from "./chain/reply.mjs";
 import { Timeout } from "./chain/timeout.mjs";
 import { Config } from "./config.mjs";
+import { neuralizer } from "./const.mjs";
 import { DadJokeBot } from "./crons/dad-joke-bot.mjs";
 import { DevDadJokeBot } from "./crons/dev-dad-joke-bot.mjs";
 import { PragTipBot } from "./crons/prag-tip-bot.mjs";
 import { RatesBot } from "./crons/rates-bot.mjs";
 import { Stanley5pmCron } from "./crons/stanley-5pm.mjs";
+import { SundayBot } from "./crons/sunday-bot.mjs";
 import { ClientWrapper } from "./discord/client-wrapper.mjs";
 import { WebhookBot } from "./discord/webhook-bot.mjs";
 import * as time from "./lib/time.mjs";
-import { SundayBot } from "./crons/sunday-bot.mjs";
+import { DeleteReply } from "./chain/delete-reply.mjs";
 
 const config = Config.fromEnv();
 
@@ -25,12 +27,14 @@ const client = new Client({
   ],
 });
 
-const handler = linkChain(
+const messageCreateChain = linkChain(
   new BotAuthorGuard(),
   new Abbrev(),
   new Timeout(10 * time.Minute),
   new Reply(config.randomFolk)
 );
+
+const messageDeleteChain = linkChain(new BotAuthorGuard(), new DeleteReply());
 
 const crons = [
   new Stanley5pmCron(
@@ -61,5 +65,6 @@ await client
     crons.forEach((cron) => cron.start());
     console.log("bot is ready");
   })
-  .on(Events.MessageCreate, async (m) => await handler.handle(m))
+  .on(Events.MessageCreate, async (m) => await messageCreateChain.handle(m))
+  .on(Events.MessageDelete, async (m) => await messageDeleteChain.handle(m))
   .login(config.token);

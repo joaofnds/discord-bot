@@ -1,4 +1,13 @@
+export class ChannelMock {
+  messages = [];
+
+  send(message) {
+    this.messages.push(message);
+  }
+}
+
 export class MessageMock {
+  channel = new ChannelMock();
   replies = [];
   reacts = [];
   author = { bot: false };
@@ -13,5 +22,9 @@ export class MessageMock {
 
   react(message) {
     this.reacts.push(message);
+  }
+
+  setAuthorId(id) {
+    this.author.id = id;
   }
 }
