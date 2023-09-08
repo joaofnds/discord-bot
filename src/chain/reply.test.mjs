@@ -93,14 +93,11 @@ describe(Reply.name, async () => {
 
   describe("stupid responses", async () => {
     const testCases = [
-      ["padrao", "PaDrAo"],
-      ["PADRAO", "PaDrAo"],
-
-      ["padroes", "PaDrOeS"],
-      ["PADROES", "PaDrOeS"],
-
       ["padronização", "PaDrOnIzAcAo"],
       ["PADRONIZAÇÃO", "PaDrOnIzAcAo"],
+
+      ["padronizar", "PaDrOnIzAr"],
+      ["PADRONIZAR", "PaDrOnIzAr"],
 
       ["simples", "SiMpLeS"],
       ["SIMPLES", "SiMpLeS"],
