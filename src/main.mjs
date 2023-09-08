@@ -36,9 +36,12 @@ const messageCreateChain = linkChain(
 const messageDeleteChain = linkChain(new BotAuthorGuard(), new DeleteReply());
 
 const crons = [
-  new Stanley5pmCron(
-    new ClientWrapper(client),
-    new WebhookBot(config.stanleyBotURL)
+  new PragTipBot(new WebhookBot(config.pragTipBotURL)),
+  new RatesBot(
+    new WebhookBot(config.richDadBotURL),
+    new WebhookBot(config.poorDadBotURL),
+    "http://api.exchangeratesapi.io/v1/latest",
+    config.exchangeRatesAPIKey
   ),
   new DadJokeBot(
     new WebhookBot(config.dadBotURL),
@@ -49,14 +52,11 @@ const crons = [
     new WebhookBot(config.dadBotURL),
     "https://v2.jokeapi.dev/joke/Programming"
   ),
-  new PragTipBot(new WebhookBot(config.pragTipBotURL)),
-  new RatesBot(
-    new WebhookBot(config.richDadBotURL),
-    new WebhookBot(config.poorDadBotURL),
-    "http://api.exchangeratesapi.io/v1/latest",
-    config.exchangeRatesAPIKey
-  ),
   new SundayBot(new WebhookBot(config.sundayBotURL)),
+  new Stanley5pmCron(
+    new ClientWrapper(client),
+    new WebhookBot(config.stanleyBotURL)
+  ),
 ];
 
 await client
