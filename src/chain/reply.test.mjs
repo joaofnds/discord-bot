@@ -102,9 +102,6 @@ describe(Reply.name, async () => {
       ["padronização", "PaDrOnIzAcAo"],
       ["PADRONIZAÇÃO", "PaDrOnIzAcAo"],
 
-      ["pattern", "PaTtErN"],
-      ["PATTERN", "PaTtErN"],
-
       ["simples", "SiMpLeS"],
       ["SIMPLES", "SiMpLeS"],
 

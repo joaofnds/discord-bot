@@ -24,7 +24,6 @@ export class Reply extends Chain {
         /(light mode)/gi,
         /(mape[ai]\w+)/gi,
         /(padra?o\w*)/gi,
-        /(pattern)/gi,
         /(seguranca)/gi,
         /(simples\b)/gi,
 
