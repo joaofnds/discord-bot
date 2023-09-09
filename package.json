@@ -7,6 +7,7 @@
     "node": "20.x"
   },
   "scripts": {
+    "start": "node src/main.mjs",
     "test": "node --test"
   },
   "author": "João Fernandes",
