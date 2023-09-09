@@ -8,12 +8,17 @@
   },
   "scripts": {
     "start": "node src/main.mjs",
-    "test": "node --test"
+    "test": "node --test",
+    "lint": "biome check --apply-unsafe .",
+    "format": "biome format --write ."
   },
   "author": "João Fernandes",
   "license": "ISC",
   "dependencies": {
     "cron": "^2.4.3",
     "discord.js": "^14.11.0"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "1.1.2"
   }
 }
