@@ -19,51 +19,51 @@ import * as time from "./lib/time.mjs";
 const config = Config.fromEnv();
 
 const client = new Client({
-  intents: [
-    GatewayIntentBits.Guilds,
-    GatewayIntentBits.GuildMessages,
-    GatewayIntentBits.MessageContent,
-  ],
+	intents: [
+		GatewayIntentBits.Guilds,
+		GatewayIntentBits.GuildMessages,
+		GatewayIntentBits.MessageContent,
+	],
 });
 
 const messageCreateChain = linkChain(
-  new BotAuthorGuard(),
-  new Abbrev(),
-  new Timeout(10 * time.Minute),
-  new Reply(config.randomFolk)
+	new BotAuthorGuard(),
+	new Abbrev(),
+	new Timeout(10 * time.Minute),
+	new Reply(config.randomFolk),
 );
 
 const messageDeleteChain = linkChain(new BotAuthorGuard(), new DeleteReply());
 
 const crons = [
-  new PragTipBot(new WebhookBot(config.pragTipBotURL)),
-  new RatesBot(
-    new WebhookBot(config.richDadBotURL),
-    new WebhookBot(config.poorDadBotURL),
-    "http://api.exchangeratesapi.io/v1/latest",
-    config.exchangeRatesAPIKey
-  ),
-  new DadJokeBot(
-    new WebhookBot(config.dadBotURL),
-    config.rapidAPIURL,
-    config.rapidAPIKey
-  ),
-  new DevDadJokeBot(
-    new WebhookBot(config.dadBotURL),
-    "https://v2.jokeapi.dev/joke/Programming"
-  ),
-  new SundayBot(new WebhookBot(config.sundayBotURL)),
-  new Stanley5pmCron(
-    new ClientWrapper(client),
-    new WebhookBot(config.stanleyBotURL)
-  ),
+	new PragTipBot(new WebhookBot(config.pragTipBotURL)),
+	new RatesBot(
+		new WebhookBot(config.richDadBotURL),
+		new WebhookBot(config.poorDadBotURL),
+		"http://api.exchangeratesapi.io/v1/latest",
+		config.exchangeRatesAPIKey,
+	),
+	new DadJokeBot(
+		new WebhookBot(config.dadBotURL),
+		config.rapidAPIURL,
+		config.rapidAPIKey,
+	),
+	new DevDadJokeBot(
+		new WebhookBot(config.dadBotURL),
+		"https://v2.jokeapi.dev/joke/Programming",
+	),
+	new SundayBot(new WebhookBot(config.sundayBotURL)),
+	new Stanley5pmCron(
+		new ClientWrapper(client),
+		new WebhookBot(config.stanleyBotURL),
+	),
 ];
 
 await client
-  .on(Events.ClientReady, () => {
-    crons.forEach((cron) => cron.start());
-    console.log("bot is ready");
-  })
-  .on(Events.MessageCreate, async (m) => await messageCreateChain.handle(m))
-  .on(Events.MessageDelete, async (m) => await messageDeleteChain.handle(m))
-  .login(config.token);
+	.on(Events.ClientReady, () => {
+		crons.forEach((cron) => cron.start());
+		console.log("bot is ready");
+	})
+	.on(Events.MessageCreate, async (m) => await messageCreateChain.handle(m))
+	.on(Events.MessageDelete, async (m) => await messageDeleteChain.handle(m))
+	.login(config.token);
