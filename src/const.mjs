@@ -9,3 +9,4 @@ export const nani =
 	"https://tenor.com/view/dk-nintendo-donkey-kong-gif-23203423";
 export const feijoada =
 	"https://cdn.discordapp.com/attachments/1088232532807520417/1149048671120396288/Feijoada-3071114142.jpg";
+export const bun = "have you guys seen https://bun.sh/ ? Looks promising....";

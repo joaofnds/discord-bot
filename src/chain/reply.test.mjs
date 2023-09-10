@@ -2,8 +2,10 @@ import assert from "node:assert";
 import { beforeEach, describe, it } from "node:test";
 import { MessageMock } from "../../test/message-mock.mjs";
 import { RememberWhenCalled } from "../../test/remember-when-called.mjs";
+import { WebhookBotMock } from "../../test/webhook-bot-mock.mjs";
 import {
 	anonymous,
+	bun,
 	devops,
 	eopt,
 	feijoada,
@@ -17,9 +19,11 @@ import { Reply } from "./reply.mjs";
 describe(Reply.name, async () => {
 	let sut;
 	const randomFolk = "chuck testa!";
+	const bunBot = new WebhookBotMock("bun bot");
 
 	beforeEach(() => {
-		sut = new Reply(randomFolk);
+		bunBot.reset();
+		sut = new Reply({ randomFolk, bunBot });
 	});
 
 	describe("when matches", async () => {
@@ -191,6 +195,35 @@ describe(Reply.name, async () => {
 				for (let i = 0; i < attempts; i++) await sut.handle(message);
 
 				assert.deepEqual(message.replies, []);
+			});
+		}
+	});
+
+	describe("webhook bot responses", async () => {
+		const testCases = [
+			["bun", bun, bunBot],
+			["bUn", bun, bunBot],
+			["BUN", bun, bunBot],
+		];
+
+		for (const [message, reply, bot] of testCases) {
+			it(`replies '${reply}' to '${message}' on ${bot.name}`, async () => {
+				await sut.handle(new MessageMock(message));
+
+				assert.deepEqual(bot.messages, [reply]);
+			});
+		}
+
+		const falseTestCases = [
+			["wbun", bunBot],
+			["bunw", bunBot],
+			["wbunw", bunBot],
+		];
+
+		for (const [message, bot] of falseTestCases) {
+			it(`does not reply to '${message}' on ${bot.name}`, async () => {
+				await sut.handle(new MessageMock(message));
+				assert.deepEqual(bot.messages, []);
 			});
 		}
 	});

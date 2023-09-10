@@ -1,10 +1,4 @@
-export class ChannelMock {
-	messages = [];
-
-	send(message) {
-		this.messages.push(message);
-	}
-}
+import { ChannelMock } from "./channel-mock.mjs";
 
 export class MessageMock {
 	channel = new ChannelMock();

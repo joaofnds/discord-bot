@@ -30,7 +30,10 @@ const messageCreateChain = linkChain(
 	new BotAuthorGuard(),
 	new Abbrev(),
 	new Timeout(10 * time.Minute),
-	new Reply(config.randomFolk),
+	new Reply({
+		randomFolk: config.randomFolk,
+		bunBot: new WebhookBot(config.bunBotURL),
+	}),
 );
 
 const messageDeleteChain = linkChain(new BotAuthorGuard(), new DeleteReply());
