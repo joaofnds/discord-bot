@@ -6,7 +6,7 @@ export const linux = `I'd just like to interject for a moment. What you're refer
 export const anonymous =
 	"https://media.discordapp.net/attachments/1088232532807520417/1133018342643466311/4fba7a226c1e361a9bbfe4df1a00226b2d90efcf5ce5801832e0646b4e332a52_1.jpg";
 export const wed4pm =
-	"https://images-ext-2.discordapp.net/external/oDteiKjLgGBy_f80oyavvCeA-8iKTDEAC0Rk5OYfv5Q/https/media.tenor.com/HDwnDEATKe0AAAAe/firmo-rafa.png?width=600&height=427";
+	"https://tenor.com/view/firmo-rafa-joao-lucas-semana-gif-26439293";
 export const nani =
 	"https://tenor.com/view/dk-nintendo-donkey-kong-gif-23203423";
 export const feijoada =
