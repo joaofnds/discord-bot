@@ -9,6 +9,7 @@ import {
 	devops,
 	eopt,
 	feijoada,
+	firebase,
 	linux,
 	nani,
 	stupid,
@@ -160,6 +161,10 @@ describe(Reply.name, async () => {
 			["linux", linux],
 			["LiNuX", linux],
 			["LINUX", linux],
+
+			["firebase", firebase],
+			["FiReBaSe", firebase],
+			["FIREBASE", firebase],
 		];
 
 		for (const [input, expected] of testCases) {

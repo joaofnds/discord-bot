@@ -4,6 +4,7 @@ import {
 	devops,
 	eopt,
 	feijoada,
+	firebase,
 	linux,
 	nani,
 } from "../const.mjs";
@@ -26,6 +27,7 @@ export class Reply extends Chain {
 			new PlainReplier(nani, /\?\?\?/),
 			new PlainReplier(feijoada, /feij\w+/gi, /nada acontece/gi),
 			new ProbPlainReplier(0.1, linux, /(?<!\/)linux/gi),
+			new ProbPlainReplier(0.01, firebase, /firebase/gi),
 			new StupidReplier(
 				/(deadline)/gi,
 				/(entregar valor)/gi,
