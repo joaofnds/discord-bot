@@ -5,6 +5,7 @@ import { DeleteReply } from "./chain/delete-reply.mjs";
 import { linkChain } from "./chain/link-chain.mjs";
 import { Reply } from "./chain/reply.mjs";
 import { Timeout } from "./chain/timeout.mjs";
+import { XKCD } from "./chain/xkcd.mjs";
 import { Config } from "./config.mjs";
 import { DadJokeBot } from "./crons/dad-joke-bot.mjs";
 import { DevDadJokeBot } from "./crons/dev-dad-joke-bot.mjs";
@@ -16,6 +17,7 @@ import { Web4pmCron } from "./crons/wed-4pm.mjs";
 import { ClientWrapper } from "./discord/client-wrapper.mjs";
 import { WebhookBot } from "./discord/webhook-bot.mjs";
 import * as time from "./lib/time.mjs";
+import { XKCDAPI } from "./lib/xkcd-api.mjs";
 
 const config = Config.fromEnv();
 
@@ -35,6 +37,7 @@ const messageCreateChain = linkChain(
 		randomFolk: config.randomFolk,
 		bunBot: new WebhookBot(config.bunBotURL),
 	}),
+	new XKCD(new XKCDAPI()),
 );
 
 const messageDeleteChain = linkChain(new BotAuthorGuard(), new DeleteReply());
