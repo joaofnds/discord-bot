@@ -13,7 +13,7 @@ import { PragTipBot } from "./crons/prag-tip-bot.mjs";
 import { RatesBot } from "./crons/rates-bot.mjs";
 import { Stanley5pmCron } from "./crons/stanley-5pm.mjs";
 import { SundayBot } from "./crons/sunday-bot.mjs";
-import { Web4pmCron } from "./crons/wed-4pm.mjs";
+import { Wed4pmCron } from "./crons/wed-4pm.mjs";
 import { ClientWrapper } from "./discord/client-wrapper.mjs";
 import { WebhookBot } from "./discord/webhook-bot.mjs";
 import * as time from "./lib/time.mjs";
@@ -64,7 +64,7 @@ const crons = [
 		new ClientWrapper(client),
 		new WebhookBot(config.stanleyBotURL),
 	),
-	new Web4pmCron(new WebhookBot(config.wed4pmBot)),
+	new Wed4pmCron(new WebhookBot(config.wed4pmBot)),
 ];
 
 await client

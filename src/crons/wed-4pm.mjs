@@ -1,7 +1,7 @@
 import { CronJob } from "cron";
 import { wed4pm } from "../const.mjs";
 
-export class Web4pmCron {
+export class Wed4pmCron {
 	constructor(bot) {
 		this.bot = bot;
 		this.cron = new CronJob({
