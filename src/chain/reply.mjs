@@ -11,6 +11,7 @@ import {
 import { normalize } from "../lib/normalize.mjs";
 import { PlainReplier } from "../replier/plain-replier.mjs";
 import { ProbPlainReplier } from "../replier/prob-plain-replier.mjs";
+import { SoundCloudReplier } from "../replier/soundcloud-replier.mjs";
 import { StupidReplier } from "../replier/stupid-replier.mjs";
 import { WebhookBotPlanReplier } from "../replier/webhook-bot-plain-replier.mjs";
 import { Chain } from "./chain.mjs";
@@ -37,7 +38,6 @@ export class Reply extends Chain {
 				/(padron\w+)/gi,
 				/(seguranca)/gi,
 				/(simples\b)/gi,
-
 				/(Api)/g,
 				/(Dto)/g,
 				/(Http)/g,
@@ -46,6 +46,7 @@ export class Reply extends Chain {
 				/(Uuid)/g,
 			),
 			new WebhookBotPlanReplier(bunBot, bun, /\bbun\b/gi),
+			new SoundCloudReplier(),
 		];
 	}
 

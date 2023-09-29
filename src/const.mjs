@@ -14,3 +14,4 @@ export const firebase = "https://tenor.com/view/asd-gif-21458128";
 export const feijoada =
 	"https://cdn.discordapp.com/attachments/1088232532807520417/1149048671120396288/Feijoada-3071114142.jpg";
 export const bun = "have you guys seen https://bun.sh/ ? Looks promising....";
+export const soundcloudBase = "https://soundcloud.com/joaofnds";

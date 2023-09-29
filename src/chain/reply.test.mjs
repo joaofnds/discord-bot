@@ -83,6 +83,12 @@ describe(Reply.name, async () => {
 			["nada acontece", feijoada],
 			["nada acontece feijão", feijoada],
 			["nada acontece feijoada", feijoada],
+
+			[
+				"por-favor-me-ajuda.mp3",
+				"https://soundcloud.com/joaofnds/por-favor-me-ajuda",
+			],
+			["belezaaa.mp3", "https://soundcloud.com/joaofnds/belezaaa"],
 		];
 
 		for (const [input, expected] of testCases) {
