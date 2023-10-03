@@ -75,3 +75,11 @@ await client
 	.on(Events.MessageCreate, async (m) => await messageCreateChain.handle(m))
 	.on(Events.MessageDelete, async (m) => await messageDeleteChain.handle(m))
 	.login(config.token);
+
+for (const signal of ["SIGINT", "SIGTERM", "SIGABRT"]) {
+	process.on(signal, () => {
+		console.log(`received ${signal}, exiting...`);
+		client.destroy();
+		process.exit(0);
+	});
+}
