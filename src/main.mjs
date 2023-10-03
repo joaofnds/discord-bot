@@ -29,6 +29,11 @@ const client = new Client({
 	],
 });
 
+function exit(code) {
+	client.destroy();
+	process.exit(code);
+}
+
 const messageCreateChain = linkChain(
 	new BotAuthorGuard(),
 	new Abbrev(),
@@ -74,12 +79,15 @@ await client
 	})
 	.on(Events.MessageCreate, async (m) => await messageCreateChain.handle(m))
 	.on(Events.MessageDelete, async (m) => await messageDeleteChain.handle(m))
+	.on(Events.ShardDisconnect, () => {
+		console.error("received shard disconnect, exiting...");
+		exit(1);
+	})
 	.login(config.token);
 
 for (const signal of ["SIGINT", "SIGTERM", "SIGABRT"]) {
 	process.on(signal, () => {
 		console.log(`received ${signal}, exiting...`);
-		client.destroy();
-		process.exit(0);
+		exit(0);
 	});
 }
