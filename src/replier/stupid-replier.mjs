@@ -1,6 +1,5 @@
 import { stupid } from "../const.mjs";
 import { allCaptures } from "../lib/all-captures.mjs";
-import { normalize } from "../lib/normalize.mjs";
 import { stupidCase } from "../lib/stupid-case.mjs";
 
 export class StupidReplier {

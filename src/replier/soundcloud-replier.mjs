@@ -1,13 +1,13 @@
-import { soundcloudBase } from "../const.mjs";
+import { captures } from "../lib/captures.mjs";
+import { normalize } from "../lib/normalize.mjs";
 
 export class SoundCloudReplier {
-	constructor() {
-		this.regex = /((\w+-{0,1})+.mp3){1}/gi;
-	}
+	regex = /([\w-]+\.mp3)/gi;
 
 	reply(str) {
-		if (this.regex.test(str)) {
-			return `${soundcloudBase}/${str.slice(0, -4)}`;
-		}
+		const [audio] = captures(this.regex, normalize(str));
+		if (!audio) return;
+
+		return `https://soundcloud.com/joaofnds/${audio.replace(/\.mp3$/gi, "")}`;
 	}
 }
