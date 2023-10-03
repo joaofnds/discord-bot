@@ -2,7 +2,6 @@ import { Client, Events, GatewayIntentBits } from "discord.js";
 import { Abbrev } from "./chain/abbrev.mjs";
 import { BotAuthorGuard } from "./chain/bot-author-guard.mjs";
 import { DeleteReply } from "./chain/delete-reply.mjs";
-import { Die } from "./chain/die.mjs";
 import { linkChain } from "./chain/link-chain.mjs";
 import { Reply } from "./chain/reply.mjs";
 import { Timeout } from "./chain/timeout.mjs";
@@ -37,10 +36,6 @@ function exit(code) {
 
 const messageCreateChain = linkChain(
 	new BotAuthorGuard(),
-	new Die(() => {
-		console.log("received !die, exiting...");
-		exit(0);
-	}),
 	new Abbrev(),
 	new Timeout(10 * time.Minute),
 	new Reply({
