@@ -147,6 +147,11 @@ describe(Reply.name, async () => {
 			["ENTREGAR VALOR", "EnTrEgAr vAlOr"],
 
 			["Http Dto Api", "ApI, DtO, HtTp"],
+
+			["estimar", "EsTiMaR"],
+			["ESTIMAR", "EsTiMaR"],
+			["estimativa", "EsTiMaTiVa"],
+			["ESTIMATIVA", "EsTiMaTiVa"],
 		];
 
 		for (const [input, expectedTransformation] of testCases) {
