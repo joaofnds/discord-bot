@@ -3,10 +3,13 @@ export class ClientWrapper {
 		this.client = client;
 	}
 
-	voiceDisconnect(channelName, username) {
-		return this.client.channels.cache
-			.find((c) => c.name === channelName)
-			?.members.find((m) => m.user.username === username)
-			?.voice.disconnect();
+	async voiceDisconnect(channelID, userID) {
+		const channel = await this.client.channels.fetch(channelID);
+		if (!channel) return;
+
+		const member = channel?.members.find((m) => m.id === userID);
+		if (!member) return;
+
+		await member?.voice.disconnect();
 	}
 }

@@ -16,7 +16,10 @@ export class Stanley5pmCron {
 	}
 
 	async run() {
-		await this.client.voiceDisconnect("trabalho", "sthefanoss");
+		await this.client.voiceDisconnect(
+			"1133135683897262191",
+			"189624819807944704",
+		);
 		await this.bot.send("então tá pessoal, tchau tchau!");
 		await this.bot.send(
 			"https://tenor.com/view/the-office-stanley-time-to-go-work-life-got-to-go-gif-4242766",
