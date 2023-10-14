@@ -25,7 +25,7 @@ export class Reply extends Chain {
 			new PlainReplier(randomFolk, /citando aleatoriamente/gi),
 			new PlainReplier(devops, / (e|sou|os) devops/gi, /contrat\w* devops/gi),
 			new PlainReplier(anonymous, /anonymous/gi, /anonimo/gi),
-			new PlainReplier(nani, /\?\?\?/),
+			new PlainReplier(nani, /(^|[^\?])\?{3}$/),
 			new PlainReplier(feijoada, /feij\w+/gi, /nada acontece/gi),
 			new ProbPlainReplier(0.1, linux, /(?<!\/)linux/gi),
 			new ProbPlainReplier(0.01, firebase, /firebase/gi),
