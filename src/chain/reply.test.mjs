@@ -6,6 +6,7 @@ import { WebhookBotMock } from "../../test/webhook-bot-mock.mjs";
 import {
 	anonymous,
 	bun,
+	cLigaMeu,
 	devops,
 	eopt,
 	feijoada,
@@ -89,6 +90,10 @@ describe(Reply.name, async () => {
 				"https://soundcloud.com/joaofnds/por-favor-me-ajuda",
 			],
 			["belezaaa.mp3", "https://soundcloud.com/joaofnds/belezaaa"],
+
+			["c liga meu", cLigaMeu],
+			["C LiGa MeU", cLigaMeu],
+			["C LIGA MEU", cLigaMeu],
 		];
 
 		for (const [input, expected] of testCases) {
