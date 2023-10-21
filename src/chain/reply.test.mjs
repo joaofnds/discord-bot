@@ -94,6 +94,10 @@ describe(Reply.name, async () => {
 			["c liga meu", cLigaMeu],
 			["C LiGa MeU", cLigaMeu],
 			["C LIGA MEU", cLigaMeu],
+
+			["agencia do nubank", cLigaMeu],
+			["agencia do nubank", cLigaMeu],
+			["agencia do nubank", cLigaMeu],
 		];
 
 		for (const [input, expected] of testCases) {
