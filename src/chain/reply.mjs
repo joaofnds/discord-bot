@@ -6,6 +6,7 @@ import {
 	eopt,
 	feijoada,
 	firebase,
+	jose,
 	linux,
 	nani,
 } from "../const.mjs";
@@ -29,6 +30,7 @@ export class Reply extends Chain {
 			new PlainReplier(nani, /(^|[^\?])\?{3}$/),
 			new PlainReplier(feijoada, /feij\w+/gi, /nada acontece/gi),
 			new PlainReplier(cLigaMeu, /c liga meu/gi, /agencia do nubank/gi),
+			new PlainReplier(jose, /\bjose\b/gi),
 			new ProbPlainReplier(0.1, linux, /(?<!\/)linux/gi),
 			new ProbPlainReplier(0.01, firebase, /firebase/gi),
 			new StupidReplier(

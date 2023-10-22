@@ -11,6 +11,7 @@ import {
 	eopt,
 	feijoada,
 	firebase,
+	jose,
 	linux,
 	nani,
 	stupid,
@@ -98,6 +99,10 @@ describe(Reply.name, async () => {
 			["agencia do nubank", cLigaMeu],
 			["aGeNcIa dO nUbAnK", cLigaMeu],
 			["AGENCIA DO NUBANK", cLigaMeu],
+
+			["jose", jose],
+			["JoSe", jose],
+			["JOSE", jose],
 		];
 
 		for (const [input, expected] of testCases) {
@@ -254,7 +259,7 @@ describe(Reply.name, async () => {
 	});
 
 	describe("when does not match", async () => {
-		const testCases = ["foo", "the devops movement"];
+		const testCases = ["foo", "the devops movement", "xjosex"];
 
 		for (const input of testCases) {
 			it(`does not reply: ${input}`, async () => {
