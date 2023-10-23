@@ -16,5 +16,4 @@ export const feijoada =
 export const bun = "have you guys seen https://bun.sh/ ? Looks promising....";
 export const cLigaMeu =
 	"https://media.discordapp.net/attachments/1131226059115872367/1164905390803263498/c-lica-meu.jpeg";
-export const jose =
-	"https://images-ext-2.discordapp.net/external/8DY7fiZp587A_1Rlff-4uMhf1yZ1IUHDlmJwLZHzaZI/https/media.tenor.com/I9j66xAKCGQAAAPo/jose.mp4";
+export const jose = "https://tenor.com/view/jose-gif-18847711";
