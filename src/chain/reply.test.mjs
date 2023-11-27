@@ -103,6 +103,10 @@ describe(Reply.name, async () => {
 			["jose", jose],
 			["JoSe", jose],
 			["JOSE", jose],
+
+			["firebase", firebase],
+			["FiReBaSe", firebase],
+			["FIREBASE", firebase],
 		];
 
 		for (const [input, expected] of testCases) {
@@ -259,7 +263,13 @@ describe(Reply.name, async () => {
 	});
 
 	describe("when does not match", async () => {
-		const testCases = ["foo", "the devops movement", "xjosex"];
+		const testCases = [
+			"foo",
+			"the devops movement",
+			"xjosex",
+			"something firebase something",
+			" firebase ",
+		];
 
 		for (const input of testCases) {
 			it(`does not reply: ${input}`, async () => {
