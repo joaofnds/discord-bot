@@ -68,10 +68,10 @@ describe(Reply.name, async () => {
 			["E O PEDRO", "Barros!"],
 			["mas e o pedro hein", "Barros!"],
 
-			["Mas e o pt hein", eopt],
-			["mas e o pt hein", eopt],
-			["mas e a dilma hein", eopt],
-			["Mas e o lula e a dilma hein", eopt],
+			["e o pt hein", eopt],
+			["e o pt hein", eopt],
+			["e a dilma hein", eopt],
+			["e o lula e a dilma hein", eopt],
 
 			["???", nani],
 
