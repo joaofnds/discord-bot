@@ -4,6 +4,7 @@ import { BotAuthorGuard } from "./chain/bot-author-guard.mjs";
 import { DeleteReply } from "./chain/delete-reply.mjs";
 import { linkChain } from "./chain/link-chain.mjs";
 import { Reply } from "./chain/reply.mjs";
+import { Send } from "./chain/send.mjs";
 import { Timeout } from "./chain/timeout.mjs";
 import { XKCD } from "./chain/xkcd.mjs";
 import { Config } from "./config.mjs";
@@ -38,6 +39,7 @@ const messageCreateChain = linkChain(
 	new BotAuthorGuard(),
 	new Abbrev(),
 	new Timeout(10 * time.Minute),
+	new Send(),
 	new Reply({
 		randomFolk: config.randomFolk,
 		bunBot: new WebhookBot(config.bunBotURL),
