@@ -17,10 +17,16 @@ describe(Send.name, async () => {
 			["channel errado", "channel errado"],
 			["CHANNEL ERRADO", "channel errado"],
 			["ChAnNeL eRrAdO", "channel errado"],
+			[" channel errado", "channel errado"],
+			["channel errado ", "channel errado"],
+			[" channel errado ", "channel errado"],
 
 			["canal errado", "canal errado"],
 			["CANAL ERRADO", "canal errado"],
 			["CaNaL eRrAdO", "canal errado"],
+			[" canal errado", "canal errado"],
+			["canal errado ", "canal errado"],
+			[" canal errado ", "canal errado"],
 		];
 
 		for (const [input, expected] of testCases) {
@@ -35,7 +41,14 @@ describe(Send.name, async () => {
 	});
 
 	describe("when does not match", async () => {
-		const testCases = ["channel certo", "canal certo"];
+		const testCases = [
+			"channel certo",
+			"something channel errado",
+			"channel errado something",
+			"canal certo",
+			"something canal errado",
+			"canal errado something",
+		];
 
 		for (const input of testCases) {
 			it(`does not reply: ${input}`, async () => {

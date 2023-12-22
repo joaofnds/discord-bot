@@ -10,18 +10,18 @@ export class Send extends Chain {
 			new SendAndTimeoutReplier(
 				1 * time.Minute,
 				"channel errado",
-				/channel errado/i,
+				/^channel errado$/i,
 			),
 			new SendAndTimeoutReplier(
 				1 * time.Minute,
 				"canal errado",
-				/canal errado/i,
+				/^canal errado$/i,
 			),
 		];
 	}
 
 	async handle(message) {
-		const str = normalize(message.content);
+		const str = normalize(message.content).trim();
 
 		for (const response of this.responses) {
 			const reply = response.reply(str);
