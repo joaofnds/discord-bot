@@ -50,6 +50,7 @@ export class Reply extends Chain {
 				/(Json)/g,
 				/(Url)/g,
 				/(Uuid)/g,
+				/(Uspsa)/g,
 			),
 			new WebhookBotPlanReplier(bunBot, bun, /\bbun\b/gi),
 			new SoundCloudReplier(),

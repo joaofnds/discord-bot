@@ -170,6 +170,8 @@ describe(Reply.name, async () => {
 			["ESTIMAR", "EsTiMaR"],
 			["estimativa", "EsTiMaTiVa"],
 			["ESTIMATIVA", "EsTiMaTiVa"],
+
+			["Uspsa", "UsPsA"],
 		];
 
 		for (const [input, expectedTransformation] of testCases) {
@@ -269,6 +271,7 @@ describe(Reply.name, async () => {
 			"xjosex",
 			"something firebase something",
 			" firebase ",
+			"USPSA",
 		];
 
 		for (const input of testCases) {
