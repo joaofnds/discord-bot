@@ -4,7 +4,13 @@ import { captures } from "./captures.mjs";
 
 describe("captures", () => {
 	describe("when matches", () => {
-		assert.deepEqual(captures(/(\d+)(\w+)/, "123abc"), ["123", "abc"]);
+		it("returns matches for single group", () => {
+			assert.deepEqual(captures(/(\d+)/, "123"), ["123"]);
+		});
+
+		it("returns matches for multiple groups", () => {
+			assert.deepEqual(captures(/(\d+)(\w+)/, "123abc"), ["123", "abc"]);
+		});
 	});
 
 	describe("when does not match", () => {
