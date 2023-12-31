@@ -51,6 +51,7 @@ export class Reply extends Chain {
 				/(Url)/g,
 				/(Uuid)/g,
 				/(Uspsa)/g,
+				/(Idpa)/g,
 			),
 			new WebhookBotPlanReplier(bunBot, bun, /\bbun\b/gi),
 			new SoundCloudReplier(),
