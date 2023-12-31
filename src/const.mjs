@@ -1,3 +1,4 @@
+export const livefireTextChannelID = "1088232532807520417";
 export const stupidID = "1095422079362404456";
 export const stupid = `<:stupid:${stupidID}>`;
 export const neuralizer = "<:mibneuralyzer:959135586357215314>";

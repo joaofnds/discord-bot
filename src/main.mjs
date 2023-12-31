@@ -2,12 +2,14 @@ import { Client, Events, GatewayIntentBits } from "discord.js";
 import { Abbrev } from "./chain/abbrev.mjs";
 import { BotAuthorGuard } from "./chain/bot-author-guard.mjs";
 import { DeleteReply } from "./chain/delete-reply.mjs";
+import { GitHubIssue } from "./chain/github-issue.mjs";
 import { linkChain } from "./chain/link-chain.mjs";
 import { Reply } from "./chain/reply.mjs";
 import { Send } from "./chain/send.mjs";
 import { Timeout } from "./chain/timeout.mjs";
 import { XKCD } from "./chain/xkcd.mjs";
 import { Config } from "./config.mjs";
+import { livefireTextChannelID } from "./const.mjs";
 import { DadJokeBot } from "./crons/dad-joke-bot.mjs";
 import { DevDadJokeBot } from "./crons/dev-dad-joke-bot.mjs";
 import { PragTipBot } from "./crons/prag-tip-bot.mjs";
@@ -45,6 +47,10 @@ const messageCreateChain = linkChain(
 		bunBot: new WebhookBot(config.bunBotURL),
 	}),
 	new XKCD(new XKCDAPI()),
+	new GitHubIssue(
+		"https://github.com/livefire-dev/lfapi/issues",
+		livefireTextChannelID,
+	),
 );
 
 const messageDeleteChain = linkChain(new BotAuthorGuard(), new DeleteReply());
