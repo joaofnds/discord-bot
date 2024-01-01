@@ -43,7 +43,6 @@ export class Reply extends Chain {
 				/(mape[ai]\w+)/gi,
 				/(padron\w+)/gi,
 				/(seguranca)/gi,
-				/(simples\b)/gi,
 				/(Api)/g,
 				/(Dto)/g,
 				/(Http)/g,

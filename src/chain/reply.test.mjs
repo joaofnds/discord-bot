@@ -128,9 +128,6 @@ describe(Reply.name, async () => {
 			["padronizar", "PaDrOnIzAr"],
 			["PADRONIZAR", "PaDrOnIzAr"],
 
-			["simples", "SiMpLeS"],
-			["SIMPLES", "SiMpLeS"],
-
 			["Json", "JsOn"],
 			["Http", "HtTp"],
 			["Api", "ApI"],
@@ -268,6 +265,7 @@ describe(Reply.name, async () => {
 	describe("when does not match", async () => {
 		const testCases = [
 			"foo",
+			"simples",
 			"the devops movement",
 			"xjosex",
 			"something firebase something",
