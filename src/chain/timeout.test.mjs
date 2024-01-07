@@ -3,7 +3,7 @@ import { beforeEach, describe, it } from "node:test";
 import { MessageMock } from "../../test/message-mock.mjs";
 import { RememberWhenCalled } from "../../test/remember-when-called.mjs";
 import { parseDuration } from "../lib/parse-duration.mjs";
-import * as time from "../lib/time.mjs";
+import time from "../lib/time.mjs";
 import { linkChain } from "./link-chain.mjs";
 import { Timeout } from "./timeout.mjs";
 

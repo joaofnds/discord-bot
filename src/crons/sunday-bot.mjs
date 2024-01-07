@@ -1,5 +1,5 @@
 import { CronJob } from "cron";
-import * as time from "../lib/time.mjs";
+import time from "../lib/time.mjs";
 
 export class SundayBot {
 	constructor(bot) {

@@ -1,5 +1,5 @@
 import { normalize } from "../lib/normalize.mjs";
-import * as time from "../lib/time.mjs";
+import time from "../lib/time.mjs";
 import { SendAndTimeoutReplier } from "../replier/send-and-time-out-replier.mjs";
 import { Chain } from "./chain.mjs";
 

@@ -19,7 +19,7 @@ import { SundayBot } from "./crons/sunday-bot.mjs";
 import { Wed4pmCron } from "./crons/wed-4pm.mjs";
 import { ClientWrapper } from "./discord/client-wrapper.mjs";
 import { WebhookBot } from "./discord/webhook-bot.mjs";
-import * as time from "./lib/time.mjs";
+import time from "./lib/time.mjs";
 import { XKCDAPI } from "./lib/xkcd-api.mjs";
 
 const config = Config.fromEnv();
