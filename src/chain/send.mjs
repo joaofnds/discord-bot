@@ -1,5 +1,6 @@
 import { normalize } from "../lib/normalize.mjs";
 import time from "../lib/time.mjs";
+import { Timeout } from "../lib/timeout.mjs";
 import { SendAndTimeoutReplier } from "../replier/send-and-time-out-replier.mjs";
 import { Chain } from "./chain.mjs";
 
@@ -8,12 +9,12 @@ export class Send extends Chain {
 		super();
 		this.responses = [
 			new SendAndTimeoutReplier(
-				1 * time.Minute,
+				Timeout.withDuration(time.Minute),
 				"channel errado",
 				/^channel errado$/i,
 			),
 			new SendAndTimeoutReplier(
-				1 * time.Minute,
+				Timeout.withDuration(time.Minute),
 				"canal errado",
 				/^canal errado$/i,
 			),

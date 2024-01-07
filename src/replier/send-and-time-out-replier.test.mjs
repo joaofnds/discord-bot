@@ -1,46 +1,68 @@
 import assert from "node:assert";
-import { describe, it } from "node:test";
-import { wait } from "../../test/util.mjs";
-import * as time from "../lib/time.mjs";
+import { beforeEach, describe, it } from "node:test";
+import { MockTimeout } from "../../test/timeout-mock.mjs";
 import { SendAndTimeoutReplier } from "./send-and-time-out-replier.mjs";
 
 describe(SendAndTimeoutReplier.name, () => {
-	it("replies when matches", async () => {
-		const replier = new SendAndTimeoutReplier(1 * time.Second, "bar", /foo/);
+	const timeout = new MockTimeout();
 
-		const response = replier.reply("foo");
-		assert.equal(response, "bar");
+	beforeEach(() => timeout.reset());
+
+	describe("when matches", () => {
+		it("replies", async () => {
+			const replier = new SendAndTimeoutReplier(timeout, "bar", /foo/);
+
+			const response = replier.reply("foo");
+			assert.equal(response, "bar");
+		});
+
+		it("starts timeout", async () => {
+			const replier = new SendAndTimeoutReplier(timeout, "bar", /foo/);
+			assert.equal(timeout.startCalls, 0);
+
+			replier.reply("foo");
+
+			assert.equal(timeout.startCalls, 1);
+		});
+
+		it("stops replying", async () => {
+			const replier = new SendAndTimeoutReplier(timeout, "bar", /foo/);
+
+			assert.equal(replier.reply("foo"), "bar");
+
+			assert.equal(replier.reply("foo"), undefined);
+			assert.equal(replier.reply("foo"), undefined);
+			assert.equal(replier.reply("foo"), undefined);
+		});
 	});
 
-	it("does not reply when does not match", async () => {
-		const replier = new SendAndTimeoutReplier(1 * time.Second, "bar", /foo/);
+	describe("when does not match", () => {
+		it("does not reply", async () => {
+			const replier = new SendAndTimeoutReplier(timeout, "bar", /foo/);
 
-		const response = replier.reply("baz");
-		assert.equal(response, undefined);
+			const response = replier.reply("baz");
+			assert.equal(response, undefined);
+		});
+
+		it("does not start timeout", async () => {
+			const replier = new SendAndTimeoutReplier(timeout, "bar", /foo/);
+
+			replier.reply("baz");
+
+			assert.equal(timeout.startCalls, 0);
+		});
 	});
 
-	it("does not reply when timed out", async () => {
-		const replier = new SendAndTimeoutReplier(
-			5 * time.Millisecond,
-			"bar",
-			/foo/,
-		);
+	describe("when timeout expires", () => {
+		it("replies", async () => {
+			const replier = new SendAndTimeoutReplier(timeout, "bar", /foo/);
 
-		assert.equal(replier.reply("foo"), "bar");
-		assert.equal(replier.reply("foo"), undefined);
-		assert.equal(replier.reply("foo"), undefined);
-		assert.equal(replier.reply("foo"), undefined);
-	});
+			assert.equal(replier.reply("foo"), "bar");
+			assert.equal(replier.reply("foo"), undefined);
 
-	it("replies after timeout", async () => {
-		const timeout = 10 * time.Millisecond;
-		const replier = new SendAndTimeoutReplier(timeout, "bar", /foo/);
+			timeout.expire();
 
-		assert.equal(replier.reply("foo"), "bar");
-		assert.equal(replier.reply("foo"), undefined);
-
-		await wait(timeout);
-
-		assert.equal(replier.reply("foo"), "bar");
+			assert.equal(replier.reply("foo"), "bar");
+		});
 	});
 });
