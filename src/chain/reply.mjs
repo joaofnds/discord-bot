@@ -9,6 +9,7 @@ import {
 	jose,
 	linux,
 	nani,
+	nothingStill,
 } from "../const.mjs";
 import { normalize } from "../lib/normalize.mjs";
 import { PlainReplier } from "../replier/plain-replier.mjs";
@@ -32,6 +33,7 @@ export class Reply extends Chain {
 			new PlainReplier(cLigaMeu, /c liga meu/gi, /agencia do nubank/gi),
 			new PlainReplier(jose, /\bjose\b/gi),
 			new PlainReplier(firebase, /^firebase$/gi),
+			new PlainReplier(nothingStill, /e.o.pix/i),
 			new ProbPlainReplier(0.1, linux, /(?<!\/)linux/gi),
 			new ProbPlainReplier(0.01, firebase, /firebase/gi),
 			new StupidReplier(

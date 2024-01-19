@@ -14,6 +14,7 @@ import {
 	jose,
 	linux,
 	nani,
+	nothingStill,
 	stupid,
 } from "../const.mjs";
 import { linkChain } from "./link-chain.mjs";
@@ -107,6 +108,12 @@ describe(Reply.name, async () => {
 			["firebase", firebase],
 			["FiReBaSe", firebase],
 			["FIREBASE", firebase],
+
+			["e o pix", nothingStill],
+			["e-o-pix", nothingStill],
+			["e_o_pix", nothingStill],
+			["foo e o pix bar", nothingStill],
+			["foo e-o-pix bar", nothingStill],
 		];
 
 		for (const [input, expected] of testCases) {
@@ -272,6 +279,7 @@ describe(Reply.name, async () => {
 			" firebase ",
 			"USPSA",
 			"IDPA",
+			"e something o something pix",
 		];
 
 		for (const input of testCases) {

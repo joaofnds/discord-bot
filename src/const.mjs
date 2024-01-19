@@ -18,3 +18,4 @@ export const bun = "have you guys seen https://bun.sh/ ? Looks promising....";
 export const cLigaMeu =
 	"https://media.discordapp.net/attachments/1131226059115872367/1164905390803263498/c-lica-meu.jpeg";
 export const jose = "https://tenor.com/view/jose-gif-18847711";
+export const nothingStill = "nada ainda?";
