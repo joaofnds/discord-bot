@@ -92,6 +92,7 @@ describe(Reply.name, async () => {
 				"https://soundcloud.com/joaofnds/por-favor-me-ajuda",
 			],
 			["belezaaa.mp3", "https://soundcloud.com/joaofnds/belezaaa"],
+			["e-o-pix.mp3", "https://soundcloud.com/joaofnds/e-o-pix"],
 
 			["c liga meu", cLigaMeu],
 			["C LiGa MeU", cLigaMeu],
