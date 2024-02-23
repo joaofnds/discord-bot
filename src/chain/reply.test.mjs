@@ -115,6 +115,10 @@ describe(Reply.name, async () => {
 			["e_o_pix", nothingStill],
 			["foo e o pix bar", nothingStill],
 			["foo e-o-pix bar", nothingStill],
+
+			["olavo", "💀"],
+			["OlAvO", "💀"],
+			["OLAVO", "💀"],
 		];
 
 		for (const [input, expected] of testCases) {
