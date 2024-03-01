@@ -10,6 +10,7 @@ import {
 	linux,
 	nani,
 	nothingStill,
+	rules,
 } from "../const.mjs";
 import { normalize } from "../lib/normalize.mjs";
 import { PlainReplier } from "../replier/plain-replier.mjs";
@@ -34,6 +35,7 @@ export class Reply extends Chain {
 			new PlainReplier(jose, /\bjose\b/gi),
 			new PlainReplier(firebase, /^firebase$/gi),
 			new PlainReplier(nothingStill, /e.o.pix(?!\.mp3)/i),
+			new PlainReplier(rules, /!regras/),
 			new PlainReplier("💀", /olavo/i),
 			new ProbPlainReplier(0.1, linux, /(?<!\/)linux/gi),
 			new ProbPlainReplier(0.01, firebase, /firebase/gi),

@@ -19,3 +19,5 @@ export const cLigaMeu =
 	"https://media.discordapp.net/attachments/1131226059115872367/1164905390803263498/c-lica-meu.jpeg";
 export const jose = "https://tenor.com/view/jose-gif-18847711";
 export const nothingStill = "nada ainda?";
+export const rules =
+	"https://i.pinimg.com/originals/6d/05/21/6d0521b0a0c3d7f2f4e169265798a260.jpg";

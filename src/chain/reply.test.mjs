@@ -15,6 +15,7 @@ import {
 	linux,
 	nani,
 	nothingStill,
+	rules,
 	stupid,
 } from "../const.mjs";
 import { linkChain } from "./link-chain.mjs";
@@ -119,6 +120,8 @@ describe(Reply.name, async () => {
 			["olavo", "💀"],
 			["OlAvO", "💀"],
 			["OLAVO", "💀"],
+
+			["!regras", rules],
 		];
 
 		for (const [input, expected] of testCases) {
@@ -285,6 +288,8 @@ describe(Reply.name, async () => {
 			"USPSA",
 			"IDPA",
 			"e something o something pix",
+			"!REGRAS",
+			"!ReGrAs",
 		];
 
 		for (const input of testCases) {
