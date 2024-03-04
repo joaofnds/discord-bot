@@ -38,7 +38,7 @@ export class Reply extends Chain {
 			new PlainReplier(nothingStill, /e.o.pix(?!\.mp3)/i),
 			new PlainReplier(rules, /!regras/),
 			new PlainReplier("💀", /olavo/i),
-			new PlainReplier(pqpracuba, /(pq|(por que)) (( )*\w( )*)* cara\?\!/gi),
+			new PlainReplier(pqpracuba, /(pq|(por que)) .* cara\?\!/i),
 			new ProbPlainReplier(0.1, linux, /(?<!\/)linux/gi),
 			new ProbPlainReplier(0.01, firebase, /firebase/gi),
 			new StupidReplier(
