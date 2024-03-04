@@ -15,6 +15,7 @@ import {
 	linux,
 	nani,
 	nothingStill,
+	pqpracuba,
 	rules,
 	stupid,
 } from "../const.mjs";
@@ -110,6 +111,11 @@ describe(Reply.name, async () => {
 			["firebase", firebase],
 			["FiReBaSe", firebase],
 			["FIREBASE", firebase],
+
+			["por que pra cuba cara?!", pqpracuba],
+			["pq pra cuba cara?!", pqpracuba],
+			["pq no objeto cara?!", pqpracuba],
+			["por que no objeto cara?!", pqpracuba],
 
 			["e o pix", nothingStill],
 			["e-o-pix", nothingStill],

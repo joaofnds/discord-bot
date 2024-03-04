@@ -21,3 +21,5 @@ export const jose = "https://tenor.com/view/jose-gif-18847711";
 export const nothingStill = "nada ainda?";
 export const rules =
 	"https://i.pinimg.com/originals/6d/05/21/6d0521b0a0c3d7f2f4e169265798a260.jpg";
+export const pqpracuba =
+	"https://cdn.discordapp.com/attachments/1131225750821945416/1214208285155262505/pq-pra-cuba.gif";
