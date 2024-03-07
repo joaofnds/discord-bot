@@ -19,6 +19,7 @@ import {
 	pqpracuba,
 	rules,
 	stupid,
+	yourcodeirgarbageimg,
 } from "../const.mjs";
 import { linkChain } from "./link-chain.mjs";
 import { Reply } from "./reply.mjs";
@@ -131,6 +132,12 @@ describe(Reply.name, async () => {
 			["!regras", rules],
 
 			["!linus", linus],
+
+			["code garbage", yourcodeirgarbageimg],
+			["your code is garbage", yourcodeirgarbageimg],
+			["code garbage", yourcodeirgarbageimg],
+			["garbage code", yourcodeirgarbageimg],
+			["this is garbage code", yourcodeirgarbageimg],
 		];
 
 		for (const [input, expected] of testCases) {
