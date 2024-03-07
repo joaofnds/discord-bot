@@ -23,3 +23,5 @@ export const rules =
 	"https://i.pinimg.com/originals/6d/05/21/6d0521b0a0c3d7f2f4e169265798a260.jpg";
 export const pqpracuba =
 	"https://cdn.discordapp.com/attachments/1131225750821945416/1214208285155262505/pq-pra-cuba.gif";
+export const linus =
+	"https://preview.redd.it/2f48st4yepfc1.jpeg?width=1080&crop=smart&auto=webp&s=d5b2007a2ec9fa9da1ebc124ad0d8e0f73611e84";

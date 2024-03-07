@@ -12,6 +12,7 @@ import {
 	feijoada,
 	firebase,
 	jose,
+	linus,
 	linux,
 	nani,
 	nothingStill,
@@ -128,6 +129,8 @@ describe(Reply.name, async () => {
 			["OLAVO", "💀"],
 
 			["!regras", rules],
+
+			["!linus", linus],
 		];
 
 		for (const [input, expected] of testCases) {
@@ -296,6 +299,8 @@ describe(Reply.name, async () => {
 			"e something o something pix",
 			"!REGRAS",
 			"!ReGrAs",
+			"!LINUS",
+			"!LiNuS",
 		];
 
 		for (const input of testCases) {
