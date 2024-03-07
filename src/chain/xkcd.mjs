@@ -24,7 +24,7 @@ export class XKCD extends Chain {
 		}
 
 		const number = parseInt(input);
-		if (isNaN(number)) {
+		if (Number.isNaN(number)) {
 			message.react(stupidID);
 			return;
 		}
