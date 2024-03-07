@@ -3,7 +3,6 @@ import { describe, it } from "node:test";
 import { MessageMock } from "../../test/message-mock.mjs";
 import { RememberWhenCalled } from "../../test/remember-when-called.mjs";
 import { stupidID } from "../const.mjs";
-import { Abbrev } from "./abbrev.mjs";
 import { linkChain } from "./link-chain.mjs";
 import { XKCD } from "./xkcd.mjs";
 
