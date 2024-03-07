@@ -4,6 +4,7 @@ import { BotAuthorGuard } from "./chain/bot-author-guard.mjs";
 import { DeleteReply } from "./chain/delete-reply.mjs";
 import { GitHubIssue } from "./chain/github-issue.mjs";
 import { linkChain } from "./chain/link-chain.mjs";
+import { PragTip } from "./chain/pragtip.mjs";
 import { Reply } from "./chain/reply.mjs";
 import { Send } from "./chain/send.mjs";
 import { Timeout } from "./chain/timeout.mjs";
@@ -46,6 +47,7 @@ const messageCreateChain = linkChain(
 		randomFolk: config.randomFolk,
 		bunBot: new WebhookBot(config.bunBotURL),
 	}),
+	new PragTip(),
 	new XKCD(new XKCDAPI()),
 	new GitHubIssue(
 		"https://github.com/livefire-dev/lfapi/issues",
