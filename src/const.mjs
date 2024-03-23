@@ -27,6 +27,7 @@ export const linus =
 	"https://preview.redd.it/2f48st4yepfc1.jpeg?width=1080&crop=smart&auto=webp&s=d5b2007a2ec9fa9da1ebc124ad0d8e0f73611e84";
 export const yourcodeirgarbageimg =
 	"https://preview.redd.it/wpvtr5pmskfc1.png?auto=webp&s=1f6c59e24b44e55669fac0fc9e855cd6a1683d42";
+export const thomasmp3 = "https://soundcloud.com/joaofnds/thomas";
 
 export const pragtips = [
 	"Tip #1, pg. xxi:\n\nCare About Your Craft\n\nWhy spend your life developing software unless you care about doing it well?",

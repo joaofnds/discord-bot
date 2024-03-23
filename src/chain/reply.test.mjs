@@ -19,6 +19,7 @@ import {
 	pqpracuba,
 	rules,
 	stupid,
+	thomasmp3,
 	yourcodeirgarbageimg,
 } from "../const.mjs";
 import { linkChain } from "./link-chain.mjs";
@@ -128,6 +129,13 @@ describe(Reply.name, async () => {
 			["olavo", "💀"],
 			["OlAvO", "💀"],
 			["OLAVO", "💀"],
+
+			["release-train", thomasmp3],
+			["rElEaSe-TrAiN", thomasmp3],
+			["RELEASE-TRAIN", thomasmp3],
+			["release train", thomasmp3],
+			["rElEaSe TrAiN", thomasmp3],
+			["RELEASE TRAIN", thomasmp3],
 
 			["!regras", rules],
 

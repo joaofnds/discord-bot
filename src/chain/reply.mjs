@@ -13,6 +13,7 @@ import {
 	nothingStill,
 	pqpracuba,
 	rules,
+	thomasmp3,
 	yourcodeirgarbageimg,
 } from "../const.mjs";
 import { normalize } from "../lib/normalize.mjs";
@@ -47,6 +48,7 @@ export class Reply extends Chain {
 				/code.*garbage/i,
 				/garbage.*code/i,
 			),
+			new PlainReplier(thomasmp3, /release[-\s]train/i),
 			new ProbPlainReplier(0.1, linux, /(?<!\/)linux/gi),
 			new ProbPlainReplier(0.01, firebase, /firebase/gi),
 			new StupidReplier(
