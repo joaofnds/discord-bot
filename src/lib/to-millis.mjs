@@ -7,10 +7,12 @@ export function toMillis(amount, unit) {
 		case "milliseconds":
 			return amount * Millisecond;
 		case "s":
+		case "sec":
 		case "second":
 		case "seconds":
 			return amount * Second;
 		case "m":
+		case "min":
 		case "minute":
 		case "minutes":
 			return amount * Minute;
