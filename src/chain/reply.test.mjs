@@ -16,11 +16,11 @@ import {
 	linux,
 	nani,
 	nothingStill,
-	pqpracuba,
+	pqPraCuba,
 	rules,
 	stupid,
-	thomasmp3,
-	yourcodeirgarbageimg,
+	thomasMP3,
+	yourCodeIsGarbageIMG,
 } from "../const.mjs";
 import { linkChain } from "./link-chain.mjs";
 import { Reply } from "./reply.mjs";
@@ -115,10 +115,10 @@ describe(Reply.name, async () => {
 			["FiReBaSe", firebase],
 			["FIREBASE", firebase],
 
-			["por que pra cuba cara?!", pqpracuba],
-			["pq pra cuba cara?!", pqpracuba],
-			["pq no objeto cara?!", pqpracuba],
-			["por que no objeto cara?!", pqpracuba],
+			["por que pra cuba cara?!", pqPraCuba],
+			["pq pra cuba cara?!", pqPraCuba],
+			["pq no objeto cara?!", pqPraCuba],
+			["por que no objeto cara?!", pqPraCuba],
 
 			["e o pix", nothingStill],
 			["e-o-pix", nothingStill],
@@ -130,22 +130,22 @@ describe(Reply.name, async () => {
 			["OlAvO", "💀"],
 			["OLAVO", "💀"],
 
-			["release-train", thomasmp3],
-			["rElEaSe-TrAiN", thomasmp3],
-			["RELEASE-TRAIN", thomasmp3],
-			["release train", thomasmp3],
-			["rElEaSe TrAiN", thomasmp3],
-			["RELEASE TRAIN", thomasmp3],
+			["release-train", thomasMP3],
+			["rElEaSe-TrAiN", thomasMP3],
+			["RELEASE-TRAIN", thomasMP3],
+			["release train", thomasMP3],
+			["rElEaSe TrAiN", thomasMP3],
+			["RELEASE TRAIN", thomasMP3],
 
 			["!regras", rules],
 
 			["!linus", linus],
 
-			["code garbage", yourcodeirgarbageimg],
-			["your code is garbage", yourcodeirgarbageimg],
-			["code garbage", yourcodeirgarbageimg],
-			["garbage code", yourcodeirgarbageimg],
-			["this is garbage code", yourcodeirgarbageimg],
+			["code garbage", yourCodeIsGarbageIMG],
+			["your code is garbage", yourCodeIsGarbageIMG],
+			["code garbage", yourCodeIsGarbageIMG],
+			["garbage code", yourCodeIsGarbageIMG],
+			["this is garbage code", yourCodeIsGarbageIMG],
 		];
 
 		for (const [input, expected] of testCases) {

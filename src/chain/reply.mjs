@@ -11,10 +11,10 @@ import {
 	linux,
 	nani,
 	nothingStill,
-	pqpracuba,
+	pqPraCuba,
 	rules,
-	thomasmp3,
-	yourcodeirgarbageimg,
+	thomasMP3,
+	yourCodeIsGarbageIMG,
 } from "../const.mjs";
 import { normalize } from "../lib/normalize.mjs";
 import { PlainReplier } from "../replier/plain-replier.mjs";
@@ -42,13 +42,13 @@ export class Reply extends Chain {
 			new PlainReplier(rules, /!regras/),
 			new PlainReplier(linus, /!linus/),
 			new PlainReplier("💀", /olavo/i),
-			new PlainReplier(pqpracuba, /(pq|(por que)) .* cara\?\!/i),
+			new PlainReplier(pqPraCuba, /(pq|(por que)) .* cara\?\!/i),
 			new PlainReplier(
-				yourcodeirgarbageimg,
+				yourCodeIsGarbageIMG,
 				/code.*garbage/i,
 				/garbage.*code/i,
 			),
-			new PlainReplier(thomasmp3, /release[-\s]train/i),
+			new PlainReplier(thomasMP3, /release[-\s]train/i),
 			new ProbPlainReplier(0.1, linux, /(?<!\/)linux/gi),
 			new ProbPlainReplier(0.01, firebase, /firebase/gi),
 			new StupidReplier(

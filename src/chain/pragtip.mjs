@@ -1,4 +1,4 @@
-import { pragtips, stupidID } from "../const.mjs";
+import { pragTips, stupidID } from "../const.mjs";
 import { captures } from "../lib/captures.mjs";
 import { normalize } from "../lib/normalize.mjs";
 import { Chain } from "./chain.mjs";
@@ -19,7 +19,7 @@ export class PragTip extends Chain {
 
 		const tipNumber = Number.parseInt(matches[0]);
 
-		const tip = pragtips[tipNumber - 1];
+		const tip = pragTips[tipNumber - 1];
 		if (!tip) {
 			message.react(stupidID);
 			return;

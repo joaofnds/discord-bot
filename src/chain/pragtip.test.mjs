@@ -2,14 +2,14 @@ import assert from "node:assert";
 import { describe, it } from "node:test";
 import { MessageMock } from "../../test/message-mock.mjs";
 import { RememberWhenCalled } from "../../test/remember-when-called.mjs";
-import { pragtips } from "../const.mjs";
+import { pragTips } from "../const.mjs";
 import { linkChain } from "./link-chain.mjs";
 import { PragTip } from "./pragtip.mjs";
 
 describe(PragTip.name, () => {
 	const sut = new PragTip();
 
-	const testCases = pragtips.map((content, i) => [
+	const testCases = pragTips.map((content, i) => [
 		`!pragtip ${i + 1}`,
 		content,
 	]);

@@ -21,15 +21,15 @@ export const jose = "https://tenor.com/view/jose-gif-18847711";
 export const nothingStill = "nada ainda?";
 export const rules =
 	"https://i.pinimg.com/originals/6d/05/21/6d0521b0a0c3d7f2f4e169265798a260.jpg";
-export const pqpracuba =
+export const pqPraCuba =
 	"https://cdn.discordapp.com/attachments/1131225750821945416/1214208285155262505/pq-pra-cuba.gif";
 export const linus =
 	"https://preview.redd.it/2f48st4yepfc1.jpeg?width=1080&crop=smart&auto=webp&s=d5b2007a2ec9fa9da1ebc124ad0d8e0f73611e84";
-export const yourcodeirgarbageimg =
+export const yourCodeIsGarbageIMG =
 	"https://preview.redd.it/wpvtr5pmskfc1.png?auto=webp&s=1f6c59e24b44e55669fac0fc9e855cd6a1683d42";
-export const thomasmp3 = "https://soundcloud.com/joaofnds/thomas";
+export const thomasMP3 = "https://soundcloud.com/joaofnds/thomas";
 
-export const pragtips = [
+export const pragTips = [
 	"Tip #1, pg. xxi:\n\nCare About Your Craft\n\nWhy spend your life developing software unless you care about doing it well?",
 	"Tip #2, pg. xxi:\n\nThink! About Your Work\n\nTurn off the autopilot and take control. Constantly critique and appraise your work.",
 	"Tip #3, pg. 2:\n\nYou Have Agency\n\nIt’s your life. Grab hold of it and make it what you want.",
