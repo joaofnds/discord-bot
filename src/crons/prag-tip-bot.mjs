@@ -1,5 +1,5 @@
 import { CronJob } from "cron";
-import { pragtips } from "../const.mjs";
+import { pragTips } from "../const.mjs";
 
 export class PragTipBot {
 	constructor(bot) {
@@ -16,7 +16,7 @@ export class PragTipBot {
 	}
 
 	async run() {
-		const randomTip = pragtips[Math.floor(Math.random() * tips.length)];
+		const randomTip = pragTips[Math.floor(Math.random() * tips.length)];
 		await this.bot.send(randomTip);
 	}
 }
