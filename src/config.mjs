@@ -15,6 +15,7 @@ export class Config {
 		sundayBotURL,
 		bunBotURL,
 		wed4pmBot,
+		accountantBotURL,
 	}) {
 		this.token = token;
 		this.randomFolk = randomFolk;
@@ -29,6 +30,7 @@ export class Config {
 		this.sundayBotURL = sundayBotURL;
 		this.bunBotURL = bunBotURL;
 		this.wed4pmBot = wed4pmBot;
+		this.accountantBotURL = accountantBotURL;
 	}
 
 	static fromEnv() {
@@ -46,6 +48,7 @@ export class Config {
 			sundayBotURL: mustGetEnv("SUNDAY_BOT_URL"),
 			bunBotURL: mustGetEnv("BUN_BOT_URL"),
 			wed4pmBot: mustGetEnv("WED_4PM_BOT_URL"),
+			accountantBotURL: mustGetEnv("ACCOUNTANT_BOT_URL"),
 		});
 	}
 }

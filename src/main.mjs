@@ -11,6 +11,7 @@ import { Timeout } from "./chain/timeout.mjs";
 import { XKCD } from "./chain/xkcd.mjs";
 import { Config } from "./config.mjs";
 import { livefireTextChannelID } from "./const.mjs";
+import { AccountantBot } from "./crons/accountant-bot.mjs";
 import { DadJokeBot } from "./crons/dad-joke-bot.mjs";
 import { DevDadJokeBot } from "./crons/dev-dad-joke-bot.mjs";
 import { PragTipBot } from "./crons/prag-tip-bot.mjs";
@@ -80,6 +81,7 @@ const crons = [
 		new WebhookBot(config.stanleyBotURL),
 	),
 	new Wed4pmCron(new WebhookBot(config.wed4pmBot)),
+	new AccountantBot(new WebhookBot(config.accountantBotURL)),
 ];
 
 await client
