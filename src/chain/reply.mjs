@@ -42,7 +42,7 @@ export class Reply extends Chain {
 			new PlainReplier(rules, /!regras/),
 			new PlainReplier(linus, /!linus/),
 			new PlainReplier("💀", /olavo/i),
-			new PlainReplier(pqPraCuba, /(pq|(por que)) .* cara\?\!/i),
+			new PlainReplier(pqPraCuba, /(pq|(por que)) .* cara\?\!/i, /cuba/i),
 			new PlainReplier(
 				yourCodeIsGarbageIMG,
 				/code.*garbage/i,

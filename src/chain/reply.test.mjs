@@ -119,6 +119,9 @@ describe(Reply.name, async () => {
 			["pq pra cuba cara?!", pqPraCuba],
 			["pq no objeto cara?!", pqPraCuba],
 			["por que no objeto cara?!", pqPraCuba],
+			["cuba", pqPraCuba],
+			["CuBa", pqPraCuba],
+			["CUBA", pqPraCuba],
 
 			["e o pix", nothingStill],
 			["e-o-pix", nothingStill],
