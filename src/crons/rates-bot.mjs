@@ -26,7 +26,7 @@ export class RatesBot {
 		const usdbrl = (1 / rates.USD) * rates.BRL;
 		const btcbrl = (1 / rates.BTC) * rates.USD;
 
-		const bot = usdbrl >= 5 ? this.richDadBot : this.poorDadBot;
+		const bot = usdbrl >= 5.2 ? this.richDadBot : this.poorDadBot;
 
 		await bot.send(
 			[
