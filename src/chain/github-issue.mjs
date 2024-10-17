@@ -3,14 +3,14 @@ import { Chain } from "./chain.mjs";
 export class GitHubIssue extends Chain {
 	regex = /#(\d+)/g;
 
-	constructor(baseURL, channelID) {
+	constructor(baseURL, channelIDs) {
 		super();
 		this.baseURL = baseURL;
-		this.channelID = channelID;
+		this.channelIDs = channelIDs;
 	}
 
 	handle(message) {
-		if (message.channel.id !== this.channelID) {
+		if (!this.channelIDs.includes(message.channel.id)) {
 			return this.next?.handle(message);
 		}
 

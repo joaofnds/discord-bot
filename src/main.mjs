@@ -10,7 +10,7 @@ import { Send } from "./chain/send.mjs";
 import { Timeout } from "./chain/timeout.mjs";
 import { XKCD } from "./chain/xkcd.mjs";
 import { Config } from "./config.mjs";
-import { livefireTextChannelID } from "./const.mjs";
+import { livefireTextChannelID, purpurinaTextChannelID } from "./const.mjs";
 import { AccountantBot } from "./crons/accountant-bot.mjs";
 import { DadJokeBot } from "./crons/dad-joke-bot.mjs";
 import { DevDadJokeBot } from "./crons/dev-dad-joke-bot.mjs";
@@ -50,10 +50,10 @@ const messageCreateChain = linkChain(
 	}),
 	new PragTip(),
 	new XKCD(new XKCDAPI()),
-	new GitHubIssue(
-		"https://github.com/livefire-dev/lfapi/issues",
+	new GitHubIssue("https://github.com/livefire-dev/lfapi/issues", [
 		livefireTextChannelID,
-	),
+		purpurinaTextChannelID,
+	]),
 );
 
 const messageDeleteChain = linkChain(new BotAuthorGuard(), new DeleteReply());

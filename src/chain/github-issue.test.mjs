@@ -7,8 +7,8 @@ import { linkChain } from "./link-chain.mjs";
 
 describe(GitHubIssue.name, () => {
 	const baseURL = "https://github.com/joaofnds/dotfiles/issues";
-	const channelID = new MessageMock().channel.id;
-	const githubIssue = new GitHubIssue(baseURL, channelID);
+	const channelIDs = [new MessageMock().channel.id, "1"];
+	const githubIssue = new GitHubIssue(baseURL, channelIDs);
 
 	const testCases = [
 		["#123", `${baseURL}/123`],
@@ -31,6 +31,17 @@ describe(GitHubIssue.name, () => {
 			await githubIssue.handle(message);
 
 			assert.deepEqual(message.channel.messages, [expected]);
+		});
+	}
+
+	for (const channelID in channelIDs) {
+		it(`replies to channel ${channelID}`, async () => {
+			const message = new MessageMock("#123");
+			message.channel.id = channelID;
+
+			await githubIssue.handle(message);
+
+			assert.deepEqual(message.channel.messages, [`${baseURL}/123`]);
 		});
 	}
 
