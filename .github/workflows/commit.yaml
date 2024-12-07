@@ -10,13 +10,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - uses: denoland/setup-deno@v2
         with:
-          node-version: 20.x
-          cache: npm
-      - run: npm install --ci
-      - run: npm run check
-      - run: npm run test
+          deno-version: v2.x
+      - run: deno install
+      - run: deno lint
+      - run: deno fmt --check
+      - run: deno task test
 
   gitleaks:
     runs-on: ubuntu-latest

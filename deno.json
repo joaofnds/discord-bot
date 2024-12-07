@@ -1,0 +1,15 @@
+{
+  "tasks": {
+    "start": "deno run --allow-env --allow-net src/main.ts",
+    "start:watch": "deno run --watch --allow-read --allow-env --allow-net src/main.ts",
+    "test": "deno test --allow-env --reporter=dot"
+  },
+  "imports": {
+    "cron": "npm:cron@^2.4.3",
+    "discord.js": "npm:discord.js@^14.11.0",
+
+    "@std/assert": "jsr:@std/assert@^1.0.9",
+    "@std/expect": "jsr:@std/expect@^1.0.9",
+    "@std/testing": "jsr:@std/testing@^1.0.6"
+  }
+}
