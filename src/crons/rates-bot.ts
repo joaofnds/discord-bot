@@ -13,7 +13,13 @@ export class RatesBot implements Disposable {
     this.cron = new CronJob({
       cronTime: "0 10,14,18 * * 1-5",
       timeZone: "America/Sao_Paulo",
-      onTick: this.run.bind(this),
+      onTick: async () => {
+        try {
+          await this.run();
+        } catch (error) {
+          console.error(error);
+        }
+      },
     });
   }
 
