@@ -36,7 +36,7 @@ export class RatesBot implements Disposable {
   }
 
   private async run() {
-    const response = await fetch(`${this.apiURL}?access_key=${this.apiKey}`);
+    const response = await fetch(`${this.apiURL}?app_id=${this.apiKey}`);
     const { rates } = await response.json();
 
     const arsbrl = (1 / rates.ARS) * rates.BRL;

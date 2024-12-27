@@ -61,8 +61,8 @@ const crons = [
   new RatesBot(
     new WebhookBot(config.richDadBotURL),
     new WebhookBot(config.poorDadBotURL),
-    "http://api.exchangeratesapi.io/v1/latest",
-    config.exchangeRatesAPIKey,
+    "https://openexchangerates.org/api/latest.json",
+    config.openExchangeRatesAppID,
   ),
   new DadJokeBot(
     new WebhookBot(config.dadBotURL),
