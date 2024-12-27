@@ -1,5 +1,6 @@
 import { CronJob } from "cron";
 import { Bot } from "../discord/bot.ts";
+import { ExchangeRates } from "../lib/exchange-rates.ts";
 
 export class RatesBot implements Disposable {
   private readonly cron: CronJob;
@@ -7,8 +8,7 @@ export class RatesBot implements Disposable {
   constructor(
     private readonly richDadBot: Bot,
     private readonly poorDadBot: Bot,
-    private readonly apiURL: string,
-    private readonly apiKey: string,
+    private readonly exchangeRates: ExchangeRates,
   ) {
     this.cron = new CronJob({
       cronTime: "0 10,14,18 * * 1-5",
@@ -36,8 +36,7 @@ export class RatesBot implements Disposable {
   }
 
   private async run() {
-    const response = await fetch(`${this.apiURL}?app_id=${this.apiKey}`);
-    const { rates } = await response.json();
+    const rates = await this.exchangeRates.fetchLatest();
 
     const arsbrl = (1 / rates.ARS) * rates.BRL;
     const eurbrl = (1 / rates.EUR) * rates.BRL;

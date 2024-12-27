@@ -21,6 +21,7 @@ import { SundayBot } from "./crons/sunday-bot.ts";
 import { Wed4pmCron } from "./crons/wed-4pm.ts";
 import { ClientWrapper } from "./discord/client-wrapper.ts";
 import { WebhookBot } from "./discord/webhook-bot.ts";
+import { ExchangeRates } from "./lib/exchange-rates.ts";
 import { MathRandom } from "./lib/random.ts";
 import time from "./lib/time.ts";
 import { XKCDAPI } from "./lib/xkcd-api.ts";
@@ -61,8 +62,7 @@ const crons = [
   new RatesBot(
     new WebhookBot(config.richDadBotURL),
     new WebhookBot(config.poorDadBotURL),
-    "https://openexchangerates.org/api/latest.json",
-    config.openExchangeRatesAppID,
+    new ExchangeRates(config.openExchangeRatesAppID),
   ),
   new DadJokeBot(
     new WebhookBot(config.dadBotURL),
