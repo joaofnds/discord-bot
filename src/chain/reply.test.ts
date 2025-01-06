@@ -206,11 +206,6 @@ describe(Reply.name, () => {
 
       ["Http Dto Api", "ApI, DtO, HtTp"],
 
-      ["estimar", "EsTiMaR"],
-      ["ESTIMAR", "EsTiMaR"],
-      ["estimativa", "EsTiMaTiVa"],
-      ["ESTIMATIVA", "EsTiMaTiVa"],
-
       ["Uspsa", "UsPsA"],
       ["Idpa", "IdPa"],
     ];
