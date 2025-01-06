@@ -69,7 +69,6 @@ export class Reply extends Chain {
         /(estima\w+)/gi,
         /(legado)/gi,
         /(light mode)/gi,
-        /(mape[ai]\w+)/gi,
         /(padron\w+)/gi,
         /(seguranca)/gi,
         /(Api)/g,

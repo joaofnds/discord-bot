@@ -191,15 +191,6 @@ describe(Reply.name, () => {
       ["seguranca", "SeGuRaNcA"],
       ["SEGURANCA", "SeGuRaNcA"],
 
-      ["mapear", "MaPeAr"],
-      ["MAPEAR", "MaPeAr"],
-      ["mapeamento", "MaPeAmEnTo"],
-      ["MAPEAMENTO", "MaPeAmEnTo"],
-      ["mapeado", "MaPeAdO"],
-      ["MAPEADO", "MaPeAdO"],
-      ["mapeio", "MaPeIo"],
-      ["MAPEIO", "MaPeIo"],
-
       ["entregar valor", "EnTrEgAr vAlOr"],
       ["eNtReGaR VaLoR", "EnTrEgAr vAlOr"],
       ["ENTREGAR VALOR", "EnTrEgAr vAlOr"],
