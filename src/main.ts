@@ -7,7 +7,6 @@ import { linkChain } from "./chain/link-chain.ts";
 import { PragTip } from "./chain/pragtip.ts";
 import { Repeat } from "./chain/repeat.ts";
 import { Reply } from "./chain/reply.ts";
-import { Send } from "./chain/send.ts";
 import { Timeout } from "./chain/timeout.ts";
 import { XKCD } from "./chain/xkcd.ts";
 import { Config } from "./config.ts";
@@ -43,7 +42,6 @@ const messageCreateChain = linkChain(
   new BotAuthorGuard(),
   new Abbrev(),
   new Timeout(10 * time.Minute),
-  new Send(),
   new Repeat(new NativeClock(), 5 * time.Minute),
   new Reply({
     random,
