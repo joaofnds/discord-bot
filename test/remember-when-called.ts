@@ -1,18 +1,18 @@
 import { Chain } from "../src/chain/chain.ts";
 
 export class RememberWhenCalled extends Chain {
-  called = false;
+  count = 0;
 
-  constructor() {
-    super();
+  get called() {
+    return this.count > 0;
   }
 
   override handle(_message: unknown) {
-    this.called = true;
+    this.count += 1;
     return Promise.resolve();
   }
 
   reset() {
-    this.called = false;
+    this.count = 0;
   }
 }
