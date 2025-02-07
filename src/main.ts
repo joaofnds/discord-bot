@@ -5,6 +5,7 @@ import { DeleteReply } from "./chain/delete-reply.ts";
 import { GitHubIssue } from "./chain/github-issue.ts";
 import { linkChain } from "./chain/link-chain.ts";
 import { PragTip } from "./chain/pragtip.ts";
+import { Repeat } from "./chain/repeat.ts";
 import { Reply } from "./chain/reply.ts";
 import { Send } from "./chain/send.ts";
 import { Timeout } from "./chain/timeout.ts";
@@ -22,6 +23,7 @@ import { Wed4pmCron } from "./crons/wed-4pm.ts";
 import { ClientWrapper } from "./discord/client-wrapper.ts";
 import { WebhookBot } from "./discord/webhook-bot.ts";
 import { ExchangeRates } from "./lib/exchange-rates.ts";
+import { NativeClock } from "./lib/native-clock.ts";
 import { MathRandom } from "./lib/random.ts";
 import time from "./lib/time.ts";
 import { XKCDAPI } from "./lib/xkcd-api.ts";
@@ -42,6 +44,7 @@ const messageCreateChain = linkChain(
   new Abbrev(),
   new Timeout(10 * time.Minute),
   new Send(),
+  new Repeat(new NativeClock(), 5 * time.Minute),
   new Reply({
     random,
     randomFolk: config.randomFolk,
