@@ -31,6 +31,7 @@ export class Repeat extends Chain {
 
     this.replyTimeout.set(this.timeoutKey(message), this.newTimeout());
     this.lastMessage.delete(message.channel.id);
+    this.deleteExpiredTimeouts();
 
     return await message.channel.send(message.content);
   }
@@ -47,5 +48,13 @@ export class Repeat extends Chain {
 
   private timeoutKey(message: Msg) {
     return `${message.channel.id}:${this.lastMessage.get(message.channel.id)}`;
+  }
+
+  private deleteExpiredTimeouts() {
+    for (const [key, timeout] of this.replyTimeout) {
+      if (!timeout.isActive()) {
+        this.replyTimeout.delete(key);
+      }
+    }
   }
 }
