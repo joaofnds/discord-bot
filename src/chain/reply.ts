@@ -20,7 +20,6 @@ import { Bot } from "../discord/bot.ts";
 import { Msg } from "../discord/types.ts";
 import { normalize } from "../lib/normalize.ts";
 import { Random } from "../lib/random.ts";
-import { stupidCase } from "../lib/stupid-case.ts";
 import { PlainReplier } from "../replier/plain-replier.ts";
 import { ProbPlainReplier } from "../replier/prob-plain-replier.ts";
 import { Replier } from "../replier/replier.ts";
@@ -32,46 +31,36 @@ import { Chain } from "./chain.ts";
 export class Reply extends Chain {
   private readonly responses: Replier[];
 
-  constructor({
-    random,
-    randomFolk,
-    bunBot,
-  }: {
-    random: Pick<Random, "chance">;
-    randomFolk: string;
-    bunBot: Bot;
-  }) {
+  constructor(
+    { random, randomFolk, bunBot }: {
+      random: Pick<Random, "chance">;
+      randomFolk: string;
+      bunBot: Bot;
+    },
+  ) {
     super();
     this.responses = [
-      new PlainReplier(() => "Barros!", /e o pedro/gi),
-      new PlainReplier(() => eopt, /bolsonaro/gi, /e [oa] .* hein/gi),
-      new PlainReplier(() => randomFolk, /citando aleatoriamente/gi),
+      new PlainReplier("Barros!", /e o pedro/gi),
+      new PlainReplier(eopt, /bolsonaro/gi, /e [oa] .* hein/gi),
+      new PlainReplier(randomFolk, /citando aleatoriamente/gi),
+      new PlainReplier(devops, / (e|sou|os) devops/gi, /contrat\w* devops/gi),
+      new PlainReplier(anonymous, /anonymous/gi, /anonimo/gi),
+      new PlainReplier(nani, /(^|[^\?])\?{3}$/),
+      new PlainReplier(feijoada, /feij\w+/gi, /nada acontece/gi),
+      new PlainReplier(cLigaMeu, /c liga meu/gi, /agencia do nubank/gi),
+      new PlainReplier(jose, /\bjose\b/gi),
+      new PlainReplier(firebase, /^firebase$/gi),
+      new PlainReplier(nothingStill, /e.o.pix(?!\.mp3)/i),
+      new PlainReplier(rules, /!regras/),
+      new PlainReplier(linus, /!linus/),
+      new PlainReplier("💀", /olavo/i),
+      new PlainReplier(pqPraCuba, /(pq|(por que)) .* cara\?\!/i, /cuba/i),
       new PlainReplier(
-        () => devops,
-        / (e|sou|os) devops/gi,
-        /contrat\w* devops/gi,
-      ),
-      new PlainReplier(() => anonymous, /anonymous/gi, /anonimo/gi),
-      new PlainReplier(() => nani, /(^|[^\?])\?{3}$/),
-      new PlainReplier(() => feijoada, /feij\w+/gi, /nada acontece/gi),
-      new PlainReplier(() => cLigaMeu, /c liga meu/gi, /agencia do nubank/gi),
-      new PlainReplier(() => jose, /\bjose\b/gi),
-      new PlainReplier(() => firebase, /^firebase$/gi),
-      new PlainReplier(() => nothingStill, /e.o.pix(?!\.mp3)/i),
-      new PlainReplier(() => rules, /!regras/),
-      new PlainReplier(() => linus, /!linus/),
-      new PlainReplier(() => "💀", /olavo/i),
-      new PlainReplier(() => pqPraCuba, /(pq|(por que)) .* cara\?\!/i, /cuba/i),
-      new PlainReplier(
-        () => yourCodeIsGarbageIMG,
+        yourCodeIsGarbageIMG,
         /code.*garbage/i,
         /garbage.*code/i,
       ),
-      new PlainReplier(() => thomasMP3, /release[-\s]train/i),
-      new PlainReplier(
-        (msg?: string): string => stupidCase(msg!),
-        /nunca (falei|disse) isso/i,
-      ),
+      new PlainReplier(thomasMP3, /release[-\s]train/i),
       new ProbPlainReplier(random, 0.1, linux, /(?<!\/)linux/gi),
       new ProbPlainReplier(random, 0.01, firebase, /firebase/gi),
       new StupidReplier(
