@@ -150,6 +150,11 @@ describe(Reply.name, () => {
       ["code garbage", yourCodeIsGarbageIMG],
       ["garbage code", yourCodeIsGarbageIMG],
       ["this is garbage code", yourCodeIsGarbageIMG],
+
+      ["eu nunca disse isso", "Eu nUnCa dIsSe iSsO"],
+      ["EU NUNCA DISSE ISSO", "Eu nUnCa dIsSe iSsO"],
+      ["eu nunca falei isso", "Eu nUnCa fAlEi iSsO"],
+      ["EU NUNCA FALEI ISSO", "Eu nUnCa fAlEi iSsO"],
     ];
 
     for (const [input, expected] of testCases) {
