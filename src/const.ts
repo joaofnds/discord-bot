@@ -35,6 +35,8 @@ export const linus =
 export const yourCodeIsGarbageIMG =
   "https://preview.redd.it/wpvtr5pmskfc1.png?auto=webp&s=1f6c59e24b44e55669fac0fc9e855cd6a1683d42";
 export const thomasMP3 = "https://soundcloud.com/joaofnds/thomas";
+export const neverSaidThis =
+  "https://media.discordapp.net/stickers/1283548772479012926.webp?size=320&quality=lossless";
 
 export const pragTips = [
   "Tip #1, pg. xxi:\n\nCare About Your Craft\n\nWhy spend your life developing software unless you care about doing it well?",

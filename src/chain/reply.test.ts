@@ -15,6 +15,7 @@ import {
   linus,
   linux,
   nani,
+  neverSaidThis,
   nothingStill,
   pqPraCuba,
   rules,
@@ -150,6 +151,13 @@ describe(Reply.name, () => {
       ["code garbage", yourCodeIsGarbageIMG],
       ["garbage code", yourCodeIsGarbageIMG],
       ["this is garbage code", yourCodeIsGarbageIMG],
+
+      ["nunca disse", neverSaidThis],
+      ["NUNCA DISSE", neverSaidThis],
+      ["nunca falei", neverSaidThis],
+      ["NUNCA FALEI", neverSaidThis],
+      ["eu nunca disse isso", neverSaidThis],
+      ["eu nunca falei isso", neverSaidThis],
     ];
 
     for (const [input, expected] of testCases) {
