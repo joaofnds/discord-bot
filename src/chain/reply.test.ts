@@ -204,6 +204,15 @@ describe(Reply.name, () => {
 
       ["Uspsa", "UsPsA"],
       ["Idpa", "IdPa"],
+
+      ["eu nunca disse isso", "Eu nUnCa dIsSe iSsO"],
+      ["EU NUNCA DISSE ISSO", "Eu nUnCa dIsSe iSsO"],
+      ["eu nunca falei isso", "Eu nUnCa fAlEi iSsO"],
+      ["EU NUNCA FALEI ISSO", "Eu nUnCa fAlEi iSsO"],
+      [
+        "se eu to dizendo eu nunca disse isso",
+        "Se eU To dIzEnDo eU NuNcA DiSsE IsSo",
+      ],
     ];
 
     for (const [input, expectedTransformation] of testCases) {
