@@ -212,6 +212,9 @@ describe(Reply.name, () => {
 
       ["Uspsa", "UsPsA"],
       ["Idpa", "IdPa"],
+
+      ["code freeze", "CoDe fReEzE"],
+      ["CODE FREEZE", "CoDe fReEzE"],
     ];
 
     for (const [input, expectedTransformation] of testCases) {

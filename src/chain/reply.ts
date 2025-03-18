@@ -73,6 +73,7 @@ export class Reply extends Chain {
         /(light mode)/gi,
         /(padron\w+)/gi,
         /(seguranca)/gi,
+        /(code freeze)/gi,
         /(Api)/g,
         /(Dto)/g,
         /(Http)/g,
