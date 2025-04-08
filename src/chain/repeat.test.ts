@@ -22,6 +22,7 @@ describe(Repeat.name, () => {
     ["punctuation doesn't matter", "punctuation doesnt matter"],
     ["case doesn't matter", "CASE DOESNT MATTER"],
     ["diacritics don't matter áèïõû", "diacritics don't matter aeiou"],
+    ["😐", "😐"],
   ];
 
   for (const [last, current] of replyCases) {
@@ -37,6 +38,31 @@ describe(Repeat.name, () => {
       await linkChain(bot, remember).handle(secondMessage);
       expect(secondMessage.channel.messages).toEqual([current]);
       expect(remember.count).toEqual(1);
+    });
+  }
+
+  const notReplyCases = [
+    ["some message", "some other message"],
+    ["", "some message"],
+    ["some message", ""],
+    ["", ""],
+    [" ", " "],
+    ["~", "~"],
+    ["~", "-"],
+  ];
+  for (const [last, current] of notReplyCases) {
+    it(`does not reply if last message was '${last}' and current message is '${current}'`, async () => {
+      const remember = new RememberWhenCalled();
+      const firstMessage = new MessageMock(last);
+      const secondMessage = new MessageMock(current);
+
+      await linkChain(bot, remember).handle(firstMessage);
+      expect(firstMessage.channel.messages).toEqual([]);
+      expect(remember.count).toEqual(1);
+
+      await linkChain(bot, remember).handle(secondMessage);
+      expect(secondMessage.channel.messages).toEqual([]);
+      expect(remember.count).toEqual(2);
     });
   }
 

@@ -19,6 +19,10 @@ export class Repeat extends Chain {
     const lastMessage = this.lastMessage.get(message.channel.id);
     const normalizedContent = this.normalize(message.content);
 
+    if (normalizedContent.length === 0) {
+      return this.next?.handle(message);
+    }
+
     if (lastMessage !== normalizedContent) {
       this.lastMessage.set(message.channel.id, normalizedContent);
       return this.next?.handle(message);
@@ -37,7 +41,16 @@ export class Repeat extends Chain {
   }
 
   private normalize(str: string) {
-    return str.normalize("NFD").replace(/[\W]+/g, "").toLowerCase();
+    const normalized = str.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+
+    const withoutSpecialChars = normalized.replace(
+      /[^\p{L}\p{N}\p{Emoji}\p{Emoji_Presentation}\p{Emoji_Modifier}\p{Emoji_Component}\s]/gu,
+      "",
+    );
+
+    const withoutMultipleSpaces = withoutSpecialChars.replace(/\s+/g, " ");
+
+    return withoutMultipleSpaces.trim().toLowerCase();
   }
 
   private newTimeout() {
