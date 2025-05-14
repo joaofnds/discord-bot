@@ -1,9 +1,8 @@
 import { Msg } from "../discord/types.ts";
+import { captures } from "../lib/captures.ts";
 import { Chain } from "./chain.ts";
 
 export class GitHubIssue extends Chain {
-  regex = /#(\d+)/g;
-
   constructor(
     private readonly baseURL: string,
     private readonly channelIDs: string[],
@@ -16,13 +15,13 @@ export class GitHubIssue extends Chain {
       return this.next?.handle(message);
     }
 
-    const matches = message.content.match(this.regex);
-    if (!matches) {
+    const issues = captures(/#(\d+)/g, message.content);
+    if (!issues.length) {
       return this.next?.handle(message);
     }
 
     await message.channel.send(
-      matches.map((issue) => `${this.baseURL}/${issue.slice(1)}`).join("\n"),
+      issues.map((issue) => `${this.baseURL}/${issue}`).join("\n"),
     );
   }
 }

@@ -11,7 +11,7 @@ type API = {
 };
 
 export class XKCD extends Chain {
-  command = /^!xkcd/gi;
+  command = /^!xkcd/i;
 
   constructor(private readonly api: API) {
     super();

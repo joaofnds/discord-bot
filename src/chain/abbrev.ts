@@ -3,7 +3,7 @@ import { normalize } from "../lib/normalize.ts";
 import { Chain } from "./chain.ts";
 
 export class Abbrev extends Chain<Msg> {
-  command = /^!abbrev/gi;
+  command = /^!abbrev/i;
 
   override async handle(message: Msg) {
     const str = normalize(message.content);
@@ -15,8 +15,8 @@ export class Abbrev extends Chain<Msg> {
   }
 
   abbreviate(str: string) {
-    const noVowelsAtTheMiddle = str.replace(/(?<=\w)[aeiou]/gi, "");
-    const noDupes = noVowelsAtTheMiddle.replace(/(.)\1+/gi, "$1");
+    const noVowelsAtTheMiddle = str.replaceAll(/(?<=\w)[aeiou]/gi, "");
+    const noDupes = noVowelsAtTheMiddle.replaceAll(/(.)\1+/gi, "$1");
 
     return noDupes;
   }

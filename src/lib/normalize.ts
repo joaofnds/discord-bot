@@ -1,2 +1,2 @@
 export const normalize = (content: string) =>
-  content.normalize("NFD").replace(/[^\p{ASCII}]/gu, "");
+  content.normalize("NFD").replaceAll(/[^\p{ASCII}]/gu, "");

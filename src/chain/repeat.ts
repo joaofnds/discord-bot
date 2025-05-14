@@ -41,14 +41,14 @@ export class Repeat extends Chain {
   }
 
   private normalize(str: string) {
-    const normalized = str.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+    const normalized = str.normalize("NFD").replaceAll(/[\u0300-\u036f]/g, "");
 
-    const withoutSpecialChars = normalized.replace(
+    const withoutSpecialChars = normalized.replaceAll(
       /[^\p{L}\p{N}\p{Emoji}\p{Emoji_Presentation}\p{Emoji_Modifier}\p{Emoji_Component}\s]/gu,
       "",
     );
 
-    const withoutMultipleSpaces = withoutSpecialChars.replace(/\s+/g, " ");
+    const withoutMultipleSpaces = withoutSpecialChars.replaceAll(/\s+/g, " ");
 
     return withoutMultipleSpaces.trim().toLowerCase();
   }
