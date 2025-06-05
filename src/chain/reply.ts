@@ -2,6 +2,7 @@ import {
   anonymous,
   bun,
   cLigaMeu,
+  definitionOfEngineering,
   devops,
   eopt,
   feijoada,
@@ -32,13 +33,15 @@ import { Chain } from "./chain.ts";
 export class Reply extends Chain {
   private readonly responses: Replier[];
 
-  constructor(
-    { random, randomFolk, bunBot }: {
-      random: Pick<Random, "chance">;
-      randomFolk: string;
-      bunBot: Bot;
-    },
-  ) {
+  constructor({
+    random,
+    randomFolk,
+    bunBot,
+  }: {
+    random: Pick<Random, "chance">;
+    randomFolk: string;
+    bunBot: Bot;
+  }) {
     super();
     this.responses = [
       new PlainReplier("Barros!", /e o pedro/i),
@@ -54,6 +57,7 @@ export class Reply extends Chain {
       new PlainReplier(nothingStill, /e.o.pix(?!\.mp3)/i),
       new PlainReplier(rules, /!regras/),
       new PlainReplier(linus, /!linus/),
+      new PlainReplier(definitionOfEngineering, /!engineering/),
       new PlainReplier("💀", /olavo/i),
       new PlainReplier(pqPraCuba, /(pq|(por que)) .* cara\?\!/i, /cuba/i),
       new PlainReplier(

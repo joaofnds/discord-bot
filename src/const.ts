@@ -37,6 +37,8 @@ export const yourCodeIsGarbageIMG =
 export const thomasMP3 = "https://soundcloud.com/joaofnds/thomas";
 export const neverSaidThis =
   "https://media.discordapp.net/stickers/1283548772479012926.webp?size=320&quality=lossless";
+export const definitionOfEngineering =
+  "The application of an empirical, scientific approach to finding efficient solutions to practical problems";
 
 export const pragTips = [
   "Tip #1, pg. xxi:\n\nCare About Your Craft\n\nWhy spend your life developing software unless you care about doing it well?",

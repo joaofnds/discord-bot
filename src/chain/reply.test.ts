@@ -7,6 +7,7 @@ import {
   anonymous,
   bun,
   cLigaMeu,
+  definitionOfEngineering,
   devops,
   eopt,
   feijoada,
@@ -143,8 +144,8 @@ describe(Reply.name, () => {
       ["RELEASE TRAIN", thomasMP3],
 
       ["!regras", rules],
-
       ["!linus", linus],
+      ["!engineering", definitionOfEngineering],
 
       ["code garbage", yourCodeIsGarbageIMG],
       ["your code is garbage", yourCodeIsGarbageIMG],
