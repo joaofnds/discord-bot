@@ -9,7 +9,7 @@ export class DadJokeBot implements Disposable {
     private readonly rapidAPIURL: string,
     private readonly rapidAPIKey: string,
   ) {
-    this.cron = new CronJob({
+    this.cron = CronJob.from({
       cronTime: "0 11 * * 1-5",
       timeZone: "America/Sao_Paulo",
       onTick: this.run.bind(this),

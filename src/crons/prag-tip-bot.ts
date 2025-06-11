@@ -10,7 +10,7 @@ export class PragTipBot implements Disposable {
     private readonly bot: Bot,
     private readonly random: Pick<Random, "pick">,
   ) {
-    this.cron = new CronJob({
+    this.cron = CronJob.from({
       cronTime: "0 9 * * 1-5",
       timeZone: "America/Sao_Paulo",
       onTick: this.run.bind(this),

@@ -6,7 +6,7 @@ export class Wed4pmCron implements Disposable {
   private readonly cron: CronJob;
 
   constructor(private readonly bot: Bot) {
-    this.cron = new CronJob({
+    this.cron = CronJob.from({
       cronTime: "0 16 * * 3",
       timeZone: "America/Sao_Paulo",
       onTick: this.run.bind(this),

@@ -4,8 +4,11 @@ import { Bot } from "../discord/bot.ts";
 export class DevDadJokeBot implements Disposable {
   private readonly cron: CronJob;
 
-  constructor(private readonly bot: Bot, private readonly apiURL: string) {
-    this.cron = new CronJob({
+  constructor(
+    private readonly bot: Bot,
+    private readonly apiURL: string,
+  ) {
+    this.cron = CronJob.from({
       cronTime: "0 15 * * 1-5",
       timeZone: "America/Sao_Paulo",
       onTick: this.run.bind(this),

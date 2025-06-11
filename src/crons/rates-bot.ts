@@ -10,7 +10,7 @@ export class RatesBot implements Disposable {
     private readonly poorDadBot: Bot,
     private readonly exchangeRates: ExchangeRates,
   ) {
-    this.cron = new CronJob({
+    this.cron = CronJob.from({
       cronTime: "0 10,14,18 * * 1-5",
       timeZone: "America/Sao_Paulo",
       onTick: async () => {

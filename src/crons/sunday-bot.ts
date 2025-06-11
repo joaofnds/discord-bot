@@ -6,7 +6,7 @@ export class SundayBot implements Disposable {
   private readonly cron: CronJob;
 
   constructor(private readonly bot: Bot) {
-    this.cron = new CronJob({
+    this.cron = CronJob.from({
       cronTime: "0 8 * * 0",
       timeZone: "America/Sao_Paulo",
       onTick: this.run.bind(this),

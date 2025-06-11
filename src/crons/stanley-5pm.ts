@@ -9,7 +9,7 @@ export class Stanley5pmCron implements Disposable {
     private readonly client: ClientWrapper,
     private readonly bot: Bot,
   ) {
-    this.cron = new CronJob({
+    this.cron = CronJob.from({
       cronTime: "0 18 * * 1-5",
       timeZone: "America/Sao_Paulo",
       onTick: this.run.bind(this),
