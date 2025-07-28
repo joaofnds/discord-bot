@@ -43,7 +43,7 @@ export class RatesBot implements Disposable {
     const usdbrl = (1 / rates.USD) * rates.BRL;
     const btcbrl = (1 / rates.BTC) * rates.USD;
 
-    const bot = usdbrl >= 6 ? this.richDadBot : this.poorDadBot;
+    const bot = usdbrl >= 5.5 ? this.richDadBot : this.poorDadBot;
 
     await bot.send(
       [
