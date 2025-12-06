@@ -3,6 +3,10 @@ import { mustGetEnv } from "./lib/must-get-env.ts";
 export class Config {
   constructor(
     readonly token: string,
+    readonly applicationId: string,
+    readonly guildId: string | undefined,
+    readonly soundcloudUserId: string,
+    readonly soundcloudClientId: string,
     readonly randomFolk: string,
     readonly stanleyBotURL: string,
     readonly dadBotURL: string,
@@ -21,6 +25,10 @@ export class Config {
   static fromEnv() {
     return new Config(
       mustGetEnv("TOKEN"),
+      mustGetEnv("APPLICATION_ID"),
+      mustGetEnv("GUILD_ID"),
+      mustGetEnv("SOUNDCLOUD_USER_ID"),
+      mustGetEnv("SOUNDCLOUD_CLIENT_ID"),
       mustGetEnv("RANDOM_FOLK"),
       mustGetEnv("STANLEY_BOT_URL"),
       mustGetEnv("DAD_BOT_URL"),
