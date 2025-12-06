@@ -57,29 +57,29 @@ describe(MP3.name, () => {
   ];
 
   for (const testCase of testCases) {
-    it(`for '${testCase.case}' calls correct handlers`, () => {
+    it(`for '${testCase.case}' calls correct handlers`, async () => {
       let mp3AutocompleteCalled = false;
       let mp3CommandCalled = false;
 
       const sut = new MP3(
         async () => {
-          await new Promise(() => null);
+          await Promise.resolve();
           mp3AutocompleteCalled = true;
         },
         async () => {
-          await new Promise(() => null);
+          await Promise.resolve();
           mp3CommandCalled = true;
         },
       );
 
-      sut.handle(testCase.interaction);
+      await sut.handle(testCase.interaction);
 
       expect(mp3AutocompleteCalled).toBe(!!testCase.wantMp3AutocompleteCalled);
       expect(mp3CommandCalled).toBe(!!testCase.wantMp3CommandCalled);
     });
   }
 
-  it("calls next when it does not match", () => {
+  it("calls next when it does not match", async () => {
     const sut = new MP3(
       async () => {},
       async () => {},
@@ -87,7 +87,7 @@ describe(MP3.name, () => {
     const remember = new RememberWhenCalled();
     const message = new MessageMock("foo");
 
-    linkChain(sut, remember).handle(message);
+    await linkChain(sut, remember).handle(message);
 
     expect(message.channel.messages).toEqual([]);
     assert(remember.called);
