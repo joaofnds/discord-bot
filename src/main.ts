@@ -9,6 +9,12 @@ import { Repeat } from "./chain/repeat.ts";
 import { Reply } from "./chain/reply.ts";
 import { Timeout } from "./chain/timeout.ts";
 import { XKCD } from "./chain/xkcd.ts";
+import {
+  handleMp3Autocomplete,
+  handleMp3Command,
+  loadSoundCloudTracks,
+} from "./commands/mp3.ts";
+import { registerCommands } from "./commands/register.ts";
 import { Config } from "./config.ts";
 import { livefireTextChannelID, purpurinaTextChannelID } from "./const.ts";
 import { AccountantBot } from "./crons/accountant-bot.ts";
@@ -24,11 +30,17 @@ import { WebhookBot } from "./discord/webhook-bot.ts";
 import { ExchangeRates } from "./lib/exchange-rates.ts";
 import { NativeClock } from "./lib/native-clock.ts";
 import { MathRandom } from "./lib/random.ts";
+import { SoundCloudAPI } from "./lib/soundcloud-api.ts";
 import time from "./lib/time.ts";
 import { XKCDAPI } from "./lib/xkcd-api.ts";
+import { MP3 } from "./chain/mp3.ts";
 
 const config = Config.fromEnv();
 const random = new MathRandom();
+const soundcloudApi = new SoundCloudAPI(
+  config.soundcloudUserId,
+  config.soundcloudClientId,
+);
 
 const client = new Client({
   intents: [
@@ -57,6 +69,10 @@ const messageCreateChain = linkChain(
 );
 
 const messageDeleteChain = linkChain(new BotAuthorGuard(), new DeleteReply());
+
+const interactionCreateChain = linkChain(
+  new MP3(handleMp3Autocomplete, handleMp3Command),
+);
 
 const crons = [
   new PragTipBot(new WebhookBot(config.pragTipBotURL), random),
@@ -90,9 +106,14 @@ function exit(code: number) {
 }
 
 await client
-  .on(Events.ClientReady, () => {
+  .on(Events.ClientReady, async () => {
+    await loadSoundCloudTracks(soundcloudApi);
+    await registerCommands(config.token, config.applicationId);
     crons.forEach((cron) => cron.start());
     console.log("bot is ready");
+  })
+  .on(Events.InteractionCreate, async (interaction) => {
+    await interactionCreateChain.handle(interaction);
   })
   .on(Events.MessageCreate, async (m) => await messageCreateChain.handle(m))
   .on(Events.MessageDelete, async (m) => await messageDeleteChain.handle(m))
