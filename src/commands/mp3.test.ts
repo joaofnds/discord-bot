@@ -24,8 +24,8 @@ class FakeSoundCloudApi extends SoundCloudAPI {
     super("user", "client");
   }
 
-  override async fetchTracks(): Promise<SoundCloudTrack[]> {
-    return this.tracks;
+  override fetchTracks(): Promise<SoundCloudTrack[]> {
+    return Promise.resolve(this.tracks);
   }
 }
 
@@ -70,20 +70,23 @@ function createInteraction(audio: string, throwOnEditReply = false) {
     set deferred(value: boolean) {
       state.deferred = value;
     },
-    async deferReply(): Promise<void> {
+    deferReply(): Promise<void> {
       calls.deferReply += 1;
       state.deferred = true;
+      return Promise.resolve();
     },
-    async editReply(payload: EditPayload): Promise<void> {
+    editReply(payload: EditPayload): Promise<void> {
       calls.editReply.push(payload);
       state.replied = true;
       if (throwOnEditReply) {
-        throw new Error("editReply failed");
+        return Promise.reject(new Error("editReply failed"));
       }
+      return Promise.resolve();
     },
-    async reply(payload: ReplyPayload): Promise<void> {
+    reply(payload: ReplyPayload): Promise<void> {
       calls.reply.push(payload);
       state.replied = true;
+      return Promise.resolve();
     },
   };
 
@@ -109,14 +112,15 @@ Deno.test("track found: download succeeds within size limit and sends attachment
   const { interaction, calls } = createInteraction("belezaaa");
   const cleanupCalls: string[] = [];
 
-  const downloadFn = async (): Promise<DownloadResult> => ({
-    ok: true,
+  const downloadFn = (): Promise<DownloadResult> => Promise.resolve({
+    ok: true as const,
     filePath: "/tmp/track.mp3",
     fileName: "track.mp3",
     fileSize: 1024,
   });
-  const cleanupFn = async (filePath: string): Promise<void> => {
+  const cleanupFn = (filePath: string): Promise<void> => {
     cleanupCalls.push(filePath);
+    return Promise.resolve();
   };
 
   await handlePlay(interaction, downloadFn, cleanupFn);
@@ -138,12 +142,13 @@ Deno.test("track found: download failure falls back to track URL", async () => {
   const { interaction, calls } = createInteraction("belezaaa");
   let cleanupCalled = false;
 
-  const downloadFn = async (): Promise<DownloadResult> => ({
-    ok: false,
+  const downloadFn = (): Promise<DownloadResult> => Promise.resolve({
+    ok: false as const,
     error: "failed",
   });
-  const cleanupFn = async (): Promise<void> => {
+  const cleanupFn = (): Promise<void> => {
     cleanupCalled = true;
+    return Promise.resolve();
   };
 
   await handlePlay(interaction, downloadFn, cleanupFn);
@@ -158,14 +163,15 @@ Deno.test("track found: oversized download falls back to URL and cleans up", asy
   const { interaction, calls } = createInteraction("belezaaa");
   const cleanupCalls: string[] = [];
 
-  const downloadFn = async (): Promise<DownloadResult> => ({
-    ok: true,
+  const downloadFn = (): Promise<DownloadResult> => Promise.resolve({
+    ok: true as const,
     filePath: "/tmp/too-large.mp3",
     fileName: "too-large.mp3",
     fileSize: 26 * 1024 * 1024,
   });
-  const cleanupFn = async (filePath: string): Promise<void> => {
+  const cleanupFn = (filePath: string): Promise<void> => {
     cleanupCalls.push(filePath);
+    return Promise.resolve();
   };
 
   await handlePlay(interaction, downloadFn, cleanupFn);
@@ -180,9 +186,9 @@ Deno.test("unknown track: replies with sanitized fallback URL", async () => {
   const { interaction, calls } = createInteraction("New Song!!.mp3");
   let downloadCalled = false;
 
-  const downloadFn = async (): Promise<DownloadResult> => {
+  const downloadFn = (): Promise<DownloadResult> => {
     downloadCalled = true;
-    return { ok: false, error: "should not be called" };
+    return Promise.resolve({ ok: false as const, error: "should not be called" });
   };
 
   await handlePlay(interaction, downloadFn);
@@ -209,14 +215,15 @@ Deno.test("track found: cleanup runs even if sending attachment fails", async ()
   const { interaction, calls } = createInteraction("belezaaa", true);
   const cleanupCalls: string[] = [];
 
-  const downloadFn = async (): Promise<DownloadResult> => ({
-    ok: true,
+  const downloadFn = (): Promise<DownloadResult> => Promise.resolve({
+    ok: true as const,
     filePath: "/tmp/cleanup-finally.mp3",
     fileName: "cleanup-finally.mp3",
     fileSize: 1024,
   });
-  const cleanupFn = async (filePath: string): Promise<void> => {
+  const cleanupFn = (filePath: string): Promise<void> => {
     cleanupCalls.push(filePath);
+    return Promise.resolve();
   };
 
   await handlePlay(interaction, downloadFn, cleanupFn);

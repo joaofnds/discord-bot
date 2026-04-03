@@ -40,7 +40,7 @@ Deno.test("returns downloaded file metadata on success", async () => {
 });
 
 Deno.test("returns error when executor exits non-zero", async () => {
-  const executor = async () => ({
+  const executor = () => Promise.resolve({
     code: 1,
     stdout: "",
     stderr: "yt-dlp failed",
@@ -73,8 +73,8 @@ Deno.test("returns error and cleans up when maxFileSize is exceeded", async () =
 });
 
 Deno.test("returns error when executor throws", async () => {
-  const executor = async () => {
-    throw new Error("spawn failed");
+  const executor = () => {
+    return Promise.reject(new Error("spawn failed"));
   };
 
   const result = await downloadTrack("https://soundcloud.com/foo/bar", {}, executor);
