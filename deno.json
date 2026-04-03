@@ -1,8 +1,8 @@
 {
   "tasks": {
-    "start": "deno run --allow-env --allow-net src/main.ts",
-    "start:watch": "deno run --watch --allow-read --allow-env --allow-net src/main.ts",
-    "test": "deno test --allow-env --reporter=dot"
+    "start": "deno run --allow-env --allow-net --allow-run --allow-read --allow-write src/main.ts",
+    "start:watch": "deno run --watch --allow-read --allow-env --allow-net --allow-run --allow-write src/main.ts",
+    "test": "deno test --allow-env --allow-read --allow-run --allow-write --reporter=dot"
   },
   "imports": {
     "cron": "npm:cron@^4.3.5",
