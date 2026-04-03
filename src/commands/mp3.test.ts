@@ -13,9 +13,15 @@ function assert(condition: boolean, message: string): void {
   }
 }
 
-function assertEquals<T>(actual: T, expected: T, message = "Values are not equal"): void {
+function assertEquals<T>(
+  actual: T,
+  expected: T,
+  message = "Values are not equal",
+): void {
   if (JSON.stringify(actual) !== JSON.stringify(expected)) {
-    throw new Error(`${message}: ${JSON.stringify(actual)} !== ${JSON.stringify(expected)}`);
+    throw new Error(
+      `${message}: ${JSON.stringify(actual)} !== ${JSON.stringify(expected)}`,
+    );
   }
 }
 
@@ -112,12 +118,13 @@ Deno.test("track found: download succeeds within size limit and sends attachment
   const { interaction, calls } = createInteraction("belezaaa");
   const cleanupCalls: string[] = [];
 
-  const downloadFn = (): Promise<DownloadResult> => Promise.resolve({
-    ok: true as const,
-    filePath: "/tmp/track.mp3",
-    fileName: "track.mp3",
-    fileSize: 1024,
-  });
+  const downloadFn = (): Promise<DownloadResult> =>
+    Promise.resolve({
+      ok: true as const,
+      filePath: "/tmp/track.mp3",
+      fileName: "track.mp3",
+      fileSize: 1024,
+    });
   const cleanupFn = (filePath: string): Promise<void> => {
     cleanupCalls.push(filePath);
     return Promise.resolve();
@@ -133,7 +140,10 @@ Deno.test("track found: download succeeds within size limit and sends attachment
     throw new Error("Expected attachment payload");
   }
   assertEquals(payload.files.length, 1);
-  assert(payload.files[0] instanceof AttachmentBuilder, "Expected AttachmentBuilder file");
+  assert(
+    payload.files[0] instanceof AttachmentBuilder,
+    "Expected AttachmentBuilder file",
+  );
   assertEquals(cleanupCalls, ["/tmp/track.mp3"]);
 });
 
@@ -142,10 +152,11 @@ Deno.test("track found: download failure falls back to track URL", async () => {
   const { interaction, calls } = createInteraction("belezaaa");
   let cleanupCalled = false;
 
-  const downloadFn = (): Promise<DownloadResult> => Promise.resolve({
-    ok: false as const,
-    error: "failed",
-  });
+  const downloadFn = (): Promise<DownloadResult> =>
+    Promise.resolve({
+      ok: false as const,
+      error: "failed",
+    });
   const cleanupFn = (): Promise<void> => {
     cleanupCalled = true;
     return Promise.resolve();
@@ -163,12 +174,13 @@ Deno.test("track found: oversized download falls back to URL and cleans up", asy
   const { interaction, calls } = createInteraction("belezaaa");
   const cleanupCalls: string[] = [];
 
-  const downloadFn = (): Promise<DownloadResult> => Promise.resolve({
-    ok: true as const,
-    filePath: "/tmp/too-large.mp3",
-    fileName: "too-large.mp3",
-    fileSize: 26 * 1024 * 1024,
-  });
+  const downloadFn = (): Promise<DownloadResult> =>
+    Promise.resolve({
+      ok: true as const,
+      filePath: "/tmp/too-large.mp3",
+      fileName: "too-large.mp3",
+      fileSize: 26 * 1024 * 1024,
+    });
   const cleanupFn = (filePath: string): Promise<void> => {
     cleanupCalls.push(filePath);
     return Promise.resolve();
@@ -188,7 +200,10 @@ Deno.test("unknown track: replies with sanitized fallback URL", async () => {
 
   const downloadFn = (): Promise<DownloadResult> => {
     downloadCalled = true;
-    return Promise.resolve({ ok: false as const, error: "should not be called" });
+    return Promise.resolve({
+      ok: false as const,
+      error: "should not be called",
+    });
   };
 
   await handlePlay(interaction, downloadFn);
@@ -207,7 +222,10 @@ Deno.test("unknown track: invalid audio name returns ephemeral error", async () 
 
   assertEquals(calls.deferReply, 0);
   assertEquals(calls.editReply.length, 0);
-  assertEquals(calls.reply, [{ content: "Invalid audio name", ephemeral: true }]);
+  assertEquals(calls.reply, [{
+    content: "Invalid audio name",
+    ephemeral: true,
+  }]);
 });
 
 Deno.test("track found: cleanup runs even if sending attachment fails", async () => {
@@ -215,12 +233,13 @@ Deno.test("track found: cleanup runs even if sending attachment fails", async ()
   const { interaction, calls } = createInteraction("belezaaa", true);
   const cleanupCalls: string[] = [];
 
-  const downloadFn = (): Promise<DownloadResult> => Promise.resolve({
-    ok: true as const,
-    filePath: "/tmp/cleanup-finally.mp3",
-    fileName: "cleanup-finally.mp3",
-    fileSize: 1024,
-  });
+  const downloadFn = (): Promise<DownloadResult> =>
+    Promise.resolve({
+      ok: true as const,
+      filePath: "/tmp/cleanup-finally.mp3",
+      fileName: "cleanup-finally.mp3",
+      fileSize: 1024,
+    });
   const cleanupFn = (filePath: string): Promise<void> => {
     cleanupCalls.push(filePath);
     return Promise.resolve();

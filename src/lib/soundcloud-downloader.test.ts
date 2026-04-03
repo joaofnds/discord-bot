@@ -6,9 +6,15 @@ function assert(condition: boolean, message: string): void {
   }
 }
 
-function assertEquals<T>(actual: T, expected: T, message = "Values are not equal"): void {
+function assertEquals<T>(
+  actual: T,
+  expected: T,
+  message = "Values are not equal",
+): void {
   if (JSON.stringify(actual) !== JSON.stringify(expected)) {
-    throw new Error(`${message}: ${JSON.stringify(actual)} !== ${JSON.stringify(expected)}`);
+    throw new Error(
+      `${message}: ${JSON.stringify(actual)} !== ${JSON.stringify(expected)}`,
+    );
   }
 }
 
@@ -24,12 +30,19 @@ async function assertRejects(fn: () => Promise<unknown>): Promise<void> {
 Deno.test("returns downloaded file metadata on success", async () => {
   const executor = async (args: string[]) => {
     const outputTemplate = args[args.indexOf("-o") + 1];
-    const filePath = outputTemplate.replace("%(title)s.%(ext)s", "test-track.mp3");
+    const filePath = outputTemplate.replace(
+      "%(title)s.%(ext)s",
+      "test-track.mp3",
+    );
     await Deno.writeTextFile(filePath, "mp3 data");
     return { code: 0, stdout: "ok", stderr: "" };
   };
 
-  const result = await downloadTrack("https://soundcloud.com/foo/bar", {}, executor);
+  const result = await downloadTrack(
+    "https://soundcloud.com/foo/bar",
+    {},
+    executor,
+  );
 
   assert(result.ok, "Expected successful download");
   if (result.ok) {
@@ -40,13 +53,18 @@ Deno.test("returns downloaded file metadata on success", async () => {
 });
 
 Deno.test("returns error when executor exits non-zero", async () => {
-  const executor = () => Promise.resolve({
-    code: 1,
-    stdout: "",
-    stderr: "yt-dlp failed",
-  });
+  const executor = () =>
+    Promise.resolve({
+      code: 1,
+      stdout: "",
+      stderr: "yt-dlp failed",
+    });
 
-  const result = await downloadTrack("https://soundcloud.com/foo/bar", {}, executor);
+  const result = await downloadTrack(
+    "https://soundcloud.com/foo/bar",
+    {},
+    executor,
+  );
 
   assertEquals(result, { ok: false, error: "yt-dlp failed" });
 });
@@ -77,7 +95,11 @@ Deno.test("returns error when executor throws", async () => {
     return Promise.reject(new Error("spawn failed"));
   };
 
-  const result = await downloadTrack("https://soundcloud.com/foo/bar", {}, executor);
+  const result = await downloadTrack(
+    "https://soundcloud.com/foo/bar",
+    {},
+    executor,
+  );
 
   assertEquals(result, { ok: false, error: "spawn failed" });
 });

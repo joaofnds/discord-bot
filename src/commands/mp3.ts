@@ -128,7 +128,9 @@ export async function handlePlay(
 
     if (track) {
       await interaction.deferReply();
-      const result = await _downloadFn(track.permalink_url, { timeout: 30_000 });
+      const result = await _downloadFn(track.permalink_url, {
+        timeout: 30_000,
+      });
 
       if (result.ok && result.fileSize <= DISCORD_UPLOAD_LIMIT_BYTES) {
         try {

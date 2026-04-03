@@ -51,7 +51,10 @@ export async function downloadTrack(
     const { code, stdout, stderr } = await selectedExecutor(args);
     if (code !== 0) {
       await Deno.remove(tempDir, { recursive: true }).catch(() => {});
-      return { ok: false, error: stderr || stdout || `yt-dlp failed (${code})` };
+      return {
+        ok: false,
+        error: stderr || stdout || `yt-dlp failed (${code})`,
+      };
     }
 
     let fileName: string | undefined;
@@ -86,7 +89,9 @@ export async function downloadTrack(
 
 export async function cleanupDownload(filePath: string): Promise<void> {
   const lastSlashIndex = filePath.lastIndexOf("/");
-  const parentDir = lastSlashIndex > -1 ? filePath.slice(0, lastSlashIndex) : "";
+  const parentDir = lastSlashIndex > -1
+    ? filePath.slice(0, lastSlashIndex)
+    : "";
   await Deno.remove(filePath).catch(() => {});
   if (parentDir) {
     await Deno.remove(parentDir).catch(() => {});
