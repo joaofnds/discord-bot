@@ -1,5 +1,13 @@
-import { ChatInputCommandInteraction, SlashCommandBuilder } from "discord.js";
+import {
+  AttachmentBuilder,
+  ChatInputCommandInteraction,
+  SlashCommandBuilder,
+} from "discord.js";
 import { SoundCloudAPI, SoundCloudTrack } from "../lib/soundcloud-api.ts";
+import {
+  cleanupDownload,
+  downloadTrack,
+} from "../lib/soundcloud-downloader.ts";
 import { Interaction } from "../discord/types.ts";
 
 let cachedTracks: SoundCloudTrack[] = [];
@@ -102,7 +110,13 @@ async function handleSync(interaction: ChatInputCommandInteraction) {
   }
 }
 
-async function handlePlay(interaction: ChatInputCommandInteraction) {
+const DISCORD_UPLOAD_LIMIT_BYTES = 25 * 1024 * 1024;
+
+export async function handlePlay(
+  interaction: ChatInputCommandInteraction,
+  _downloadFn = downloadTrack,
+  _cleanupFn = cleanupDownload,
+) {
   try {
     const audio = interaction.options.getString("audio", true);
 
@@ -113,7 +127,26 @@ async function handlePlay(interaction: ChatInputCommandInteraction) {
     );
 
     if (track) {
-      await interaction.reply(track.permalink_url);
+      await interaction.deferReply();
+      const result = await _downloadFn(track.permalink_url, { timeout: 30_000 });
+
+      if (result.ok && result.fileSize <= DISCORD_UPLOAD_LIMIT_BYTES) {
+        try {
+          const attachment = new AttachmentBuilder(result.filePath, {
+            name: result.fileName,
+          });
+          await interaction.editReply({ files: [attachment] });
+        } finally {
+          await _cleanupFn(result.filePath);
+        }
+        return;
+      }
+
+      if (result.ok) {
+        await _cleanupFn(result.filePath);
+      }
+
+      await interaction.editReply(track.permalink_url);
       return;
     }
 
@@ -134,11 +167,13 @@ async function handlePlay(interaction: ChatInputCommandInteraction) {
     await interaction.reply(`https://soundcloud.com/joaofnds/${sanitized}`);
   } catch (error) {
     console.error("Play error:", error);
-    if (!interaction.replied) {
+    if (!interaction.replied && !interaction.deferred) {
       await interaction.reply({
         content: "An error occurred",
         ephemeral: true,
       });
+    } else if (interaction.deferred) {
+      await interaction.editReply("An error occurred").catch(() => {});
     }
   }
 }
