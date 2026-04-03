@@ -1,7 +1,5 @@
 import { cleanupDownload, downloadTrack } from "./soundcloud-downloader.ts";
 
-const deno = (globalThis as unknown as { Deno: any }).Deno;
-
 function assert(condition: boolean, message: string): void {
   if (!condition) {
     throw new Error(message);
@@ -23,11 +21,11 @@ async function assertRejects(fn: () => Promise<unknown>): Promise<void> {
   }
 }
 
-deno.test("returns downloaded file metadata on success", async () => {
+Deno.test("returns downloaded file metadata on success", async () => {
   const executor = async (args: string[]) => {
     const outputTemplate = args[args.indexOf("-o") + 1];
     const filePath = outputTemplate.replace("%(title)s.%(ext)s", "test-track.mp3");
-    await deno.writeTextFile(filePath, "mp3 data");
+    await Deno.writeTextFile(filePath, "mp3 data");
     return { code: 0, stdout: "ok", stderr: "" };
   };
 
@@ -41,7 +39,7 @@ deno.test("returns downloaded file metadata on success", async () => {
   }
 });
 
-deno.test("returns error when executor exits non-zero", async () => {
+Deno.test("returns error when executor exits non-zero", async () => {
   const executor = async () => ({
     code: 1,
     stdout: "",
@@ -53,12 +51,12 @@ deno.test("returns error when executor exits non-zero", async () => {
   assertEquals(result, { ok: false, error: "yt-dlp failed" });
 });
 
-deno.test("returns error and cleans up when maxFileSize is exceeded", async () => {
+Deno.test("returns error and cleans up when maxFileSize is exceeded", async () => {
   let createdPath = "";
   const executor = async (args: string[]) => {
     const outputTemplate = args[args.indexOf("-o") + 1];
     createdPath = outputTemplate.replace("%(title)s.%(ext)s", "too-large.mp3");
-    await deno.writeFile(createdPath, new Uint8Array(32));
+    await Deno.writeFile(createdPath, new Uint8Array(32));
     return { code: 0, stdout: "ok", stderr: "" };
   };
 
@@ -70,11 +68,11 @@ deno.test("returns error and cleans up when maxFileSize is exceeded", async () =
 
   assertEquals(result, { ok: false, error: "File exceeds maxFileSize" });
   const parentDir = createdPath.slice(0, createdPath.lastIndexOf("/"));
-  await assertRejects(() => deno.stat(createdPath));
-  await assertRejects(() => deno.stat(parentDir));
+  await assertRejects(() => Deno.stat(createdPath));
+  await assertRejects(() => Deno.stat(parentDir));
 });
 
-deno.test("returns error when executor throws", async () => {
+Deno.test("returns error when executor throws", async () => {
   const executor = async () => {
     throw new Error("spawn failed");
   };
@@ -84,13 +82,13 @@ deno.test("returns error when executor throws", async () => {
   assertEquals(result, { ok: false, error: "spawn failed" });
 });
 
-deno.test("cleanupDownload removes file and parent directory", async () => {
-  const tempDir = await deno.makeTempDir({ prefix: "soundcloud_" });
+Deno.test("cleanupDownload removes file and parent directory", async () => {
+  const tempDir = await Deno.makeTempDir({ prefix: "soundcloud_" });
   const filePath = `${tempDir}/track.mp3`;
-  await deno.writeTextFile(filePath, "data");
+  await Deno.writeTextFile(filePath, "data");
 
   await cleanupDownload(filePath);
 
-  await assertRejects(() => deno.stat(filePath));
-  await assertRejects(() => deno.stat(tempDir));
+  await assertRejects(() => Deno.stat(filePath));
+  await assertRejects(() => Deno.stat(tempDir));
 });

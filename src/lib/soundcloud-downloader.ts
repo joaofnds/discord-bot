@@ -11,15 +11,13 @@ type Executor = (
   args: string[],
 ) => Promise<{ code: number; stdout: string; stderr: string }>;
 
-const deno = (globalThis as unknown as { Deno: any }).Deno;
-
 export async function downloadTrack(
   url: string,
   options: DownloadOptions = {},
   executor?: Executor,
 ): Promise<DownloadResult> {
   const timeout = options.timeout ?? 30_000;
-  const tempDir = await deno.makeTempDir({ prefix: "soundcloud_" });
+  const tempDir = await Deno.makeTempDir({ prefix: "soundcloud_" });
   const outputPath = `${tempDir}/%(title)s.%(ext)s`;
   const args = [
     "yt-dlp",
@@ -33,7 +31,7 @@ export async function downloadTrack(
   ];
 
   const defaultExecutor: Executor = async (commandArgs: string[]) => {
-    const cmd = new deno.Command(commandArgs[0], {
+    const cmd = new Deno.Command(commandArgs[0], {
       args: commandArgs.slice(1),
       signal: AbortSignal.timeout(timeout),
       stdout: "piped",
@@ -52,12 +50,12 @@ export async function downloadTrack(
   try {
     const { code, stdout, stderr } = await selectedExecutor(args);
     if (code !== 0) {
-      await deno.remove(tempDir, { recursive: true }).catch(() => {});
+      await Deno.remove(tempDir, { recursive: true }).catch(() => {});
       return { ok: false, error: stderr || stdout || `yt-dlp failed (${code})` };
     }
 
     let fileName: string | undefined;
-    for await (const entry of deno.readDir(tempDir)) {
+    for await (const entry of Deno.readDir(tempDir)) {
       if (entry.isFile && entry.name.endsWith(".mp3")) {
         fileName = entry.name;
         break;
@@ -65,12 +63,12 @@ export async function downloadTrack(
     }
 
     if (!fileName) {
-      await deno.remove(tempDir, { recursive: true }).catch(() => {});
+      await Deno.remove(tempDir, { recursive: true }).catch(() => {});
       return { ok: false, error: "No mp3 file found" };
     }
 
     const filePath = `${tempDir}/${fileName}`;
-    const fileStat = await deno.stat(filePath);
+    const fileStat = await Deno.stat(filePath);
     const fileSize = fileStat.size;
 
     if (options.maxFileSize !== undefined && fileSize > options.maxFileSize) {
@@ -80,7 +78,7 @@ export async function downloadTrack(
 
     return { ok: true, filePath, fileName, fileSize };
   } catch (error) {
-    await deno.remove(tempDir, { recursive: true }).catch(() => {});
+    await Deno.remove(tempDir, { recursive: true }).catch(() => {});
     const message = error instanceof Error ? error.message : String(error);
     return { ok: false, error: message };
   }
@@ -89,8 +87,8 @@ export async function downloadTrack(
 export async function cleanupDownload(filePath: string): Promise<void> {
   const lastSlashIndex = filePath.lastIndexOf("/");
   const parentDir = lastSlashIndex > -1 ? filePath.slice(0, lastSlashIndex) : "";
-  await deno.remove(filePath).catch(() => {});
+  await Deno.remove(filePath).catch(() => {});
   if (parentDir) {
-    await deno.remove(parentDir).catch(() => {});
+    await Deno.remove(parentDir).catch(() => {});
   }
 }
