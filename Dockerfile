@@ -5,7 +5,7 @@ RUN chmod +x /bot
 
 FROM debian:bookworm-slim
 RUN apt-get update && \
-    apt-get install -y --no-install-recommends ffmpeg yt-dlp && \
+    apt-get install -y --no-install-recommends ca-certificates ffmpeg yt-dlp && \
     rm -rf /var/lib/apt/lists/* && \
     useradd -r nonroot
 COPY --from=build /bot /
