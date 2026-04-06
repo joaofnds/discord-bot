@@ -7,10 +7,18 @@ let soundcloudApi: SoundCloudAPI | null = null;
 let lastSyncTime: Date | null = null;
 const SYNC_THROTTLE_MS = 10 * 60 * 1000; // 10 minutes
 
-export async function loadSoundCloudTracks(api: SoundCloudAPI) {
+export function initializeSoundCloud(api: SoundCloudAPI) {
   soundcloudApi = api;
-  cachedTracks = await api.fetchTracks();
+}
+
+export async function loadSoundCloudTracks() {
+  if (!soundcloudApi) {
+    return [];
+  }
+
+  cachedTracks = await soundcloudApi.fetchTracks();
   lastSyncTime = new Date();
+  return cachedTracks;
 }
 
 export const mp3Command = new SlashCommandBuilder()
@@ -94,8 +102,8 @@ async function handleSync(interaction: ChatInputCommandInteraction) {
       }
     }
 
-    await loadSoundCloudTracks(soundcloudApi);
-    await interaction.editReply(`✅ Synced ${cachedTracks.length} tracks!`);
+    const tracks = await loadSoundCloudTracks();
+    await interaction.editReply(`✅ Synced ${tracks.length} tracks!`);
   } catch (error) {
     console.error("Sync error:", error);
     await interaction.editReply("❌ Failed to sync SoundCloud tracks");

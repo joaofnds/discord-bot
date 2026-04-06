@@ -12,7 +12,7 @@ import { XKCD } from "./chain/xkcd.ts";
 import {
   handleMp3Autocomplete,
   handleMp3Command,
-  loadSoundCloudTracks,
+  initializeSoundCloud,
 } from "./commands/mp3.ts";
 import { registerCommands } from "./commands/register.ts";
 import { Config } from "./config.ts";
@@ -41,6 +41,7 @@ const soundcloudApi = new SoundCloudAPI(
   config.soundcloudUserId,
   config.soundcloudClientId,
 );
+initializeSoundCloud(soundcloudApi);
 
 const client = new Client({
   intents: [
@@ -107,7 +108,6 @@ function exit(code: number) {
 
 await client
   .on(Events.ClientReady, async () => {
-    await loadSoundCloudTracks(soundcloudApi);
     await registerCommands(config.token, config.applicationId);
     crons.forEach((cron) => cron.start());
     console.log("bot is ready");
