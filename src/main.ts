@@ -12,6 +12,7 @@ import { XKCD } from "./chain/xkcd.ts";
 import {
   handleMp3Autocomplete,
   handleMp3Command,
+  initializeMyinstants,
   initializeSoundCloud,
 } from "./commands/mp3.ts";
 import { registerCommands } from "./commands/register.ts";
@@ -29,6 +30,7 @@ import { ClientWrapper } from "./discord/client-wrapper.ts";
 import { WebhookBot } from "./discord/webhook-bot.ts";
 import { ExchangeRates } from "./lib/exchange-rates.ts";
 import { NativeClock } from "./lib/native-clock.ts";
+import { MyinstantsAPI } from "./lib/myinstants-api.ts";
 import { MathRandom } from "./lib/random.ts";
 import { SoundCloudAPI } from "./lib/soundcloud-api.ts";
 import time from "./lib/time.ts";
@@ -41,7 +43,9 @@ const soundcloudApi = new SoundCloudAPI(
   config.soundcloudUserId,
   config.soundcloudClientId,
 );
+const myinstantsApi = new MyinstantsAPI();
 initializeSoundCloud(soundcloudApi);
+initializeMyinstants(myinstantsApi);
 
 const client = new Client({
   intents: [
