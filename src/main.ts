@@ -112,7 +112,7 @@ function exit(code: number) {
 
 await client
   .on(Events.ClientReady, async () => {
-    await registerCommands(config.token, config.applicationId);
+    await registerCommands(config.token, config.applicationId, config.guildId);
     crons.forEach((cron) => cron.start());
     console.log("bot is ready");
   })
