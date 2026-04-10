@@ -84,6 +84,7 @@ const crons = [
   new RatesBot(
     new WebhookBot(config.richDadBotURL),
     new WebhookBot(config.poorDadBotURL),
+    new WebhookBot(config.brokeDadBotURL),
     new ExchangeRates(config.openExchangeRatesAppID),
   ),
   new DadJokeBot(

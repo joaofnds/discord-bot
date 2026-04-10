@@ -8,6 +8,7 @@ export class RatesBot implements Disposable {
   constructor(
     private readonly richDadBot: Bot,
     private readonly poorDadBot: Bot,
+    private readonly brokeDadBot: Bot,
     private readonly exchangeRates: ExchangeRates,
   ) {
     this.cron = CronJob.from({
@@ -43,7 +44,7 @@ export class RatesBot implements Disposable {
     const usdbrl = (1 / rates.USD) * rates.BRL;
     const btcbrl = (1 / rates.BTC) * rates.USD;
 
-    const bot = usdbrl >= 5.5 ? this.richDadBot : this.poorDadBot;
+    const bot = this.pickBot(usdbrl);
 
     await bot.send(
       [
@@ -53,5 +54,11 @@ export class RatesBot implements Disposable {
         `BTC: $${(btcbrl / 1000).toFixed(2)}k`,
       ].join("\n"),
     );
+  }
+
+  private pickBot(usdbrl: number): Bot {
+    if (usdbrl >= 5.5) return this.richDadBot;
+    if (usdbrl < 5) return this.brokeDadBot;
+    return this.poorDadBot;
   }
 }
