@@ -21,6 +21,7 @@ export class Config {
     readonly bunBotURL: string,
     readonly wed4pmBot: string,
     readonly accountantBotURL: string,
+    readonly claudeOutageBotURL: string,
   ) {}
 
   static fromEnv() {
@@ -44,6 +45,7 @@ export class Config {
       mustGetEnv("BUN_BOT_URL"),
       mustGetEnv("WED_4PM_BOT_URL"),
       mustGetEnv("ACCOUNTANT_BOT_URL"),
+      mustGetEnv("CLAUDE_OUTAGE_BOT_URL"),
     );
   }
 }

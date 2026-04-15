@@ -19,6 +19,7 @@ import { registerCommands } from "./commands/register.ts";
 import { Config } from "./config.ts";
 import { livefireTextChannelID, purpurinaTextChannelID } from "./const.ts";
 import { AccountantBot } from "./crons/accountant-bot.ts";
+import { ClaudeStatusBot } from "./crons/claude-status-bot.ts";
 import { DadJokeBot } from "./crons/dad-joke-bot.ts";
 import { DevDadJokeBot } from "./crons/dev-dad-joke-bot.ts";
 import { PragTipBot } from "./crons/prag-tip-bot.ts";
@@ -28,6 +29,7 @@ import { SundayBot } from "./crons/sunday-bot.ts";
 import { Wed4pmCron } from "./crons/wed-4pm.ts";
 import { ClientWrapper } from "./discord/client-wrapper.ts";
 import { WebhookBot } from "./discord/webhook-bot.ts";
+import { ClaudeStatusAPI } from "./lib/claude-status-api.ts";
 import { ExchangeRates } from "./lib/exchange-rates.ts";
 import { NativeClock } from "./lib/native-clock.ts";
 import { MyinstantsAPI } from "./lib/myinstants-api.ts";
@@ -103,6 +105,10 @@ const crons = [
   ),
   new Wed4pmCron(new WebhookBot(config.wed4pmBot)),
   new AccountantBot(new WebhookBot(config.accountantBotURL)),
+  new ClaudeStatusBot(
+    new ClaudeStatusAPI(),
+    new WebhookBot(config.claudeOutageBotURL),
+  ),
 ];
 
 function exit(code: number) {

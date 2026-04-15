@@ -41,6 +41,8 @@ export const neverSaidThis =
   "https://media.discordapp.net/stickers/1283548772479012926.webp?size=320&quality=lossless";
 export const definitionOfEngineering =
   "The application of an empirical, scientific approach to finding efficient solutions to practical problems";
+export const codingIsLargelySolvedImageUrl =
+  "https://cdn.discordapp.com/attachments/1347018007012184104/1493991940189065358/mqdefault.png?ex=69e0fbeb&is=69dfaa6b&hm=44cabef3aadce9fc7d4aaccf411c645fde05f6656c9eb73d3ee1a2128e45ec63";
 
 export const pragTips = [
   "Tip #1, pg. xxi:\n\nCare About Your Craft\n\nWhy spend your life developing software unless you care about doing it well?",
