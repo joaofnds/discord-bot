@@ -1,3 +1,5 @@
+import time from "./lib/time.ts";
+
 export const livefireTextChannelID = "1088232532807520417";
 export const purpurinaTextChannelID = "1288930925442240532";
 export const stupidID = "1095422079362404456";
@@ -43,6 +45,57 @@ export const definitionOfEngineering =
   "The application of an empirical, scientific approach to finding efficient solutions to practical problems";
 export const codingIsLargelySolvedImageUrl =
   "https://cdn.discordapp.com/attachments/1347018007012184104/1493991940189065358/mqdefault.png?ex=69e0fbeb&is=69dfaa6b&hm=44cabef3aadce9fc7d4aaccf411c645fde05f6656c9eb73d3ee1a2128e45ec63";
+
+export const claudeOutageResolvedJokes = [
+  "back up. coding is once again largely solved.",
+  "outage resolved. you may resume vibe coding.",
+  "claude is back. crisis averted.",
+  "it's over. we can stop pretending to read documentation.",
+  "status: resolved. dignity: unrecoverable.",
+] as const;
+
+export const claudeOutageJokes = [
+  {
+    after: 30 * time.Minute,
+    texts: [
+      "outage still going, trying to fix it with deepseek...",
+      "30 min in. claude currently stuck on a captcha.",
+      "have we tried turning it off and on again?",
+    ],
+  },
+  {
+    after: 1 * time.Hour,
+    texts: [
+      "still down. someone dust off the gemini cli...",
+      "an hour in. copilot is laughing at us.",
+      "the sf interns are on it, i'm sure.",
+    ],
+  },
+  {
+    after: 2 * time.Hour,
+    texts: [
+      "getting desperate. reopening the stackoverflow tab...",
+      "2h down. anyone remember how regex works without tab complete?",
+      "considering paying for grok. considering.",
+    ],
+  },
+  {
+    after: 4 * time.Hour,
+    texts: [
+      "ok this is fine. we're just gonna read the docs now.",
+      "4h in. i've forgotten how to type semicolons.",
+      "is this what the old days were like?",
+    ],
+  },
+  {
+    after: 8 * time.Hour,
+    texts: [
+      "writing code in notepad like a caveman.",
+      "8h. the codebase is now a single 3000-line file. at least it compiles.",
+      "coding is NOT, in fact, largely solved.",
+    ],
+  },
+] as const;
 
 export const pragTips = [
   "Tip #1, pg. xxi:\n\nCare About Your Craft\n\nWhy spend your life developing software unless you care about doing it well?",

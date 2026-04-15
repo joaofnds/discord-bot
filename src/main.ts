@@ -108,6 +108,8 @@ const crons = [
   new ClaudeStatusBot(
     new ClaudeStatusAPI(),
     new WebhookBot(config.claudeOutageBotURL),
+    new NativeClock(),
+    random,
   ),
 ];
 

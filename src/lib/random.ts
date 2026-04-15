@@ -6,10 +6,10 @@ export interface Random {
   intBetween(lower: number, upper: number): number;
 
   // returns a random index between
-  index(arr: unknown[]): number;
+  index(arr: readonly unknown[]): number;
 
   // returns a random element from the array
-  pick<T>(arr: T[]): T;
+  pick<T>(arr: readonly T[]): T;
 
   // returns true with the given probability
   chance(probability: number): boolean;
@@ -24,11 +24,11 @@ export class MathRandom implements Random {
     return Math.floor(this.between(lower, upper));
   }
 
-  index(arr: unknown[]): number {
+  index(arr: readonly unknown[]): number {
     return this.intBetween(0, arr.length);
   }
 
-  pick<T>(arr: T[]): T {
+  pick<T>(arr: readonly T[]): T {
     return arr[this.index(arr)];
   }
 

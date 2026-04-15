@@ -10,10 +10,19 @@ export type Incident = {
   name: string;
   shortlink: string;
   status: IncidentStatus;
+  startedAt: Date;
 };
 
-type IncidentsResponse = {
-  incidents: Incident[];
+type RawIncident = {
+  id: string;
+  name: string;
+  shortlink: string;
+  status: IncidentStatus;
+  started_at: string;
+};
+
+type RawIncidentsResponse = {
+  incidents: RawIncident[];
 };
 
 export class ClaudeStatusAPI {
@@ -29,7 +38,16 @@ export class ClaudeStatusAPI {
       );
     }
 
-    const data: IncidentsResponse = await response.json();
-    return data.incidents[0] ?? null;
+    const data: RawIncidentsResponse = await response.json();
+    const raw = data.incidents[0];
+    if (!raw) return null;
+
+    return {
+      id: raw.id,
+      name: raw.name,
+      shortlink: raw.shortlink,
+      status: raw.status,
+      startedAt: new Date(raw.started_at),
+    };
   }
 }
