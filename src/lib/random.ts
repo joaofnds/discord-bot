@@ -29,6 +29,9 @@ export class MathRandom implements Random {
   }
 
   pick<T>(arr: readonly T[]): T {
+    if (arr.length === 0) {
+      throw new RangeError("cannot pick from an empty array");
+    }
     return arr[this.index(arr)];
   }
 

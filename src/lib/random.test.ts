@@ -57,6 +57,10 @@ describe("random", () => {
 
       expect(picked.size).toBe(array.length);
     });
+
+    it("throws RangeError when the array is empty", () => {
+      expect(() => random.pick([])).toThrow(RangeError);
+    });
   });
 
   describe("chance", () => {
