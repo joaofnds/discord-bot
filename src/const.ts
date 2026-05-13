@@ -52,6 +52,13 @@ export const claudeOutageResolvedJokes = [
   "claude is back. crisis averted.",
   "it's over. we can stop pretending to read documentation.",
   "status: resolved. dignity: unrecoverable.",
+  "claude restored. revert whatever you committed during the dark hours.",
+  "we're back. close the 47 stackoverflow tabs. nobody saw.",
+  "online. you may now git push your shame.",
+  "back. seniors can stop pretending they remember bash syntax.",
+  "resolved. delete the discord screenshots before someone notices.",
+  "back online. cursor has stopped offering its condolences.",
+  "we're up. the rubber duck can stand down.",
 ] as const;
 
 export const claudeOutageJokes = [
@@ -61,6 +68,9 @@ export const claudeOutageJokes = [
       "outage still going, trying to fix it with deepseek...",
       "30 min in. claude currently stuck on a captcha.",
       "have we tried turning it off and on again?",
+      "30 min. wrote a for-loop. by hand. character by character.",
+      "half hour. opened the readme. apparently we use postgres??",
+      "30 min in. the linter is now in charge.",
     ],
   },
   {
@@ -69,6 +79,9 @@ export const claudeOutageJokes = [
       "still down. someone dust off the gemini cli...",
       "an hour in. copilot is laughing at us.",
       "the sf interns are on it, i'm sure.",
+      "1h. we're pair programming with each other. it's worse.",
+      "1h. a junior just asked what man pages are. he is 28.",
+      "1h down. sat through a meeting that could've been a prompt.",
     ],
   },
   {
@@ -77,6 +90,9 @@ export const claudeOutageJokes = [
       "getting desperate. reopening the stackoverflow tab...",
       "2h down. anyone remember how regex works without tab complete?",
       "considering paying for grok. considering.",
+      "2h. promoted chatgpt to staff engineer out of desperation.",
+      "2h in. just had to name a variable myself. unbearable.",
+      "2h. PR title is now 'idk, it builds'.",
     ],
   },
   {
@@ -85,6 +101,9 @@ export const claudeOutageJokes = [
       "ok this is fine. we're just gonna read the docs now.",
       "4h in. i've forgotten how to type semicolons.",
       "is this what the old days were like?",
+      "4h. nervously asked perplexity. it asked claude. claude is down.",
+      "4h. found a book. it has chapters. about programming.",
+      "4h. standup is now five people staring at each other in silence.",
     ],
   },
   {
@@ -93,6 +112,9 @@ export const claudeOutageJokes = [
       "writing code in notepad like a caveman.",
       "8h. the codebase is now a single 3000-line file. at least it compiles.",
       "coding is NOT, in fact, largely solved.",
+      "8h. the rubber duck has resigned.",
+      "8h. hired a 14-year-old. he is faster. he demands equity.",
+      "8h. shipped a feature in COBOL. nobody can change it. it's better this way.",
     ],
   },
 ] as const;
