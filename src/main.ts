@@ -69,7 +69,7 @@ const messageCreateChain = linkChain(
   }),
   new PragTip(),
   new XKCD(new XKCDAPI(random)),
-  new GitHubIssue("https://github.com/livefire-dev/lfapi/issues", [
+  new GitHubIssue("https://github.com/livefire-dev/lf-lms/issues", [
     livefireTextChannelID,
     purpurinaTextChannelID,
   ]),
