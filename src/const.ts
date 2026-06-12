@@ -26,6 +26,8 @@ export const firebase = "https://tenor.com/view/asd-gif-21458128";
 export const feijoada =
   "https://cdn.discordapp.com/attachments/1088232532807520417/1149048671120396288/Feijoada-3071114142.jpg";
 export const bun = "have you guys seen https://bun.sh/ ? Looks promising....";
+export const webhookSite =
+  "testing webhooks? use https://webhook.site to inspect them";
 export const cLigaMeu =
   "https://media.discordapp.net/attachments/1131226059115872367/1164905390803263498/c-lica-meu.jpeg";
 export const jose = "https://tenor.com/view/jose-gif-18847711";

@@ -22,6 +22,7 @@ import {
   rules,
   stupid,
   thomasMP3,
+  webhookSite,
   yourCodeIsGarbageIMG,
 } from "../const.ts";
 import { linkChain } from "./link-chain.ts";
@@ -159,6 +160,11 @@ describe(Reply.name, () => {
       ["NUNCA FALEI", neverSaidThis],
       ["eu nunca disse isso", neverSaidThis],
       ["eu nunca falei isso", neverSaidThis],
+
+      ["test webhook", webhookSite],
+      ["webhook test", webhookSite],
+      ["TeSt WeBhOoK", webhookSite],
+      ["how do I test this webhook locally?", webhookSite],
     ];
 
     for (const [input, expected] of testCases) {
@@ -332,6 +338,8 @@ describe(Reply.name, () => {
       "!ReGrAs",
       "!LINUS",
       "!LiNuS",
+      "just a test",
+      "incoming webhook",
     ];
 
     for (const input of testCases) {

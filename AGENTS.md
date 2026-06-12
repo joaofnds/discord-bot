@@ -13,6 +13,10 @@ There is no `package.json`, no `node_modules`, no biome. Project config lives in
 - **Tests:** `deno task test`
 - **Run:** `deno task start` / `deno task start:watch`
 
+`deno` is managed by mise and is not on the bare PATH in non-interactive shells.
+If `deno` returns "command not found", prefix every command with `mise exec --`
+(e.g. `mise exec -- deno task test`, `mise exec -- deno fmt <path>`).
+
 Do not reach for `biome`, `prettier`, `eslint`, `tsc`, `jest`, `vitest`, or
 `npm`/`npx` — none are wired up and invoking them wastes a round-trip. Do not
 add a `package.json` to "fix" a missing tool. Imports use the `imports` map in

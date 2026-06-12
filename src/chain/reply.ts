@@ -16,12 +16,14 @@ import {
   pqPraCuba,
   rules,
   thomasMP3,
+  webhookSite,
   yourCodeIsGarbageIMG,
 } from "../const.ts";
 import { Bot } from "../discord/bot.ts";
 import { Msg } from "../discord/types.ts";
 import { normalize } from "../lib/normalize.ts";
 import { Random } from "../lib/random.ts";
+import { AllMatchReplier } from "../replier/all-match-replier.ts";
 import { PlainReplier } from "../replier/plain-replier.ts";
 import { ProbPlainReplier } from "../replier/prob-plain-replier.ts";
 import { Replier } from "../replier/replier.ts";
@@ -66,6 +68,7 @@ export class Reply extends Chain {
         /garbage.*code/i,
       ),
       new PlainReplier(neverSaidThis, /nunca (disse|falei)/i),
+      new AllMatchReplier(webhookSite, /test/i, /webhook/i),
       new PlainReplier(thomasMP3, /release[-\s]train/i),
       new ProbPlainReplier(random, 0.1, linux, /(?<!\/)linux/i),
       new ProbPlainReplier(random, 0.01, firebase, /firebase/i),
