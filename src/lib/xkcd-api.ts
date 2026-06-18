@@ -16,4 +16,10 @@ export class XKCDAPI {
       .then((response) => response.json())
       .then((data) => this.comic(this.rand.intBetween(0, data.num)));
   }
+
+  async image(url: string): Promise<Uint8Array> {
+    return await fetch(url)
+      .then((response) => response.arrayBuffer())
+      .then((buffer) => new Uint8Array(buffer));
+  }
 }

@@ -4,7 +4,9 @@ import {
   ChatInputCommandInteraction,
 } from "discord.js";
 
-export type Content = string | { content: string; files: string[] };
+export type FileContent = string | { attachment: Uint8Array; name: string };
+
+export type Content = string | { content: string; files: FileContent[] };
 
 export interface MsgAuthor {
   id: string;

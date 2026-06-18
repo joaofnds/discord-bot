@@ -34,6 +34,7 @@ import { ExchangeRates } from "./lib/exchange-rates.ts";
 import { NativeClock } from "./lib/native-clock.ts";
 import { MyinstantsAPI } from "./lib/myinstants-api.ts";
 import { MathRandom } from "./lib/random.ts";
+import { JimpSlicer } from "./lib/slicer.ts";
 import { SoundCloudAPI } from "./lib/soundcloud-api.ts";
 import time from "./lib/time.ts";
 import { XKCDAPI } from "./lib/xkcd-api.ts";
@@ -68,7 +69,7 @@ const messageCreateChain = linkChain(
     bunBot: new WebhookBot(config.bunBotURL),
   }),
   new PragTip(),
-  new XKCD(new XKCDAPI(random)),
+  new XKCD(new XKCDAPI(random), new JimpSlicer()),
   new GitHubIssue("https://github.com/livefire-dev/lf-lms/issues", [
     livefireTextChannelID,
     purpurinaTextChannelID,
