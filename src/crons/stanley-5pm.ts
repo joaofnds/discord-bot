@@ -34,8 +34,6 @@ export class Stanley5pmCron implements Disposable {
       "189624819807944704",
     );
     await this.bot.send("então tá pessoal, tchau tchau!");
-    await this.bot.send(
-      "https://tenor.com/view/the-office-stanley-time-to-go-work-life-got-to-go-gif-4242766",
-    );
+    await this.bot.send("https://klipy.com/gifs/stanley-run");
   }
 }
