@@ -19,7 +19,7 @@ export const linux =
 export const anonymous =
   "https://media.discordapp.net/attachments/1088232532807520417/1133018342643466311/4fba7a226c1e361a9bbfe4df1a00226b2d90efcf5ce5801832e0646b4e332a52_1.jpg";
 export const wed4pm = "https://klipy.com/gifs/firmo-rafa";
-export const nani = "https//klipy.com/gifs/dk-nintendo-1";
+export const nani = "https://klipy.com/gifs/dk-nintendo-1";
 export const firebase = "https://klipy.com/gifs/firebase-was-a-bad-choice";
 export const feijoada =
   "https://cdn.discordapp.com/attachments/1088232532807520417/1149048671120396288/Feijoada-3071114142.jpg";
