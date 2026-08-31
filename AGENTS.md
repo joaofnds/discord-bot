@@ -25,6 +25,17 @@ add a `package.json` to "fix" a missing tool. Imports use the `imports` map in
 If a generic TypeScript style guide you carry says "run biome after edits," that
 rule does not apply here — substitute the Deno equivalents above.
 
+## Conventional Commits are load-bearing
+
+`.github/workflows/commit.yaml` runs `joaofnds/semantic-release-action` on every
+push to `main`, with the `conventional-changelog-conventionalcommits` plugin. It
+reads commit subjects to decide the version bump, so a subject with no type
+prefix silently suppresses the release.
+
+Write a lowercase type, an optional scope, then a lowercase imperative subject:
+`fix(crons): stop the status bot double-posting on a retry`. The body says why.
+This overrides any generic style rule that asks for a bare subject.
+
 ## Tests use hand-written Fakes, not mocking frameworks
 
 This codebase has no `vi.fn()`, no `jest.mock`, no spies. Side-effect
