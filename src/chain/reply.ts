@@ -1,6 +1,5 @@
 import {
   anonymous,
-  bun,
   cLigaMeu,
   definitionOfEngineering,
   devops,
@@ -19,7 +18,6 @@ import {
   webhookSite,
   yourCodeIsGarbageIMG,
 } from "../const.ts";
-import { Bot } from "../discord/bot.ts";
 import { Msg } from "../discord/types.ts";
 import { normalize } from "../lib/normalize.ts";
 import { Random } from "../lib/random.ts";
@@ -29,7 +27,6 @@ import { ProbPlainReplier } from "../replier/prob-plain-replier.ts";
 import { Replier } from "../replier/replier.ts";
 import { SoundCloudReplier } from "../replier/soundcloud-replier.ts";
 import { StupidReplier } from "../replier/stupid-replier.ts";
-import { WebhookBotPlanReplier } from "../replier/webhook-bot-plain-replier.ts";
 import { Chain } from "./chain.ts";
 
 export class Reply extends Chain {
@@ -38,11 +35,9 @@ export class Reply extends Chain {
   constructor({
     random,
     randomFolk,
-    bunBot,
   }: {
     random: Pick<Random, "chance">;
     randomFolk: string;
-    bunBot: Bot;
   }) {
     super();
     this.responses = [
@@ -90,7 +85,6 @@ export class Reply extends Chain {
         /(Uspsa)/,
         /(Idpa)/,
       ),
-      new WebhookBotPlanReplier(bunBot, bun, /\bbun\b/i),
       new SoundCloudReplier(),
     ];
   }

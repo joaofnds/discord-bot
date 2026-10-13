@@ -63,11 +63,7 @@ const messageCreateChain = linkChain(
   new Abbrev(),
   new Timeout(10 * time.Minute),
   new Repeat(new NativeClock(), 5 * time.Minute),
-  new Reply({
-    random,
-    randomFolk: config.randomFolk,
-    bunBot: new WebhookBot(config.bunBotURL),
-  }),
+  new Reply({ random, randomFolk: config.randomFolk }),
   new PragTip(),
   new XKCD(new XKCDAPI(random), new JimpSlicer()),
   new GitHubIssue("https://github.com/livefire-dev/lf-lms/issues", [

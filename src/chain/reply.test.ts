@@ -2,10 +2,8 @@ import { expect } from "@std/expect";
 import { beforeEach, describe, it } from "@std/testing/bdd";
 import { MessageMock } from "../../test/message-mock.ts";
 import { RememberWhenCalled } from "../../test/remember-when-called.ts";
-import { WebhookBotMock } from "../../test/webhook-bot-mock.ts";
 import {
   anonymous,
-  bun,
   cLigaMeu,
   definitionOfEngineering,
   devops,
@@ -32,11 +30,9 @@ describe(Reply.name, () => {
   let sut: Reply;
   const random = { chance: () => false };
   const randomFolk = "chuck testa!";
-  const bunBot = new WebhookBotMock("bun bot");
 
   beforeEach(() => {
-    bunBot.reset();
-    sut = new Reply({ random, randomFolk, bunBot });
+    sut = new Reply({ random, randomFolk });
   });
 
   describe("when matches", () => {
@@ -253,7 +249,6 @@ describe(Reply.name, () => {
         const alwaysFalseSUT = new Reply({
           random: { chance: () => false },
           randomFolk,
-          bunBot,
         });
 
         it(`does not reply: ${input}`, async () => {
@@ -269,7 +264,6 @@ describe(Reply.name, () => {
         const alwaysTrueSUT = new Reply({
           random: { chance: () => true },
           randomFolk,
-          bunBot,
         });
 
         it(`replies '${expected}'`, async () => {
@@ -294,35 +288,6 @@ describe(Reply.name, () => {
     }
   });
 
-  describe("webhook bot responses", () => {
-    const testCases = [
-      ["bun", bun, bunBot],
-      ["bUn", bun, bunBot],
-      ["BUN", bun, bunBot],
-    ] as const;
-
-    for (const [message, reply, bot] of testCases) {
-      it(`replies '${reply}' to '${message}' on ${bot.name}`, async () => {
-        await sut.handle(new MessageMock(message));
-
-        expect(bot.messages).toEqual([reply]);
-      });
-    }
-
-    const falseTestCases = [
-      ["wbun", bunBot],
-      ["bunw", bunBot],
-      ["wbunw", bunBot],
-    ] as const;
-
-    for (const [message, bot] of falseTestCases) {
-      it(`does not reply to '${message}' on ${bot.name}`, async () => {
-        await sut.handle(new MessageMock(message));
-        expect(bot.messages).toEqual([]);
-      });
-    }
-  });
-
   describe("when does not match", () => {
     const testCases = [
       "foo",
@@ -340,6 +305,7 @@ describe(Reply.name, () => {
       "!LiNuS",
       "just a test",
       "incoming webhook",
+      "bun",
     ];
 
     for (const input of testCases) {

@@ -23,7 +23,6 @@ export const nani = "https://klipy.com/gifs/dk-nintendo-1";
 export const firebase = "https://klipy.com/gifs/firebase-was-a-bad-choice";
 export const feijoada =
   "https://cdn.discordapp.com/attachments/1088232532807520417/1149048671120396288/Feijoada-3071114142.jpg";
-export const bun = "have you guys seen https://bun.sh/ ? Looks promising....";
 export const webhookSite =
   "testing webhooks? use https://webhook.site to inspect them";
 export const cLigaMeu =
