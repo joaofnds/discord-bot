@@ -3,3 +3,6 @@ _.file = '.env'
 
 [tools]
 bun = "1.4.3"
+
+[tasks.ci]
+run = ["bun run typecheck", "bun run lint", "bun run fmt:check", "bun run test"]
