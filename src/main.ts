@@ -30,6 +30,7 @@ import { Wed4pmCron } from "./crons/wed-4pm.ts";
 import { ClientWrapper } from "./discord/client-wrapper.ts";
 import { WebhookBot } from "./discord/webhook-bot.ts";
 import { ClaudeStatusAPI } from "./lib/claude-status-api.ts";
+import { BunScheduler } from "./lib/bun-scheduler.ts";
 import { ExchangeRates } from "./lib/exchange-rates.ts";
 import { NativeClock } from "./lib/native-clock.ts";
 import { MyinstantsAPI } from "./lib/myinstants-api.ts";
@@ -42,6 +43,7 @@ import { MP3 } from "./chain/mp3.ts";
 
 const config = Config.fromEnv();
 const random = new MathRandom();
+const scheduler = new BunScheduler();
 const soundcloudApi = new SoundCloudAPI(
   config.soundcloudUserId,
   config.soundcloudClientId,
@@ -79,34 +81,39 @@ const interactionCreateChain = linkChain(
 );
 
 const crons = [
-  new PragTipBot(new WebhookBot(config.pragTipBotURL), random),
+  new PragTipBot(new WebhookBot(config.pragTipBotURL), random, scheduler),
   new RatesBot(
     new WebhookBot(config.richDadBotURL),
     new WebhookBot(config.poorDadBotURL),
     new WebhookBot(config.brokeDadBotURL),
     new ExchangeRates(config.openExchangeRatesAppID),
+    scheduler,
   ),
   new DadJokeBot(
     new WebhookBot(config.dadBotURL),
     config.rapidAPIURL,
     config.rapidAPIKey,
+    scheduler,
   ),
   new DevDadJokeBot(
     new WebhookBot(config.dadBotURL),
     "https://v2.jokeapi.dev/joke/Programming",
+    scheduler,
   ),
-  new SundayBot(new WebhookBot(config.sundayBotURL)),
+  new SundayBot(new WebhookBot(config.sundayBotURL), scheduler),
   new Stanley5pmCron(
     new ClientWrapper(client),
     new WebhookBot(config.stanleyBotURL),
+    scheduler,
   ),
-  new Wed4pmCron(new WebhookBot(config.wed4pmBot)),
-  new AccountantBot(new WebhookBot(config.accountantBotURL)),
+  new Wed4pmCron(new WebhookBot(config.wed4pmBot), scheduler),
+  new AccountantBot(new WebhookBot(config.accountantBotURL), scheduler),
   new ClaudeStatusBot(
     new ClaudeStatusAPI(),
     new WebhookBot(config.claudeOutageBotURL),
     new NativeClock(),
     random,
+    scheduler,
   ),
 ];
 

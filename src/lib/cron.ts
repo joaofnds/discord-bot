@@ -1,40 +1,50 @@
-type Options = {
+export interface CronOptions {
   cronTime: string;
   timeZone: string;
-  onTick: () => unknown;
-};
+  onTick: () => void | Promise<void>;
+}
 
-type Scheduler = (
-  expression: string,
-  onTick: () => unknown,
-  options: Bun.CronOptions,
-) => { stop(): unknown };
+export interface ScheduledJob {
+  stop(): void;
+}
+
+export interface Scheduler {
+  schedule(
+    expression: string,
+    onTick: () => void,
+    timeZone: string,
+  ): ScheduledJob;
+}
 
 export class CronJob {
-  private job?: ReturnType<Scheduler>;
+  private job: ScheduledJob | undefined;
 
-  private constructor(
-    private readonly options: Options,
-    private readonly schedule: Scheduler,
+  constructor(
+    private readonly options: CronOptions,
+    private readonly scheduler: Scheduler,
   ) {}
 
-  static from(options: Options, schedule: Scheduler = Bun.cron) {
-    return new CronJob(options, schedule);
-  }
-
   start() {
-    this.job ??= this.schedule(
+    if (this.job !== undefined) {
+      return;
+    }
+
+    this.job = this.scheduler.schedule(
       this.options.cronTime,
       () => {
         // Keep async ticks independent, as cron's default did.
         void this.fire();
       },
-      { tz: this.options.timeZone },
+      this.options.timeZone,
     );
   }
 
   stop() {
-    this.job?.stop();
+    if (this.job === undefined) {
+      return;
+    }
+
+    this.job.stop();
     this.job = undefined;
   }
 

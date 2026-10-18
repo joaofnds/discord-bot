@@ -1,4 +1,4 @@
-import { CronJob } from "../lib/cron.ts";
+import { CronJob, Scheduler } from "../lib/cron.ts";
 import { z } from "zod";
 import { Bot } from "../discord/bot.ts";
 
@@ -17,12 +17,13 @@ export class DevDadJokeBot implements Disposable {
   constructor(
     private readonly bot: Bot,
     private readonly apiURL: string,
+    scheduler: Scheduler,
   ) {
-    this.cron = CronJob.from({
+    this.cron = new CronJob({
       cronTime: "0 15 * * 1-5",
       timeZone: "America/Sao_Paulo",
       onTick: this.run.bind(this),
-    });
+    }, scheduler);
   }
 
   start() {

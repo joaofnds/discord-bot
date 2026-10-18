@@ -1,5 +1,6 @@
 import { beforeEach, describe, expect, it } from "bun:test";
 import { FakeClock } from "../../test/fake-clock.ts";
+import { FakeScheduler } from "../../test/fake-scheduler.ts";
 import { WebhookBotMock } from "../../test/webhook-bot-mock.ts";
 import {
   claudeOutageJokes,
@@ -56,6 +57,7 @@ describe(ClaudeStatusBot.name, () => {
   let api: FakeClaudeStatusAPI;
   let webhook: WebhookBotMock;
   let random: FakeRandom;
+  let scheduler: FakeScheduler;
   let bot: ClaudeStatusBot;
 
   const incident = (overrides: Partial<Incident> = {}): Incident => ({
@@ -83,7 +85,8 @@ describe(ClaudeStatusBot.name, () => {
     api = new FakeClaudeStatusAPI();
     webhook = new WebhookBotMock("claude-status");
     random = new FakeRandom();
-    bot = new ClaudeStatusBot(api, webhook, clock, random);
+    scheduler = new FakeScheduler();
+    bot = new ClaudeStatusBot(api, webhook, clock, random, scheduler);
   });
 
   it("does not send on the first run even when an active incident is present", async () => {
@@ -188,7 +191,7 @@ describe(ClaudeStatusBot.name, () => {
     const failingBot: Bot = {
       send: () => Promise.reject(new Error("webhook exploded")),
     };
-    const resilientBot = new ClaudeStatusBot(api, failingBot, clock, random);
+    const resilientBot = new ClaudeStatusBot(api, failingBot, clock, random, scheduler);
 
     api.incidents = [incident({ id: "old" })];
     await resilientBot.run();

@@ -1,4 +1,4 @@
-import { CronJob } from "../lib/cron.ts";
+import { CronJob, Scheduler } from "../lib/cron.ts";
 import { pragTips } from "../const.ts";
 import { Bot } from "../discord/bot.ts";
 import { Random } from "../lib/random.ts";
@@ -9,12 +9,13 @@ export class PragTipBot implements Disposable {
   constructor(
     private readonly bot: Bot,
     private readonly random: Pick<Random, "pick">,
+    scheduler: Scheduler,
   ) {
-    this.cron = CronJob.from({
+    this.cron = new CronJob({
       cronTime: "0 9 * * 1-5",
       timeZone: "America/Sao_Paulo",
       onTick: this.run.bind(this),
-    });
+    }, scheduler);
   }
 
   start() {

@@ -1,4 +1,4 @@
-import { CronJob } from "../lib/cron.ts";
+import { CronJob, Scheduler } from "../lib/cron.ts";
 import {
   claudeOutageJokes,
   claudeOutageResolvedJokes,
@@ -29,12 +29,13 @@ export class ClaudeStatusBot implements Disposable {
     private readonly bot: Bot,
     private readonly clock: Clock,
     private readonly random: Random,
+    scheduler: Scheduler,
   ) {
-    this.cron = CronJob.from({
+    this.cron = new CronJob({
       cronTime: "*/5 * * * *",
       timeZone: "UTC",
       onTick: this.run.bind(this),
-    });
+    }, scheduler);
   }
 
   start() {

@@ -1,43 +1,12 @@
 import { beforeEach, describe, expect, it } from "bun:test";
+import { FakeScheduler } from "../../test/fake-scheduler.ts";
 import { CronJob } from "./cron.ts";
-
-class FakeJob {
-  stopped = false;
-
-  constructor(
-    readonly expression: string,
-    readonly onTick: () => unknown,
-    readonly options: Bun.CronOptions,
-  ) {}
-
-  stop() {
-    this.stopped = true;
-  }
-
-  fire() {
-    if (!this.stopped) return this.onTick();
-  }
-}
-
-class FakeScheduler {
-  jobs: FakeJob[] = [];
-
-  schedule = (
-    expression: string,
-    onTick: () => unknown,
-    options: Bun.CronOptions,
-  ) => {
-    const job = new FakeJob(expression, onTick, options);
-    this.jobs.push(job);
-    return job;
-  };
-}
 
 describe(CronJob.name, () => {
   let scheduler: FakeScheduler;
   let job: CronJob;
   let calls: number;
-  let onTick: () => unknown;
+  let onTick: () => void | Promise<void>;
 
   beforeEach(() => {
     scheduler = new FakeScheduler();
@@ -45,13 +14,13 @@ describe(CronJob.name, () => {
     onTick = () => {
       calls++;
     };
-    job = CronJob.from(
+    job = new CronJob(
       {
         cronTime: "0 9 * * 1-5",
         timeZone: "America/Sao_Paulo",
         onTick: () => onTick(),
       },
-      scheduler.schedule,
+      scheduler,
     );
   });
 
@@ -66,7 +35,7 @@ describe(CronJob.name, () => {
 
     expect(scheduler.jobs.length).toBe(1);
     expect(scheduler.jobs[0].expression).toBe("0 9 * * 1-5");
-    expect(scheduler.jobs[0].options).toEqual({ tz: "America/Sao_Paulo" });
+    expect(scheduler.jobs[0].timeZone).toBe("America/Sao_Paulo");
     expect(calls).toBe(0);
 
     scheduler.jobs[0].fire();

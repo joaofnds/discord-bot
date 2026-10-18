@@ -1,4 +1,4 @@
-import { CronJob } from "../lib/cron.ts";
+import { CronJob, Scheduler } from "../lib/cron.ts";
 import { Bot } from "../discord/bot.ts";
 import { ClientWrapper } from "../discord/client-wrapper.ts";
 
@@ -8,12 +8,13 @@ export class Stanley5pmCron implements Disposable {
   constructor(
     private readonly client: ClientWrapper,
     private readonly bot: Bot,
+    scheduler: Scheduler,
   ) {
-    this.cron = CronJob.from({
+    this.cron = new CronJob({
       cronTime: "0 18 * * 1-5",
       timeZone: "America/Sao_Paulo",
       onTick: this.run.bind(this),
-    });
+    }, scheduler);
   }
 
   start() {

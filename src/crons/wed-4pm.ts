@@ -1,16 +1,16 @@
-import { CronJob } from "../lib/cron.ts";
+import { CronJob, Scheduler } from "../lib/cron.ts";
 import { wed4pm } from "../const.ts";
 import { Bot } from "../discord/bot.ts";
 
 export class Wed4pmCron implements Disposable {
   private readonly cron: CronJob;
 
-  constructor(private readonly bot: Bot) {
-    this.cron = CronJob.from({
+  constructor(private readonly bot: Bot, scheduler: Scheduler) {
+    this.cron = new CronJob({
       cronTime: "0 16 * * 3",
       timeZone: "America/Sao_Paulo",
       onTick: this.run.bind(this),
-    });
+    }, scheduler);
   }
 
   start() {

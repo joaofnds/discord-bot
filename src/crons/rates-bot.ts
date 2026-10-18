@@ -1,4 +1,4 @@
-import { CronJob } from "../lib/cron.ts";
+import { CronJob, Scheduler } from "../lib/cron.ts";
 import { Bot } from "../discord/bot.ts";
 import { ExchangeRates } from "../lib/exchange-rates.ts";
 
@@ -10,8 +10,9 @@ export class RatesBot implements Disposable {
     private readonly poorDadBot: Bot,
     private readonly brokeDadBot: Bot,
     private readonly exchangeRates: ExchangeRates,
+    scheduler: Scheduler,
   ) {
-    this.cron = CronJob.from({
+    this.cron = new CronJob({
       cronTime: "0 10,14,18 * * 1-5",
       timeZone: "America/Sao_Paulo",
       onTick: async () => {
@@ -21,7 +22,7 @@ export class RatesBot implements Disposable {
           console.error(error);
         }
       },
-    });
+    }, scheduler);
   }
 
   start() {
