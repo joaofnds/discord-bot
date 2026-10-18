@@ -1,13 +1,17 @@
-export interface SoundCloudTrack {
-  id: number;
-  title: string;
-  permalink: string;
-  permalink_url: string;
-}
+import { z } from "zod";
 
-interface SoundCloudResponse {
-  collection: SoundCloudTrack[];
-}
+const soundCloudTrackSchema = z.object({
+  id: z.number(),
+  title: z.string(),
+  permalink: z.string(),
+  permalink_url: z.string(),
+}).passthrough();
+
+export type SoundCloudTrack = z.infer<typeof soundCloudTrackSchema>;
+
+const soundCloudResponseSchema = z.object({
+  collection: z.array(soundCloudTrackSchema),
+});
 
 export class SoundCloudAPI {
   private readonly baseUrl = "https://api-v2.soundcloud.com";
@@ -30,7 +34,7 @@ export class SoundCloudAPI {
       return [];
     }
 
-    const data: SoundCloudResponse = await response.json();
+    const data = soundCloudResponseSchema.parse(await response.json());
     return data.collection;
   }
 }

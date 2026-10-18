@@ -1,4 +1,4 @@
-import { assertEquals } from "@std/assert";
+import { expect, it } from "bun:test";
 import {
   handleMp3Autocomplete,
   handleMp3Command,
@@ -11,7 +11,7 @@ import { Interaction } from "../discord/types.ts";
 import { MyinstantsClient } from "../lib/myinstants-api.ts";
 import { SoundCloudAPI } from "../lib/soundcloud-api.ts";
 
-Deno.test("initializeSoundCloud does not fetch tracks until sync", async () => {
+it("initializeSoundCloud does not fetch tracks until sync", async () => {
   const tracks = [
     {
       id: 1,
@@ -30,13 +30,13 @@ Deno.test("initializeSoundCloud does not fetch tracks until sync", async () => {
     },
   } as SoundCloudAPI);
 
-  assertEquals(fetchCalls, 0);
-  assertEquals(await loadSoundCloudTracks(), tracks);
-  assertEquals(fetchCalls, 1);
+  expect(fetchCalls).toStrictEqual(0);
+  expect(await loadSoundCloudTracks()).toStrictEqual(tracks);
+  expect(fetchCalls).toStrictEqual(1);
   resetMp3State();
 });
 
-Deno.test("soundcloud autocomplete uses the grouped play command", async () => {
+it("soundcloud autocomplete uses the grouped play command", async () => {
   resetMp3State();
   initializeSoundCloud({
     fetchTracks: () => {
@@ -76,11 +76,11 @@ Deno.test("soundcloud autocomplete uses the grouped play command", async () => {
 
   await handleMp3Autocomplete(interaction);
 
-  assertEquals(responses, [[{ name: "belezaaa", value: "belezaaa" }]]);
+  expect(responses).toStrictEqual([[{ name: "belezaaa", value: "belezaaa" }]]);
   resetMp3State();
 });
 
-Deno.test("instant autocomplete searches Myinstants live", async () => {
+it("instant autocomplete searches Myinstants live", async () => {
   resetMp3State();
   initializeMyinstants({
     search: () => {
@@ -114,14 +114,14 @@ Deno.test("instant autocomplete searches Myinstants live", async () => {
 
   await handleMp3Autocomplete(interaction);
 
-  assertEquals(responses, [[{
+  expect(responses).toStrictEqual([[{
     name: "BRUH",
     value: "/en/instant/bruh/",
   }]]);
   resetMp3State();
 });
 
-Deno.test("grouped soundcloud play still replies with the track url", async () => {
+it("grouped soundcloud play still replies with the track url", async () => {
   resetMp3State();
   initializeSoundCloud({
     fetchTracks: () => {
@@ -157,11 +157,11 @@ Deno.test("grouped soundcloud play still replies with the track url", async () =
 
   await handleMp3Command(interaction);
 
-  assertEquals(replies, ["https://soundcloud.com/joaofnds/belezaaa"]);
+  expect(replies).toStrictEqual(["https://soundcloud.com/joaofnds/belezaaa"]);
   resetMp3State();
 });
 
-Deno.test("instant play uploads the audio file with the title", async () => {
+it("instant play uploads the audio file with the title", async () => {
   const originalFetch = globalThis.fetch;
 
   try {
@@ -187,7 +187,7 @@ Deno.test("instant play uploads the audio file with the title", async () => {
           headers: { "content-length": "4", "content-type": "audio/mpeg" },
         }),
       );
-    }) as typeof fetch;
+    }) as unknown as typeof fetch;
 
     const autocomplete = createAutocompleteInteraction("instant", "play", "br");
     await handleMp3Autocomplete(autocomplete.interaction);
@@ -199,22 +199,22 @@ Deno.test("instant play uploads the audio file with the title", async () => {
     );
     await handleMp3Command(command.interaction);
 
-    assertEquals(command.calls.length, 2);
-    assertEquals(command.calls[0], { type: "defer", payload: undefined });
-    assertEquals(command.calls[1].type, "edit");
+    expect(command.calls.length).toStrictEqual(2);
+    expect(command.calls[0]).toStrictEqual({ type: "defer", payload: undefined });
+    expect(command.calls[1].type).toStrictEqual("edit");
     const payload = command.calls[1].payload as {
       content: string;
       files: unknown[];
     };
-    assertEquals(payload.content, "BRUH");
-    assertEquals(payload.files.length, 1);
+    expect(payload.content).toStrictEqual("BRUH");
+    expect(payload.files.length).toStrictEqual(1);
   } finally {
     globalThis.fetch = originalFetch;
     resetMp3State();
   }
 });
 
-Deno.test("instant play falls back to the instant url when the file is too large", async () => {
+it("instant play falls back to the instant url when the file is too large", async () => {
   const originalFetch = globalThis.fetch;
 
   try {
@@ -240,13 +240,13 @@ Deno.test("instant play falls back to the instant url when the file is too large
           headers: { "content-length": `${9 * 1024 * 1024}` },
         }),
       );
-    }) as typeof fetch;
+    }) as unknown as typeof fetch;
 
     const command = createChatInteraction("instant", "play", "bruh");
     await handleMp3Command(command.interaction);
 
-    assertEquals(command.calls.length, 2);
-    assertEquals(command.calls[1], {
+    expect(command.calls.length).toStrictEqual(2);
+    expect(command.calls[1]).toStrictEqual({
       type: "edit",
       payload: "BRUH\nhttps://www.myinstants.com/en/instant/bruh/",
     });

@@ -1,5 +1,4 @@
-import { expect } from "@std/expect";
-import { beforeEach, describe, it } from "@std/testing/bdd";
+import { beforeEach, describe, expect, it } from "bun:test";
 import { MessageMock } from "../../test/message-mock.ts";
 import { RememberWhenCalled } from "../../test/remember-when-called.ts";
 import {

@@ -3,27 +3,23 @@
 Repository-specific instructions for AI coding agents. Read this before running
 tools or proposing changes.
 
-## Toolchain — this is a Deno project, not Node
+## Toolchain
 
-There is no `package.json`, no `node_modules`, no biome. Project config lives in
-`deno.json`.
+Use Bun and the scripts in `package.json` for development and checks. The lint
+and format scripts run the installed Oxlint and Oxfmt through Bun so their Node
+shebangs do not introduce a second runtime. Keep the production dependency
+overrides when migrating tooling. Remove them only with a deliberate dependency
+update so runtime changes remain reviewable.
 
-- **Format:** `deno fmt <path>`
-- **Type-check:** `deno check <path>`
-- **Tests:** `deno task test`
-- **Run:** `deno task start` / `deno task start:watch`
+Mise pins Bun and injects `.env`. Bun's automatic dotenv loading is disabled to
+keep that environment source consistent. If Bun is missing from the shell PATH,
+run commands through `mise exec -- bun`.
 
-`deno` is managed by mise and is not on the bare PATH in non-interactive shells.
-If `deno` returns "command not found", prefix every command with `mise exec --`
-(e.g. `mise exec -- deno task test`, `mise exec -- deno fmt <path>`).
+The default format scripts check tooling configuration so the migration preserves
+the existing source layout. Pass a source path explicitly to format it.
 
-Do not reach for `biome`, `prettier`, `eslint`, `tsc`, `jest`, `vitest`, or
-`npm`/`npx` — none are wired up and invoking them wastes a round-trip. Do not
-add a `package.json` to "fix" a missing tool. Imports use the `imports` map in
-`deno.json` (`npm:` and `jsr:` specifiers); add new dependencies there.
-
-If a generic TypeScript style guide you carry says "run biome after edits," that
-rule does not apply here — substitute the Deno equivalents above.
+Keep tests Jest-like with `describe`, `it`, and `expect` from `bun:test`. Use nested
+`describe` blocks for contexts and preserve the handwritten fakes below.
 
 ## Conventional Commits are load-bearing
 

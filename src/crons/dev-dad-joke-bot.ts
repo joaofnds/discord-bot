@@ -1,5 +1,15 @@
 import { CronJob } from "cron";
+import { z } from "zod";
 import { Bot } from "../discord/bot.ts";
+
+const jokeSchema = z.discriminatedUnion("type", [
+  z.object({ type: z.literal("single"), joke: z.string() }),
+  z.object({
+    type: z.literal("twopart"),
+    setup: z.string(),
+    delivery: z.string(),
+  }),
+]);
 
 export class DevDadJokeBot implements Disposable {
   private readonly cron: CronJob;
@@ -29,7 +39,7 @@ export class DevDadJokeBot implements Disposable {
 
   private async run() {
     const response = await fetch(this.apiURL);
-    const body = await response.json();
+    const body = jokeSchema.parse(await response.json());
 
     if (body.type === "single") {
       await this.bot.send(body.joke);

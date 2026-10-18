@@ -1,5 +1,4 @@
-import { expect } from "@std/expect";
-import { beforeEach, describe, it } from "@std/testing/bdd";
+import { beforeEach, describe, expect, it } from "bun:test";
 import { MockTimeout } from "../../test/timeout-mock.ts";
 import { SendAndTimeoutReplier } from "./send-and-time-out-replier.ts";
 

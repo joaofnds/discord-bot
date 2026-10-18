@@ -1,5 +1,4 @@
-import { expect } from "@std/expect";
-import { describe, it } from "@std/testing/bdd";
+import { describe, expect, it } from "bun:test";
 import { MessageMock } from "../../test/message-mock.ts";
 import { ReturnWhenEqual } from "../../test/return-when-equal.ts";
 import { Chain } from "./chain.ts";

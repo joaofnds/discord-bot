@@ -1,5 +1,4 @@
-import { assert } from "@std/assert";
-import { describe, it } from "@std/testing/bdd";
+import { describe, expect, it } from "bun:test";
 import { MessageMock } from "../../test/message-mock.ts";
 import { RememberWhenCalled } from "../../test/remember-when-called.ts";
 import { BotAuthorGuard } from "./bot-author-guard.ts";
@@ -15,7 +14,7 @@ describe(BotAuthorGuard.name, () => {
 
       await linkChain(botGuard, remember).handle(message);
 
-      assert(!remember.called);
+      expect(remember.called).toBeFalsy();
     });
   });
 
@@ -27,8 +26,8 @@ describe(BotAuthorGuard.name, () => {
 
       await linkChain(botGuard, remember).handle(message);
 
-      assert(!message.author.bot);
-      assert(remember.called);
+      expect(message.author.bot).toBeFalsy();
+      expect(remember.called).toBeTruthy();
     });
   });
 });

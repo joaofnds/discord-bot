@@ -113,7 +113,7 @@ const crons = [
 function exit(code: number) {
   crons.forEach((cron) => cron.stop());
   client.destroy();
-  Deno.exit(code);
+  process.exit(code);
 }
 
 await client
@@ -134,7 +134,7 @@ await client
   .login(config.token);
 
 for (const signal of ["SIGINT", "SIGTERM", "SIGABRT"] as const) {
-  Deno.addSignalListener(signal, () => {
+  process.on(signal, () => {
     console.log(`received ${signal}, exiting...`);
     exit(0);
   });

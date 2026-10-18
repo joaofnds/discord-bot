@@ -10,13 +10,14 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: denoland/setup-deno@v2
+      - uses: oven-sh/setup-bun@v2
         with:
-          deno-version: v2.5.6
-      - run: deno install
-      - run: deno lint
-      - run: deno fmt --check
-      - run: deno task test
+          bun-version: "1.4.3"
+      - run: bun --no-env-file install --frozen-lockfile --ignore-scripts
+      - run: bun run typecheck
+      - run: bun run lint
+      - run: bun run fmt:check
+      - run: bun run test
 
   release:
     if: github.ref == 'refs/heads/main'

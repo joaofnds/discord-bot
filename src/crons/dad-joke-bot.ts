@@ -1,5 +1,10 @@
 import { CronJob } from "cron";
+import { z } from "zod";
 import { Bot } from "../discord/bot.ts";
+
+const jokeResponseSchema = z.object({
+  body: z.array(z.object({ setup: z.string(), punchline: z.string() })).nonempty(),
+});
 
 export class DadJokeBot implements Disposable {
   private readonly cron: CronJob;
@@ -37,7 +42,7 @@ export class DadJokeBot implements Disposable {
     });
     const {
       body: [{ setup, punchline }],
-    } = await response.json();
+    } = jokeResponseSchema.parse(await response.json());
 
     await this.bot.send(setup);
     await new Promise((resolve) => setTimeout(resolve, 20_000));

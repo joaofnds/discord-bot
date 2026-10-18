@@ -1,7 +1,5 @@
 import { MP3 } from "./mp3.ts";
-import { assert } from "@std/assert";
-import { expect } from "@std/expect";
-import { describe, it } from "@std/testing/bdd";
+import { describe, expect, it } from "bun:test";
 import { RememberWhenCalled } from "../../test/remember-when-called.ts";
 import { linkChain } from "./link-chain.ts";
 import { MessageMock } from "../../test/message-mock.ts";
@@ -90,6 +88,6 @@ describe(MP3.name, () => {
     await linkChain(sut, remember).handle(message);
 
     expect(message.channel.messages).toEqual([]);
-    assert(remember.called);
+    expect(remember.called).toBeTruthy();
   });
 });

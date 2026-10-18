@@ -1,7 +1,7 @@
-import { assert } from "@std/assert";
+import { ok as assert } from "node:assert";
 
 export function mustGetEnv(key: string): string {
-  const value = Deno.env.get(key);
+  const value = process.env[key];
 
   assert(value, `missing environment variable: ${key}`);
 

@@ -1,6 +1,4 @@
-import { assert } from "@std/assert";
-import { expect } from "@std/expect";
-import { describe, it } from "@std/testing/bdd";
+import { describe, expect, it } from "bun:test";
 import { MessageMock } from "../../test/message-mock.ts";
 import { RememberWhenCalled } from "../../test/remember-when-called.ts";
 import { pragTips } from "../const.ts";
@@ -32,6 +30,6 @@ describe(PragTip.name, () => {
     await linkChain(sut, remember).handle(message);
 
     expect(message.channel.messages).toEqual([]);
-    assert(remember.called);
+    expect(remember.called).toBeTruthy();
   });
 });

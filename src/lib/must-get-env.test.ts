@@ -1,16 +1,15 @@
-import { expect } from "@std/expect";
-import { after, before, describe, it } from "@std/testing/bdd";
+import { afterAll, beforeAll, describe, expect, it } from "bun:test";
 import { mustGetEnv } from "./must-get-env.ts";
 
 describe("mustGetEnv", () => {
-  before(() => {
-    Deno.env.set("EXISTING", "existing");
-    Deno.env.set("EMPTY", "");
+  beforeAll(() => {
+    process.env.EXISTING = "existing";
+    process.env.EMPTY = "";
   });
 
-  after(() => {
-    Deno.env.delete("EXISTING");
-    Deno.env.delete("EMPTY");
+  afterAll(() => {
+    delete process.env.EXISTING;
+    delete process.env.EMPTY;
   });
 
   it("throws when environment variable is set", () => {

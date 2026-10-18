@@ -1,4 +1,8 @@
-**/*
-!deno.json
-!deno-lock.yaml
+**
+!package.json
+!bun.lock
+!bunfig.toml
+!tsconfig.json
 !src
+!src/**
+src/**/*.test.ts

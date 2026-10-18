@@ -1,9 +1,14 @@
-export type IncidentStatus =
-  | "investigating"
-  | "identified"
-  | "monitoring"
-  | "resolved"
-  | "postmortem";
+import { z } from "zod";
+
+const incidentStatusSchema = z.enum([
+  "investigating",
+  "identified",
+  "monitoring",
+  "resolved",
+  "postmortem",
+]);
+
+export type IncidentStatus = z.infer<typeof incidentStatusSchema>;
 
 export type Incident = {
   id: string;
@@ -13,17 +18,15 @@ export type Incident = {
   startedAt: Date;
 };
 
-type RawIncident = {
-  id: string;
-  name: string;
-  shortlink: string;
-  status: IncidentStatus;
-  started_at: string;
-};
-
-type RawIncidentsResponse = {
-  incidents: RawIncident[];
-};
+const incidentsResponseSchema = z.object({
+  incidents: z.array(z.object({
+    id: z.string(),
+    name: z.string(),
+    shortlink: z.string(),
+    status: incidentStatusSchema,
+    started_at: z.string(),
+  })),
+});
 
 export class ClaudeStatusAPI {
   private static readonly url =
@@ -38,7 +41,7 @@ export class ClaudeStatusAPI {
       );
     }
 
-    const data: RawIncidentsResponse = await response.json();
+    const data = incidentsResponseSchema.parse(await response.json());
     const raw = data.incidents[0];
     if (!raw) return null;
 

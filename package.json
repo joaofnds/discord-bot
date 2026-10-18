@@ -1,0 +1,46 @@
+{
+  "name": "discord-bot",
+  "private": true,
+  "type": "module",
+  "packageManager": "bun@1.4.3",
+  "engines": {
+    "bun": "1.4.3"
+  },
+  "scripts": {
+    "start": "bun src/main.ts",
+    "start:watch": "bun --watch src/main.ts",
+    "test": "bun test",
+    "typecheck": "bun check",
+    "lint": "bunx --bun --no-install oxlint --deny-warnings",
+    "fmt": "bunx --bun --no-install oxfmt package.json tsconfig.json .oxlintrc.json .oxfmtrc.json .github/workflows/commit.yaml",
+    "fmt:check": "bunx --bun --no-install oxfmt --check package.json tsconfig.json .oxlintrc.json .oxfmtrc.json .github/workflows/commit.yaml",
+    "build": "bun build --compile --no-compile-autoload-dotenv --no-compile-autoload-bunfig src/main.ts --outfile bot"
+  },
+  "dependencies": {
+    "cron": "4.3.5",
+    "discord.js": "14.25.1",
+    "jimp": "1.6.1",
+    "zod": "3.25.76"
+  },
+  "devDependencies": {
+    "@types/bun": "1.4.3",
+    "oxfmt": "0.73.0",
+    "oxlint": "1.88.0"
+  },
+  "overrides": {
+    "@discordjs/builders": "1.13.1",
+    "@discordjs/rest": "2.6.0",
+    "@sapphire/snowflake": "3.5.3",
+    "@types/luxon": "3.7.1",
+    "@types/ws": "8.18.1",
+    "@types/ws>@types/node": "24.2.0",
+    "discord-api-types": "0.38.36",
+    "lodash": "4.17.21",
+    "magic-bytes.js": "1.12.1",
+    "sax": "1.6.0",
+    "strtok3": "10.3.5",
+    "uint8array-extras": "1.5.0",
+    "undici": "6.21.3",
+    "ws": "8.18.3"
+  }
+}

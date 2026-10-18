@@ -1,13 +1,12 @@
-import { assertEquals } from "@std/assert";
+import { expect, it } from "bun:test";
 import { MyinstantsAPI } from "./myinstants-api.ts";
 
-Deno.test("MyinstantsAPI.search parses results from the search page", async () => {
+it("MyinstantsAPI.search parses results from the search page", async () => {
   const originalFetch = globalThis.fetch;
 
   try {
     globalThis.fetch = ((input: string | URL | Request) => {
-      assertEquals(
-        String(input),
+      expect(String(input)).toStrictEqual(
         "https://www.myinstants.com/en/search/?name=bruh",
       );
 
@@ -31,7 +30,7 @@ Deno.test("MyinstantsAPI.search parses results from the search page", async () =
     const api = new MyinstantsAPI();
     const results = await api.search("bruh");
 
-    assertEquals(results, [
+    expect(results).toStrictEqual([
       {
         title: "BRUH & FRIENDS",
         path: "/en/instant/bruh/",
@@ -50,13 +49,12 @@ Deno.test("MyinstantsAPI.search parses results from the search page", async () =
   }
 });
 
-Deno.test("MyinstantsAPI.getInstant parses the instant page", async () => {
+it("MyinstantsAPI.getInstant parses the instant page", async () => {
   const originalFetch = globalThis.fetch;
 
   try {
     globalThis.fetch = ((input: string | URL | Request) => {
-      assertEquals(
-        String(input),
+      expect(String(input)).toStrictEqual(
         "https://www.myinstants.com/en/instant/bruh/",
       );
 
@@ -75,7 +73,7 @@ Deno.test("MyinstantsAPI.getInstant parses the instant page", async () => {
     const api = new MyinstantsAPI();
     const result = await api.getInstant("/en/instant/bruh/");
 
-    assertEquals(result, {
+    expect(result).toStrictEqual({
       title: "BRUH",
       path: "/en/instant/bruh/",
       instantUrl: "https://www.myinstants.com/en/instant/bruh/",
@@ -86,7 +84,7 @@ Deno.test("MyinstantsAPI.getInstant parses the instant page", async () => {
   }
 });
 
-Deno.test("MyinstantsAPI.getInstant returns null when the page is missing audio", async () => {
+it("MyinstantsAPI.getInstant returns null when the page is missing audio", async () => {
   const originalFetch = globalThis.fetch;
 
   try {
@@ -94,12 +92,12 @@ Deno.test("MyinstantsAPI.getInstant returns null when the page is missing audio"
       return Promise.resolve(
         new Response(`<h1 id="instant-page-title">BRUH</h1>`, { status: 200 }),
       );
-    }) as typeof fetch;
+    }) as unknown as typeof fetch;
 
     const api = new MyinstantsAPI();
     const result = await api.getInstant("/en/instant/bruh/");
 
-    assertEquals(result, null);
+    expect(result).toStrictEqual(null);
   } finally {
     globalThis.fetch = originalFetch;
   }

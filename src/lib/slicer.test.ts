@@ -1,5 +1,4 @@
-import { expect } from "@std/expect";
-import { describe, it } from "@std/testing/bdd";
+import { describe, expect, it } from "bun:test";
 import { Jimp } from "jimp";
 import { Buffer } from "node:buffer";
 import { JimpSlicer } from "./slicer.ts";

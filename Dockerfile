@@ -1,8 +1,12 @@
-FROM denoland/deno:alpine-2.5.6 AS build
-COPY . .
-RUN deno compile --output /bot --allow-env --allow-net src/main.ts
-RUN chmod +x /bot
+FROM oven/bun:1.4.3-debian AS build
+WORKDIR /app
+COPY package.json bun.lock ./
+RUN bun --no-env-file install --frozen-lockfile --production --ignore-scripts
+
+COPY tsconfig.json bunfig.toml ./
+COPY src ./src
+RUN bun run build
 
 FROM gcr.io/distroless/cc:nonroot
-COPY --from=build /bot /
+COPY --from=build /app/bot /bot
 ENTRYPOINT ["/bot"]

@@ -1,6 +1,4 @@
-import { assert } from "@std/assert";
-import { expect } from "@std/expect";
-import { describe, it } from "@std/testing/bdd";
+import { describe, expect, it } from "bun:test";
 import { MessageMock } from "../../test/message-mock.ts";
 import { RememberWhenCalled } from "../../test/remember-when-called.ts";
 import { GitHubIssue } from "./github-issue.ts";
@@ -53,7 +51,7 @@ describe(GitHubIssue.name, () => {
     await linkChain(githubIssue, remember).handle(message);
 
     expect(message.channel.messages).toEqual([`${baseURL}/123`]);
-    assert(!remember.called);
+    expect(remember.called).toBeFalsy();
   });
 
   it("calls next when channel does not match", async () => {
@@ -64,7 +62,7 @@ describe(GitHubIssue.name, () => {
     await linkChain(githubIssue, remember).handle(message);
 
     expect(message.channel.messages).toEqual([]);
-    assert(remember.called);
+    expect(remember.called).toBeTruthy();
   });
 
   it("calls next when message does not match", async () => {
@@ -74,6 +72,6 @@ describe(GitHubIssue.name, () => {
     await linkChain(githubIssue, remember).handle(message);
 
     expect(message.channel.messages).toEqual([]);
-    assert(remember.called);
+    expect(remember.called).toBeTruthy();
   });
 });

@@ -1,5 +1,4 @@
-import { assert } from "@std/assert";
-import { describe, it } from "@std/testing/bdd";
+import { describe, expect, it } from "bun:test";
 import { FakeClock } from "../../test/fake-clock.ts";
 import time from "./time.ts";
 import { Timeout } from "./timeout.ts";
@@ -9,7 +8,7 @@ describe(Timeout.name, () => {
 
   it("starts inactive", () => {
     const timeout = new Timeout(clock, time.Second);
-    assert(!timeout.isActive());
+    expect(timeout.isActive()).toBeFalsy();
   });
 
   describe("when started", () => {
@@ -18,7 +17,7 @@ describe(Timeout.name, () => {
 
       timeout.start();
 
-      assert(timeout.isActive());
+      expect(timeout.isActive()).toBeTruthy();
     });
 
     it("stays active until the time has elapsed", () => {
@@ -28,11 +27,11 @@ describe(Timeout.name, () => {
 
       for (let i = 0; i < 10; i++) {
         clock.tickBy(time.Second);
-        assert(timeout.isActive());
+        expect(timeout.isActive()).toBeTruthy();
       }
 
       clock.tickBy(time.Millisecond);
-      assert(!timeout.isActive());
+      expect(timeout.isActive()).toBeFalsy();
     });
   });
 });
