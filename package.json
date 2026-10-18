@@ -17,7 +17,6 @@
     "build": "bun build --compile --no-compile-autoload-dotenv --no-compile-autoload-bunfig src/main.ts --outfile bot"
   },
   "dependencies": {
-    "cron": "4.3.5",
     "discord.js": "14.25.1",
     "jimp": "1.6.1",
     "zod": "3.25.76"
@@ -31,7 +30,6 @@
     "@discordjs/builders": "1.13.1",
     "@discordjs/rest": "2.6.0",
     "@sapphire/snowflake": "3.5.3",
-    "@types/luxon": "3.7.1",
     "@types/ws": "8.18.1",
     "@types/ws>@types/node": "24.2.0",
     "discord-api-types": "0.38.36",

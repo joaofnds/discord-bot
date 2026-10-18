@@ -1,4 +1,4 @@
-import { CronJob } from "cron";
+import { CronJob } from "../lib/cron.ts";
 import { Bot } from "../discord/bot.ts";
 import { ClientWrapper } from "../discord/client-wrapper.ts";
 

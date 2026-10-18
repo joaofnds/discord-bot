@@ -1,4 +1,4 @@
-import { CronJob } from "cron";
+import { CronJob } from "../lib/cron.ts";
 import { pragTips } from "../const.ts";
 import { Bot } from "../discord/bot.ts";
 import { Random } from "../lib/random.ts";

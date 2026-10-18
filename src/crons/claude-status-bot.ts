@@ -1,4 +1,4 @@
-import { CronJob } from "cron";
+import { CronJob } from "../lib/cron.ts";
 import {
   claudeOutageJokes,
   claudeOutageResolvedJokes,
