@@ -14,7 +14,7 @@
     "lint": "bunx --bun --no-install oxlint --deny-warnings",
     "format": "bun fmt .",
     "format:check": "bun fmt --check .",
-    "build": "bun build --compile --no-compile-autoload-dotenv --no-compile-autoload-bunfig src/main.ts --outfile bot"
+    "build": "bun build --compile src/main.ts --outfile bot"
   },
   "dependencies": {
     "discord.js": "14.25.1",
