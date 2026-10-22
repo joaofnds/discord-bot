@@ -11,9 +11,8 @@ introduce a second runtime. Keep the production dependency
 overrides when migrating tooling. Remove them only with a deliberate dependency
 update so runtime changes remain reviewable.
 
-Mise pins Bun and injects `.env`. Bun's automatic dotenv loading is disabled to
-keep that environment source consistent. If Bun is missing from the shell PATH,
-run commands through `mise exec -- bun`.
+Let Bun load `.env` for local source execution. If Bun is missing from the shell
+PATH, run commands through `mise exec -- bun`.
 
 Keep tests Jest-like with `describe`, `it`, and `expect` from `bun:test`. Use nested
 `describe` blocks for contexts and preserve the handwritten fakes below.

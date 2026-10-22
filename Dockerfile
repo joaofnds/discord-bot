@@ -3,7 +3,7 @@ WORKDIR /app
 COPY package.json bun.lock ./
 RUN bun --no-env-file install --frozen-lockfile --production --ignore-scripts
 
-COPY tsconfig.json bunfig.toml ./
+COPY tsconfig.json ./
 COPY src ./src
 RUN bun run build
 
