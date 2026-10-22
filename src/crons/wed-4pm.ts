@@ -5,12 +5,18 @@ import { Bot } from "../discord/bot.ts";
 export class Wed4pmCron implements Disposable {
   private readonly cron: CronJob;
 
-  constructor(private readonly bot: Bot, scheduler: Scheduler) {
-    this.cron = new CronJob({
-      cronTime: "0 16 * * 3",
-      timeZone: "America/Sao_Paulo",
-      onTick: this.run.bind(this),
-    }, scheduler);
+  constructor(
+    private readonly bot: Bot,
+    scheduler: Scheduler,
+  ) {
+    this.cron = new CronJob(
+      {
+        cronTime: "0 16 * * 3",
+        timeZone: "America/Sao_Paulo",
+        onTick: this.run.bind(this),
+      },
+      scheduler,
+    );
   }
 
   start() {

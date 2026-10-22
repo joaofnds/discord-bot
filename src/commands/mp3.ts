@@ -63,14 +63,14 @@ export const mp3Command = new SlashCommandBuilder()
                 "The audio name (e.g., belezaaa, por-favor-me-ajuda)",
               )
               .setRequired(true)
-              .setAutocomplete(true)
-          )
+              .setAutocomplete(true),
+          ),
       )
       .addSubcommand((subcommand) =>
         subcommand
           .setName("sync")
-          .setDescription("Refresh the SoundCloud tracks list")
-      )
+          .setDescription("Refresh the SoundCloud tracks list"),
+      ),
   )
   .addSubcommandGroup((group) =>
     group
@@ -85,9 +85,9 @@ export const mp3Command = new SlashCommandBuilder()
               .setName("audio")
               .setDescription("The audio name to search on Myinstants")
               .setRequired(true)
-              .setAutocomplete(true)
-          )
-      )
+              .setAutocomplete(true),
+          ),
+      ),
   );
 
 export async function handleMp3Autocomplete(interaction: Interaction) {
@@ -107,7 +107,7 @@ export async function handleMp3Autocomplete(interaction: Interaction) {
     if (group === "soundcloud") {
       const filtered = cachedTracks
         .filter((track) =>
-          track.title.toLowerCase().includes(focused.toLowerCase())
+          track.title.toLowerCase().includes(focused.toLowerCase()),
         )
         .slice(0, DISCORD_MAX_CHOICES);
 
@@ -192,9 +192,9 @@ async function handleSoundCloudSync(interaction: ChatInputCommandInteraction) {
         const remainingMs = SYNC_THROTTLE_MS - elapsed;
         const remainingMins = Math.ceil(remainingMs / 60000);
         await interaction.editReply(
-          `⏳ Sync was already run at <t:${
-            Math.floor(lastSyncTime.getTime() / 1000)
-          }:T>. Try again in ${remainingMins} minute${
+          `⏳ Sync was already run at <t:${Math.floor(
+            lastSyncTime.getTime() / 1000,
+          )}:T>. Try again in ${remainingMins} minute${
             remainingMins === 1 ? "" : "s"
           }.`,
         );
@@ -266,9 +266,9 @@ async function handleInstantPlay(interaction: ChatInputCommandInteraction) {
 
     if (!result) {
       await interaction.editReply(
-        `No Myinstants result found for "${audio}"\n${
-          buildMyinstantsSearchUrl(audio)
-        }`,
+        `No Myinstants result found for "${audio}"\n${buildMyinstantsSearchUrl(
+          audio,
+        )}`,
       );
       return;
     }
@@ -370,9 +370,9 @@ function isInstantPathOrUrl(value: string) {
 }
 
 function buildMyinstantsSearchUrl(query: string) {
-  return `https://www.myinstants.com/en/search/?name=${
-    encodeURIComponent(query)
-  }`;
+  return `https://www.myinstants.com/en/search/?name=${encodeURIComponent(
+    query,
+  )}`;
 }
 
 function truncateChoiceName(value: string) {

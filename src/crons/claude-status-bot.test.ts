@@ -191,7 +191,13 @@ describe(ClaudeStatusBot.name, () => {
     const failingBot: Bot = {
       send: () => Promise.reject(new Error("webhook exploded")),
     };
-    const resilientBot = new ClaudeStatusBot(api, failingBot, clock, random, scheduler);
+    const resilientBot = new ClaudeStatusBot(
+      api,
+      failingBot,
+      clock,
+      random,
+      scheduler,
+    );
 
     api.incidents = [incident({ id: "old" })];
     await resilientBot.run();

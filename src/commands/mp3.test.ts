@@ -114,10 +114,14 @@ it("instant autocomplete searches Myinstants live", async () => {
 
   await handleMp3Autocomplete(interaction);
 
-  expect(responses).toStrictEqual([[{
-    name: "BRUH",
-    value: "/en/instant/bruh/",
-  }]]);
+  expect(responses).toStrictEqual([
+    [
+      {
+        name: "BRUH",
+        value: "/en/instant/bruh/",
+      },
+    ],
+  ]);
   resetMp3State();
 });
 
@@ -200,7 +204,10 @@ it("instant play uploads the audio file with the title", async () => {
     await handleMp3Command(command.interaction);
 
     expect(command.calls.length).toStrictEqual(2);
-    expect(command.calls[0]).toStrictEqual({ type: "defer", payload: undefined });
+    expect(command.calls[0]).toStrictEqual({
+      type: "defer",
+      payload: undefined,
+    });
     expect(command.calls[1].type).toStrictEqual("edit");
     const payload = command.calls[1].payload as {
       content: string;

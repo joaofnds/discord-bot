@@ -6,17 +6,14 @@ tools or proposing changes.
 ## Toolchain
 
 Use Bun and the scripts in `package.json` for development and checks. The lint
-and format scripts run the installed Oxlint and Oxfmt through Bun so their Node
-shebangs do not introduce a second runtime. Keep the production dependency
+script runs the installed Oxlint through Bun so its Node shebang does not
+introduce a second runtime. Keep the production dependency
 overrides when migrating tooling. Remove them only with a deliberate dependency
 update so runtime changes remain reviewable.
 
 Mise pins Bun and injects `.env`. Bun's automatic dotenv loading is disabled to
 keep that environment source consistent. If Bun is missing from the shell PATH,
 run commands through `mise exec -- bun`.
-
-The default format scripts check tooling configuration so the migration preserves
-the existing source layout. Pass a source path explicitly to format it.
 
 Keep tests Jest-like with `describe`, `it`, and `expect` from `bun:test`. Use nested
 `describe` blocks for contexts and preserve the handwritten fakes below.

@@ -11,11 +11,14 @@ export class PragTipBot implements Disposable {
     private readonly random: Pick<Random, "pick">,
     scheduler: Scheduler,
   ) {
-    this.cron = new CronJob({
-      cronTime: "0 9 * * 1-5",
-      timeZone: "America/Sao_Paulo",
-      onTick: this.run.bind(this),
-    }, scheduler);
+    this.cron = new CronJob(
+      {
+        cronTime: "0 9 * * 1-5",
+        timeZone: "America/Sao_Paulo",
+        onTick: this.run.bind(this),
+      },
+      scheduler,
+    );
   }
 
   start() {

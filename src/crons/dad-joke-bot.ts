@@ -3,7 +3,9 @@ import { z } from "zod";
 import { Bot } from "../discord/bot.ts";
 
 const jokeResponseSchema = z.object({
-  body: z.array(z.object({ setup: z.string(), punchline: z.string() })).nonempty(),
+  body: z
+    .array(z.object({ setup: z.string(), punchline: z.string() }))
+    .nonempty(),
 });
 
 export class DadJokeBot implements Disposable {
@@ -15,11 +17,14 @@ export class DadJokeBot implements Disposable {
     private readonly rapidAPIKey: string,
     scheduler: Scheduler,
   ) {
-    this.cron = new CronJob({
-      cronTime: "0 11 * * 1-5",
-      timeZone: "America/Sao_Paulo",
-      onTick: this.run.bind(this),
-    }, scheduler);
+    this.cron = new CronJob(
+      {
+        cronTime: "0 11 * * 1-5",
+        timeZone: "America/Sao_Paulo",
+        onTick: this.run.bind(this),
+      },
+      scheduler,
+    );
   }
 
   start() {

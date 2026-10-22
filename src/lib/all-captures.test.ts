@@ -10,11 +10,9 @@ describe("allCaptures", () => {
 
   describe("when matches", () => {
     it("returns all matches", () => {
-      expect(allCaptures([/(123)/, /(321)/, /(abc)/, /(cba)/], "123abc"))
-        .toEqual([
-          "123",
-          "abc",
-        ]);
+      expect(
+        allCaptures([/(123)/, /(321)/, /(abc)/, /(cba)/], "123abc"),
+      ).toEqual(["123", "abc"]);
     });
   });
 });

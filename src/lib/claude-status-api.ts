@@ -19,13 +19,15 @@ export type Incident = {
 };
 
 const incidentsResponseSchema = z.object({
-  incidents: z.array(z.object({
-    id: z.string(),
-    name: z.string(),
-    shortlink: z.string(),
-    status: incidentStatusSchema,
-    started_at: z.string(),
-  })),
+  incidents: z.array(
+    z.object({
+      id: z.string(),
+      name: z.string(),
+      shortlink: z.string(),
+      status: incidentStatusSchema,
+      started_at: z.string(),
+    }),
+  ),
 });
 
 export class ClaudeStatusAPI {

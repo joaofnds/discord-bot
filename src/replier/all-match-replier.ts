@@ -3,7 +3,10 @@ import { Replier } from "./replier.ts";
 export class AllMatchReplier implements Replier {
   private readonly regexes: RegExp[];
 
-  constructor(private readonly response: string, ...regexes: RegExp[]) {
+  constructor(
+    private readonly response: string,
+    ...regexes: RegExp[]
+  ) {
     this.regexes = regexes;
   }
 

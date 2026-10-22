@@ -51,7 +51,8 @@ export class MyinstantsAPI implements MyinstantsClient {
     const titleMatch = html.match(
       /<h1 id="instant-page-title">([\s\S]*?)<\/h1>/,
     );
-    const audioMatch = html.match(/var preloadAudioUrl = '([^']+)'/) ??
+    const audioMatch =
+      html.match(/var preloadAudioUrl = '([^']+)'/) ??
       html.match(/<meta property="og:audio" content="([^"]+)"/) ??
       html.match(/<a href="([^"]+)" download target="_blank"/);
 

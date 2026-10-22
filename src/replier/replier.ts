@@ -1,5 +1,3 @@
 export interface Replier {
-  reply(
-    str: string,
-  ): string | undefined;
+  reply(str: string): string | undefined;
 }

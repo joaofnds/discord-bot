@@ -5,12 +5,18 @@ import time from "../lib/time.ts";
 export class SundayBot implements Disposable {
   private readonly cron: CronJob;
 
-  constructor(private readonly bot: Bot, scheduler: Scheduler) {
-    this.cron = new CronJob({
-      cronTime: "0 8 * * 0",
-      timeZone: "America/Sao_Paulo",
-      onTick: this.run.bind(this),
-    }, scheduler);
+  constructor(
+    private readonly bot: Bot,
+    scheduler: Scheduler,
+  ) {
+    this.cron = new CronJob(
+      {
+        cronTime: "0 8 * * 0",
+        timeZone: "America/Sao_Paulo",
+        onTick: this.run.bind(this),
+      },
+      scheduler,
+    );
   }
 
   start() {

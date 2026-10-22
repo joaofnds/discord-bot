@@ -10,11 +10,14 @@ export class Stanley5pmCron implements Disposable {
     private readonly bot: Bot,
     scheduler: Scheduler,
   ) {
-    this.cron = new CronJob({
-      cronTime: "0 18 * * 1-5",
-      timeZone: "America/Sao_Paulo",
-      onTick: this.run.bind(this),
-    }, scheduler);
+    this.cron = new CronJob(
+      {
+        cronTime: "0 18 * * 1-5",
+        timeZone: "America/Sao_Paulo",
+        onTick: this.run.bind(this),
+      },
+      scheduler,
+    );
   }
 
   start() {

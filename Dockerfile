@@ -1,4 +1,4 @@
-FROM oven/bun:1.4.3-debian AS build
+FROM oven/bun:1.4.4-debian AS build
 WORKDIR /app
 COPY package.json bun.lock ./
 RUN bun --no-env-file install --frozen-lockfile --production --ignore-scripts

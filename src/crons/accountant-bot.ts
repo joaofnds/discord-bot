@@ -6,16 +6,22 @@ export class AccountantBot implements Disposable {
   onEmail: CronJob;
   expire: CronJob;
   constructor(bot: Bot, scheduler: Scheduler) {
-    this.onEmail = new CronJob({
-      cronTime: "0 14 15 * *",
-      timeZone: "America/Sao_Paulo",
-      onTick: () => bot.send(guiasNoEmailIMG),
-    }, scheduler);
-    this.expire = new CronJob({
-      cronTime: "0 14 20 * *",
-      timeZone: "America/Sao_Paulo",
-      onTick: () => bot.send(guiasVencemHojeIMG),
-    }, scheduler);
+    this.onEmail = new CronJob(
+      {
+        cronTime: "0 14 15 * *",
+        timeZone: "America/Sao_Paulo",
+        onTick: () => bot.send(guiasNoEmailIMG),
+      },
+      scheduler,
+    );
+    this.expire = new CronJob(
+      {
+        cronTime: "0 14 20 * *",
+        timeZone: "America/Sao_Paulo",
+        onTick: () => bot.send(guiasVencemHojeIMG),
+      },
+      scheduler,
+    );
   }
 
   start() {

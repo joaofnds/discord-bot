@@ -12,17 +12,20 @@ export class RatesBot implements Disposable {
     private readonly exchangeRates: ExchangeRates,
     scheduler: Scheduler,
   ) {
-    this.cron = new CronJob({
-      cronTime: "0 10,14,18 * * 1-5",
-      timeZone: "America/Sao_Paulo",
-      onTick: async () => {
-        try {
-          await this.run();
-        } catch (error) {
-          console.error(error);
-        }
+    this.cron = new CronJob(
+      {
+        cronTime: "0 10,14,18 * * 1-5",
+        timeZone: "America/Sao_Paulo",
+        onTick: async () => {
+          try {
+            await this.run();
+          } catch (error) {
+            console.error(error);
+          }
+        },
       },
-    }, scheduler);
+      scheduler,
+    );
   }
 
   start() {

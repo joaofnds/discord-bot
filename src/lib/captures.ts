@@ -3,5 +3,8 @@ export function captures(regex: RegExp, str: string) {
     return regex.exec(str)?.slice(1) ?? [];
   }
 
-  return str.matchAll(regex).flatMap((match) => match.slice(1)).toArray();
+  return str
+    .matchAll(regex)
+    .flatMap((match) => match.slice(1))
+    .toArray();
 }

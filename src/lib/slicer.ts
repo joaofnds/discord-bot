@@ -19,7 +19,7 @@ export class JimpSlicer implements Slicer {
     ];
 
     const quadrants = cells.map((cell) =>
-      image.clone().crop({ x: cell.x, y: cell.y, w: halfWidth, h: halfHeight })
+      image.clone().crop({ x: cell.x, y: cell.y, w: halfWidth, h: halfHeight }),
     );
 
     const output = new Jimp({ width: halfWidth * 2, height: halfHeight * 2 });

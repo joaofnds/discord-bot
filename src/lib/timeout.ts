@@ -4,7 +4,10 @@ import { NativeClock } from "./native-clock.ts";
 export class Timeout {
   private startTime = Number.MIN_SAFE_INTEGER;
 
-  constructor(private clock: Clock, private duration: number) {}
+  constructor(
+    private clock: Clock,
+    private duration: number,
+  ) {}
 
   static withDuration(duration: number) {
     return new Timeout(new NativeClock(), duration);

@@ -31,11 +31,14 @@ export class ClaudeStatusBot implements Disposable {
     private readonly random: Random,
     scheduler: Scheduler,
   ) {
-    this.cron = new CronJob({
-      cronTime: "*/5 * * * *",
-      timeZone: "UTC",
-      onTick: this.run.bind(this),
-    }, scheduler);
+    this.cron = new CronJob(
+      {
+        cronTime: "*/5 * * * *",
+        timeZone: "UTC",
+        onTick: this.run.bind(this),
+      },
+      scheduler,
+    );
   }
 
   start() {

@@ -19,11 +19,14 @@ export class DevDadJokeBot implements Disposable {
     private readonly apiURL: string,
     scheduler: Scheduler,
   ) {
-    this.cron = new CronJob({
-      cronTime: "0 15 * * 1-5",
-      timeZone: "America/Sao_Paulo",
-      onTick: this.run.bind(this),
-    }, scheduler);
+    this.cron = new CronJob(
+      {
+        cronTime: "0 15 * * 1-5",
+        timeZone: "America/Sao_Paulo",
+        onTick: this.run.bind(this),
+      },
+      scheduler,
+    );
   }
 
   start() {

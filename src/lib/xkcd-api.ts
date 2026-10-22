@@ -1,11 +1,13 @@
 import { z } from "zod";
 import { Random } from "./random.ts";
 
-const comicSchema = z.object({
-  num: z.number(),
-  title: z.string(),
-  img: z.string(),
-}).passthrough();
+const comicSchema = z
+  .object({
+    num: z.number(),
+    title: z.string(),
+    img: z.string(),
+  })
+  .passthrough();
 
 export class XKCDAPI {
   #url = "https://xkcd.com";
@@ -13,8 +15,8 @@ export class XKCDAPI {
   constructor(private readonly rand: Random) {}
 
   async comic(number: number) {
-    return await fetch(`${this.#url}/${number}/info.0.json`).then(async (response) =>
-      comicSchema.parse(await response.json())
+    return await fetch(`${this.#url}/${number}/info.0.json`).then(
+      async (response) => comicSchema.parse(await response.json()),
     );
   }
 
