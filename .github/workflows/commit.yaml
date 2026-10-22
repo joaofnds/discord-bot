@@ -16,7 +16,7 @@ jobs:
       - run: bun --no-env-file install --frozen-lockfile --ignore-scripts
       - run: bun run typecheck
       - run: bun run lint
-      - run: bun run fmt:check
+      - run: bun run format:check
       - run: bun run test
 
   release:

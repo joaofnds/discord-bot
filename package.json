@@ -12,8 +12,8 @@
     "test": "bun test",
     "typecheck": "bun check",
     "lint": "bunx --bun --no-install oxlint --deny-warnings",
-    "fmt": "bun fmt .",
-    "fmt:check": "bun fmt --check .",
+    "format": "bun fmt .",
+    "format:check": "bun fmt --check .",
     "build": "bun build --compile --no-compile-autoload-dotenv --no-compile-autoload-bunfig src/main.ts --outfile bot"
   },
   "dependencies": {
