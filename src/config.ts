@@ -1,3 +1,4 @@
+import { z } from "zod";
 import { mustGetEnv } from "./lib/must-get-env.ts";
 
 export class Config {
@@ -21,6 +22,7 @@ export class Config {
     readonly wed4pmBot: string,
     readonly accountantBotURL: string,
     readonly claudeOutageBotURL: string,
+    readonly mistralApiKey: string,
   ) {}
 
   static fromEnv() {
@@ -44,6 +46,7 @@ export class Config {
       mustGetEnv("WED_4PM_BOT_URL"),
       mustGetEnv("ACCOUNTANT_BOT_URL"),
       mustGetEnv("CLAUDE_OUTAGE_BOT_URL"),
+      z.string().trim().min(1).parse(mustGetEnv("MISTRAL_API_KEY")),
     );
   }
 }
