@@ -6,6 +6,7 @@
       "name": "discord-bot",
       "dependencies": {
         "@mistralai/mistralai": "3.3.0",
+        "@opentelemetry/api": "1.10.0",
         "discord.js": "14.25.1",
         "jimp": "1.6.1",
         "zod": "3.25.76",
@@ -92,6 +93,8 @@
     "@mistralai/mistralai": ["@mistralai/mistralai@3.3.0", "", { "dependencies": { "@modelcontextprotocol/sdk": "^1.29.0", "@opentelemetry/semantic-conventions": "^1.40.0", "ws": "^8.18.0", "zod": "^3.25.0 || ^4.0.0", "zod-to-json-schema": "^3.25.0" }, "peerDependencies": { "@aws-sdk/client-s3": "^3.300.0", "@azure/identity": "^4.0.0", "@azure/storage-blob": "^12.24.0", "@google-cloud/storage": "^7.0.0 || ^8.0.0", "@hpcc-js/wasm-zstd": "^1.16.0", "@livekit/rtc-node": "^0.13.28", "@msgpack/msgpack": "^3.0.0", "@opentelemetry/api": "^1.9.0", "@opentelemetry/exporter-trace-otlp-http": "^0.220.0", "@opentelemetry/resources": "^2.9.0", "@opentelemetry/sdk-trace-base": "^2.9.0", "livekit-client": "^2.19.0" }, "optionalPeers": ["@aws-sdk/client-s3", "@azure/identity", "@azure/storage-blob", "@google-cloud/storage", "@hpcc-js/wasm-zstd", "@livekit/rtc-node", "@msgpack/msgpack", "@opentelemetry/api", "@opentelemetry/exporter-trace-otlp-http", "@opentelemetry/resources", "@opentelemetry/sdk-trace-base", "livekit-client"] }, "sha512-b5NSkQ8lFBxwZfA4Vj5oHxs7Jw7VrZRI2E9g95sigQiTi3NsQ//o6y3nDXjKUPWjksfagjH3STEFCYBg19SMvg=="],
 
     "@modelcontextprotocol/sdk": ["@modelcontextprotocol/sdk@1.32.2", "", { "dependencies": { "@hono/node-server": "^1.19.9 || ^2.0.5", "ajv": "^8.17.1", "ajv-formats": "^3.0.1", "content-type": "^1.0.5", "cors": "^2.8.5", "cross-spawn": "^7.0.5", "eventsource": "^3.0.2", "eventsource-parser": "^3.0.0", "express": "^5.2.1", "express-rate-limit": "^8.2.1", "hono": "^4.11.4", "jose": "^6.1.3", "json-schema-typed": "^8.0.2", "pkce-challenge": "^5.0.0", "raw-body": "^3.0.0", "zod": "^3.25 || ^4.0", "zod-to-json-schema": "^3.25.1" }, "peerDependencies": { "@cfworker/json-schema": "^4.1.1" }, "optionalPeers": ["@cfworker/json-schema"] }, "sha512-SWsVtH/0vULSQStoZ6xxH2K09Li8fXYTMC64ZeogCdpZ3XSi1eCPOByV1OpuJxuI3OcmHhosDWYyii07tpPsLw=="],
+
+    "@opentelemetry/api": ["@opentelemetry/api@1.10.0", "", {}, "sha512-lMkyes8iHrG+mk6WH7X70MdCLI2RS0FwNBY1PyQ8UemaijE2m5mv5A0Niy3HtbYTFrgkUEQjFMXmSAk2hQDuPQ=="],
 
     "@opentelemetry/semantic-conventions": ["@opentelemetry/semantic-conventions@1.43.0", "", {}, "sha512-eSYWTm620tTk45EKSedaUL8MFYI8hW164hIXsgIHyxu3VobUB3fFCu5t0hQby6OoWRPsG1KkKUG2M5UadiLiVg=="],
 

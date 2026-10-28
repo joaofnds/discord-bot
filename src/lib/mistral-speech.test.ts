@@ -1,4 +1,4 @@
-import { Mistral } from "@mistralai/mistralai";
+import { Speech } from "@mistralai/mistralai/sdk/speech.js";
 import { HTTPClient } from "@mistralai/mistralai/lib/http.js";
 import { describe, expect, it } from "bun:test";
 import {
@@ -20,7 +20,7 @@ class FakeHTTPClient extends HTTPClient {
 
 function setup() {
   const httpClient = new FakeHTTPClient();
-  const sdk = new Mistral({ apiKey: "test-key", httpClient });
+  const sdk = new Speech({ apiKey: "test-key", httpClient });
   return { httpClient, speech: new MistralSpeech(sdk) };
 }
 

@@ -1,4 +1,4 @@
-import { Mistral } from "@mistralai/mistralai";
+import { Speech } from "@mistralai/mistralai/sdk/speech.js";
 import { Buffer } from "node:buffer";
 import { z } from "zod";
 
@@ -47,13 +47,13 @@ export class SpeechGenerationError extends Error {
 }
 
 export class MistralSpeech implements SpeechGenerator {
-  constructor(private readonly client: Pick<Mistral, "audio">) {}
+  constructor(private readonly client: Pick<Speech, "complete">) {}
 
   async generate(text: string, voiceId: string): Promise<Uint8Array> {
     const request = requestSchema.safeParse({ input: text, voiceId });
     if (!request.success) throw new InvalidSpeechRequestError();
 
-    const response = await this.client.audio.speech
+    const response = await this.client
       .complete(
         {
           ...request.data,
