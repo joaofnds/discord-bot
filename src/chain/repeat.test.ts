@@ -1,5 +1,4 @@
 import { beforeEach, describe, expect, it } from "bun:test";
-import { FakeClock } from "../../test/fake-clock.ts";
 import { MessageMock } from "../../test/message-mock.ts";
 import { RememberWhenCalled } from "../../test/remember-when-called.ts";
 import { linkChain } from "./link-chain.ts";
@@ -7,12 +6,9 @@ import { Repeat } from "./repeat.ts";
 
 describe(Repeat.name, () => {
   let bot: Repeat;
-  let clock: FakeClock;
-  const timeout = 5;
 
   beforeEach(() => {
-    clock = new FakeClock(new Date());
-    bot = new Repeat(clock, timeout);
+    bot = new Repeat();
   });
 
   const replyCases = [
@@ -84,36 +80,38 @@ describe(Repeat.name, () => {
     });
   });
 
-  it("stops replying for the duration of the timeout", async () => {
+  it("echoes a run once, however many times it repeats", async () => {
     const remember = new RememberWhenCalled();
     const chain = linkChain(bot, remember);
     const message = new MessageMock("some message");
+    await chain.handle(message);
+    await chain.handle(message);
 
     await chain.handle(message);
-    expect(remember.count).toEqual(1);
-    expect(message.channel.messages).toEqual([]);
-
     await chain.handle(message);
-    expect(remember.count).toEqual(1);
+
     expect(message.channel.messages).toEqual([message.content]);
+    expect(remember.count).toEqual(3);
+  });
 
-    for (let i = 1; i <= timeout; i++) {
-      clock.tick();
-      await chain.handle(message);
-      expect(remember.count).toEqual(i + 1);
-      expect(message.channel.messages).toEqual([message.content]);
-    }
+  it("echoes the same text again after a different message ends the run", async () => {
+    const message = new MessageMock("some message");
+    const otherMessage = new MessageMock("some other message");
+    otherMessage.channel.id = message.channel.id;
+    await bot.handle(message);
+    await bot.handle(message);
 
-    clock.tick();
-    await chain.handle(message);
+    await bot.handle(otherMessage);
+    await bot.handle(message);
+    await bot.handle(message);
+
     expect(message.channel.messages).toEqual([
       message.content,
       message.content,
     ]);
-    expect(remember.count).toEqual(timeout + 1);
   });
 
-  it("times out per message", async () => {
+  it("echoes each run on its own", async () => {
     const firstMessage = new MessageMock("some message");
     const secondMessage = new MessageMock("some other message");
 
@@ -128,7 +126,7 @@ describe(Repeat.name, () => {
     expect(secondMessage.channel.messages).toEqual([secondMessage.content]);
   });
 
-  it("times out per channel", async () => {
+  it("echoes a run in each channel", async () => {
     const firstMessage = new MessageMock("some message");
     firstMessage.channel.id = "0";
     const secondMessage = new MessageMock(firstMessage.content);

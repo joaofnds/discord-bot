@@ -64,7 +64,7 @@ const messageCreateChain = linkChain(
   new BotAuthorGuard(),
   new Abbrev(),
   new Timeout(10 * time.Minute),
-  new Repeat(new NativeClock(), 5 * time.Minute),
+  new Repeat(),
   new Reply({ random, randomFolk: config.randomFolk }),
   new PragTip(),
   new XKCD(new XKCDAPI(random), new JimpSlicer()),

@@ -1,42 +1,28 @@
 import { Msg } from "../discord/types.ts";
-import { Clock } from "../lib/clock.ts";
-import time from "../lib/time.ts";
-import { Timeout } from "../lib/timeout.ts";
 import { Chain } from "./chain.ts";
 
-export class Repeat extends Chain {
-  private readonly lastMessage = new Map<string, string>(); // channel.id -> message
-  private readonly replyTimeout = new Map<string, Timeout>(); // channel.id -> timestamp
+type Run = { readonly content: string; readonly echoed: boolean };
 
-  constructor(
-    private readonly clock: Clock,
-    private readonly timeout: number = 5 * time.Minute,
-  ) {
-    super();
-  }
+export class Repeat extends Chain {
+  private readonly runByChannelId = new Map<string, Run>();
 
   override async handle(message: Msg) {
-    const lastMessage = this.lastMessage.get(message.channel.id);
-    const normalizedContent = this.normalize(message.content);
-
-    if (normalizedContent.length === 0) {
+    const content = this.normalize(message.content);
+    if (content.length === 0) {
       return this.next?.handle(message);
     }
 
-    if (lastMessage !== normalizedContent) {
-      this.lastMessage.set(message.channel.id, normalizedContent);
+    const run = this.runByChannelId.get(message.channel.id);
+    if (run?.content !== content) {
+      this.runByChannelId.set(message.channel.id, { content, echoed: false });
       return this.next?.handle(message);
     }
 
-    const timeout = this.replyTimeout.get(this.timeoutKey(message));
-    if (timeout?.isActive()) {
+    if (run.echoed) {
       return this.next?.handle(message);
     }
 
-    this.replyTimeout.set(this.timeoutKey(message), this.newTimeout());
-    this.lastMessage.delete(message.channel.id);
-    this.deleteExpiredTimeouts();
-
+    this.runByChannelId.set(message.channel.id, { content, echoed: true });
     return await message.channel.send(message.content);
   }
 
@@ -51,23 +37,5 @@ export class Repeat extends Chain {
     const withoutMultipleSpaces = withoutSpecialChars.replaceAll(/\s+/g, " ");
 
     return withoutMultipleSpaces.trim().toLowerCase();
-  }
-
-  private newTimeout() {
-    const timeout = new Timeout(this.clock, this.timeout);
-    timeout.start();
-    return timeout;
-  }
-
-  private timeoutKey(message: Msg) {
-    return `${message.channel.id}:${this.lastMessage.get(message.channel.id)}`;
-  }
-
-  private deleteExpiredTimeouts() {
-    for (const [key, timeout] of this.replyTimeout) {
-      if (!timeout.isActive()) {
-        this.replyTimeout.delete(key);
-      }
-    }
   }
 }
