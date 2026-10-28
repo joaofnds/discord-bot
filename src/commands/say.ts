@@ -1,26 +1,11 @@
 import { MessageFlags, SlashCommandBuilder } from "discord.js";
 import { Buffer } from "node:buffer";
 import { z } from "zod";
-import {
-  MistralVoicesEnum,
-  MistralVoicesIDsEnum,
-  SpeechGenerator,
-} from "../lib/mistral-speech.ts";
+import { fishVoices, fishVoiceSlugSchema } from "../lib/fish-voices.ts";
+import { SpeechGenerator } from "../lib/speech-generator.ts";
 
-const voices = {
-  [MistralVoicesEnum.Kiko]: { name: "Kiko", id: MistralVoicesIDsEnum.Kiko },
-  [MistralVoicesEnum.MarceloAvila]: {
-    name: "Marcelo Avila",
-    id: MistralVoicesIDsEnum.MarceloAvila,
-  },
-  [MistralVoicesEnum.Eneas]: { name: "Eneas", id: MistralVoicesIDsEnum.Eneas },
-  [MistralVoicesEnum.Bolsonaro]: {
-    name: "Bolsonaro",
-    id: MistralVoicesIDsEnum.Bolsonaro,
-  },
-};
 const inputSchema = z.object({
-  voice: z.nativeEnum(MistralVoicesEnum),
+  voice: fishVoiceSlugSchema,
   text: z.string().max(2000).trim().min(1),
 });
 
@@ -34,7 +19,6 @@ export type SayReply =
 export interface SayInteraction {
   attachmentSizeLimit: number;
   options: {
-    getSubcommand(): string;
     getString(name: string, required: true): string;
   };
   deferReply(): Promise<unknown>;
@@ -43,6 +27,11 @@ export interface SayInteraction {
     flags: typeof MessageFlags.Ephemeral;
   }): Promise<unknown>;
   editReply(payload: SayReply): Promise<unknown>;
+}
+
+export interface SayAutocompleteInteraction {
+  options: { getFocused(): string };
+  respond(choices: { name: string; value: string }[]): Promise<unknown>;
 }
 
 export class SayDeliveryError extends Error {
@@ -54,26 +43,50 @@ export class SayDeliveryError extends Error {
 
 export const sayCommand = new SlashCommandBuilder()
   .setName("say")
-  .setDescription("Generate a speech audio file");
-
-for (const [slug, voice] of Object.entries(voices)) {
-  sayCommand.addSubcommand((subcommand) =>
-    subcommand
-      .setName(slug)
-      .setDescription(`Speak with ${voice.name}'s voice`)
-      .addStringOption((option) =>
-        option
-          .setName("text")
-          .setDescription("The text to speak (up to 2000 characters)")
-          .setRequired(true)
-          .setMinLength(1)
-          .setMaxLength(2000),
-      ),
+  .setDescription("Generate a speech audio file")
+  .addStringOption((option) =>
+    option
+      .setName("voice")
+      .setDescription("The voice slug to use")
+      .setRequired(true)
+      .setAutocomplete(true),
+  )
+  .addStringOption((option) =>
+    option
+      .setName("text")
+      .setDescription("The text to speak (up to 2000 characters)")
+      .setRequired(true)
+      .setMinLength(1)
+      .setMaxLength(2000),
   );
+
+function normalizeSearch(value: string): string {
+  return value
+    .trim()
+    .toLowerCase()
+    .normalize("NFD")
+    .replace(/\p{Diacritic}/gu, "");
 }
 
 export class SayCommand {
   constructor(private readonly speech: SpeechGenerator) {}
+
+  async autocomplete(interaction: SayAutocompleteInteraction): Promise<void> {
+    const query = normalizeSearch(interaction.options.getFocused());
+    const choices = Object.entries(fishVoices)
+      .filter(([slug, voice]) =>
+        normalizeSearch(`${slug} ${voice.name}`).includes(query),
+      )
+      .slice(0, 25)
+      .map(([slug, voice]) => ({
+        name: `${voice.name} (${slug})`,
+        value: slug,
+      }));
+
+    await interaction.respond(choices).catch(() => {
+      throw new SayDeliveryError();
+    });
+  }
 
   async handle(interaction: SayInteraction): Promise<void> {
     try {
@@ -85,7 +98,7 @@ export class SayCommand {
 
   private async respond(interaction: SayInteraction): Promise<void> {
     const input = inputSchema.safeParse({
-      voice: interaction.options.getSubcommand(),
+      voice: interaction.options.getString("voice", true),
       text: interaction.options.getString("text", true),
     });
 
@@ -105,7 +118,7 @@ export class SayCommand {
     try {
       audio = await this.speech.generate(
         input.data.text,
-        voices[input.data.voice].id,
+        fishVoices[input.data.voice].id,
       );
     } catch {
       await interaction.editReply(

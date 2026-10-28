@@ -13,6 +13,11 @@ export class Say extends Chain {
     if (interaction.commandName !== this.commandName)
       return this.next?.handle(interaction);
 
+    if (interaction.isAutocomplete()) {
+      await this.command.autocomplete(interaction);
+      return;
+    }
+
     if (interaction.isChatInputCommand())
       await this.command.handle(interaction);
   }

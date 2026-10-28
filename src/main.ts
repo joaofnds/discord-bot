@@ -1,4 +1,3 @@
-import { Speech } from "@mistralai/mistralai/sdk/speech.js";
 import { Client, Events, GatewayIntentBits } from "discord.js";
 import { Abbrev } from "./chain/abbrev.ts";
 import { BotAuthorGuard } from "./chain/bot-author-guard.ts";
@@ -36,7 +35,7 @@ import { WebhookBot } from "./discord/webhook-bot.ts";
 import { ClaudeStatusAPI } from "./lib/claude-status-api.ts";
 import { BunScheduler } from "./lib/bun-scheduler.ts";
 import { ExchangeRates } from "./lib/exchange-rates.ts";
-import { MistralSpeech } from "./lib/mistral-speech.ts";
+import { FishSpeech } from "./lib/fish-speech.ts";
 import { NativeClock } from "./lib/native-clock.ts";
 import { MyinstantsAPI } from "./lib/myinstants-api.ts";
 import { MathRandom } from "./lib/random.ts";
@@ -46,9 +45,7 @@ import time from "./lib/time.ts";
 import { XKCDAPI } from "./lib/xkcd-api.ts";
 
 const config = Config.fromEnv();
-const say = new SayCommand(
-  new MistralSpeech(new Speech({ apiKey: config.mistralApiKey })),
-);
+const say = new SayCommand(new FishSpeech(config.fishApiKey, fetch));
 const random = new MathRandom();
 const scheduler = new BunScheduler();
 const soundcloudApi = new SoundCloudAPI(

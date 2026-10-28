@@ -21,7 +21,7 @@ export class Config {
     readonly wed4pmBot: string,
     readonly accountantBotURL: string,
     readonly claudeOutageBotURL: string,
-    readonly mistralApiKey: string,
+    readonly fishApiKey: string,
   ) {}
 
   static fromEnv() {
@@ -45,7 +45,7 @@ export class Config {
       mustGetEnv("WED_4PM_BOT_URL"),
       mustGetEnv("ACCOUNTANT_BOT_URL"),
       mustGetEnv("CLAUDE_OUTAGE_BOT_URL"),
-      mustGetEnv("MISTRAL_API_KEY"),
+      mustGetEnv("FISH_API_KEY"),
     );
   }
 }

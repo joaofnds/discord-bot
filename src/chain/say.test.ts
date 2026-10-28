@@ -1,9 +1,7 @@
 import { describe, expect, it } from "bun:test";
 import { SayCommand, SayInteraction } from "../commands/say.ts";
-import {
-  MistralVoicesIDsEnum,
-  SpeechGenerator,
-} from "../lib/mistral-speech.ts";
+import { fishVoices } from "../lib/fish-voices.ts";
+import { SpeechGenerator } from "../lib/speech-generator.ts";
 import { Chain } from "./chain.ts";
 import { linkChain } from "./link-chain.ts";
 import { MP3 } from "./mp3.ts";
@@ -11,10 +9,19 @@ import { Say } from "./say.ts";
 
 class FakeInteraction implements SayInteraction {
   attachmentSizeLimit = 1024;
+  choices: { name: string; value: string }[] = [];
   options = {
-    getSubcommand: (): string => "kiko",
-    getString: (): string => "Hello",
+    getFocused: (): string => "eneas",
+    getString: (name: string): string => {
+      if (name === "voice") return "eneas";
+      return "Hello";
+    },
   };
+
+  respond(choices: { name: string; value: string }[]): Promise<void> {
+    this.choices = choices;
+    return Promise.resolve();
+  }
 
   constructor(
     readonly commandName: string,
@@ -91,7 +98,7 @@ describe("interaction chain", () => {
     await chain.handle(interaction);
 
     expect(speech.requests).toEqual([
-      { text: "Hello", voiceId: MistralVoicesIDsEnum.Kiko },
+      { text: "Hello", voiceId: fishVoices.eneas.id },
     ]);
     expect({ autocomplete, mp3, next: next.interactions }).toEqual({
       autocomplete: [],
@@ -128,8 +135,23 @@ describe("interaction chain", () => {
     });
   });
 
+  it("routes /say autocomplete past MP3 without generating speech", async () => {
+    const { chain, speech, next, autocomplete, mp3 } = setup();
+    const interaction = new FakeInteraction("say", "autocomplete");
+    await chain.handle(interaction);
+    expect(interaction.choices).toEqual([
+      { name: "Eneas (eneas)", value: "eneas" },
+    ]);
+    expect({
+      speech: speech.requests,
+      next: next.interactions,
+      autocomplete,
+      mp3,
+    }).toEqual({ speech: [], next: [], autocomplete: [], mp3: [] });
+  });
+
   describe("owned non-chat interactions", () => {
-    for (const kind of ["autocomplete", "button"]) {
+    for (const kind of ["button"]) {
       it(`stops say ${kind} without generating speech`, async () => {
         const { chain, speech, next, autocomplete, mp3 } = setup();
 
