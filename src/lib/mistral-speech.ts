@@ -3,14 +3,24 @@ import { Buffer } from "node:buffer";
 import { z } from "zod";
 
 export const MistralVoicesEnum = {
+  Kiko: "kiko",
+  MarceloAvila: "marcelo-avila",
+  Eneas: "eneas",
+  Bolsonaro: "bolsonaro",
+} as const;
+
+export type MistralVoicesEnum =
+  (typeof MistralVoicesEnum)[keyof typeof MistralVoicesEnum];
+
+export const MistralVoicesIDsEnum = {
   Kiko: "01a17e32-e7e9-7722-9822-f2e798c609ad",
   MarceloAvila: "01a17d80-0525-757c-8811-9f361e001946",
   Eneas: "01a17d69-88e8-74d1-8046-30ec5f15a8c9",
   Bolsonaro: "afab6cf3-b24b-4939-a533-8d8ceec35442",
 } as const;
 
-export type MistralVoicesEnum =
-  (typeof MistralVoicesEnum)[keyof typeof MistralVoicesEnum];
+export type MistralVoicesIDsEnum =
+  (typeof MistralVoicesIDsEnum)[keyof typeof MistralVoicesIDsEnum];
 
 const requestSchema = z.object({
   input: z.string().trim().min(1),
