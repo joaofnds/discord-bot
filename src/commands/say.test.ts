@@ -106,10 +106,10 @@ describe("say command definition", () => {
         {
           type: ApplicationCommandOptionType.String,
           name: "text",
-          description: "The text to speak (up to 2000 characters)",
+          description: "The text to speak (up to 4000 characters)",
           required: true,
           min_length: 1,
-          max_length: 2000,
+          max_length: 4000,
         },
       ],
     });
@@ -190,10 +190,10 @@ describe("SayCommand", () => {
     });
   }
 
-  it("accepts exactly 2000 characters", async () => {
+  it("accepts exactly 4000 characters", async () => {
     const speech = new FakeSpeechGenerator();
     const interaction = new FakeSayInteraction();
-    interaction.text = "a".repeat(2000);
+    interaction.text = "a".repeat(4000);
     await new SayCommand(speech).handle(interaction);
     expect(speech.requests).toEqual([
       { text: interaction.text, voiceId: fishVoices.eneas.id },
@@ -214,7 +214,7 @@ describe("SayCommand", () => {
   });
 
   describe("invalid input", () => {
-    for (const text of ["", "   ", "a".repeat(2001), ` ${"a".repeat(2000)}`]) {
+    for (const text of ["", "   ", "a".repeat(4001), ` ${"a".repeat(4000)}`]) {
       it(`rejects text with length ${text.length} and trimmed length ${text.trim().length}`, async () => {
         const speech = new FakeSpeechGenerator();
         const interaction = new FakeSayInteraction();
@@ -225,7 +225,7 @@ describe("SayCommand", () => {
           {
             reply: {
               content:
-                "Choose a supported voice and enter 1 to 2000 characters of text.",
+                "Choose a supported voice and enter 1 to 4000 characters of text.",
               flags: MessageFlags.Ephemeral,
             },
           },
@@ -251,7 +251,7 @@ describe("SayCommand", () => {
           {
             reply: {
               content:
-                "Choose a supported voice and enter 1 to 2000 characters of text.",
+                "Choose a supported voice and enter 1 to 4000 characters of text.",
               flags: MessageFlags.Ephemeral,
             },
           },

@@ -35,7 +35,7 @@ export class FishSpeech implements SpeechGenerator {
           format: "wav",
           latency: "normal",
         }),
-        signal: AbortSignal.timeout(30_000),
+        signal: AbortSignal.timeout(120_000),
       }),
     ).catch((cause: unknown) => {
       throw new SpeechGenerationError(cause);

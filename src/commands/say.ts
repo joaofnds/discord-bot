@@ -6,7 +6,7 @@ import { SpeechGenerator } from "../lib/speech-generator.ts";
 
 const inputSchema = z.object({
   voice: fishVoiceSlugSchema,
-  text: z.string().max(2000).trim().min(1),
+  text: z.string().max(4000).trim().min(1),
 });
 
 export type SayReply =
@@ -54,10 +54,10 @@ export const sayCommand = new SlashCommandBuilder()
   .addStringOption((option) =>
     option
       .setName("text")
-      .setDescription("The text to speak (up to 2000 characters)")
+      .setDescription("The text to speak (up to 4000 characters)")
       .setRequired(true)
       .setMinLength(1)
-      .setMaxLength(2000),
+      .setMaxLength(4000),
   );
 
 function normalizeSearch(value: string): string {
@@ -105,7 +105,7 @@ export class SayCommand {
     if (!input.success) {
       await interaction.reply({
         content:
-          "Choose a supported voice and enter 1 to 2000 characters of text.",
+          "Choose a supported voice and enter 1 to 4000 characters of text.",
         flags: MessageFlags.Ephemeral,
       });
 
