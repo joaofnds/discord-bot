@@ -14,21 +14,25 @@ export class MP3 extends Chain {
   }
 
   override async handle(interaction: Interaction) {
-    if (!interaction.isAutocomplete || !interaction.isChatInputCommand) {
-      return this.next?.handle(interaction);
-    }
-
-    if (interaction.isAutocomplete()) {
-      if (interaction.commandName === "mp3") {
-        await this.handleMp3Autocomplete(interaction);
-      }
+    if (
+      !interaction.isAutocomplete ||
+      !interaction.isChatInputCommand ||
+      interaction.commandName !== "mp3"
+    ) {
+      if (this.next) return this.next.handle(interaction);
       return;
     }
 
-    if (!interaction.isChatInputCommand()) return;
-
-    if (interaction.commandName === "mp3") {
-      await this.handleMp3Command(interaction);
+    if (interaction.isAutocomplete()) {
+      await this.handleMp3Autocomplete(interaction);
+      return;
     }
+
+    if (interaction.isChatInputCommand()) {
+      await this.handleMp3Command(interaction);
+      return;
+    }
+
+    if (this.next) return this.next.handle(interaction);
   }
 }

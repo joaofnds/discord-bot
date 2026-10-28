@@ -1,7 +1,8 @@
 import { REST, Routes } from "discord.js";
 import { mp3Command } from "./mp3.ts";
+import { sayCommand } from "./say.ts";
 
-const commands = [mp3Command.toJSON()];
+export const commands = [mp3Command.toJSON(), sayCommand.toJSON()];
 
 export async function registerCommands(
   token: string,

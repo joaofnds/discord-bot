@@ -1,12 +1,15 @@
+import { Speech } from "@mistralai/mistralai/sdk/speech.js";
 import { Client, Events, GatewayIntentBits } from "discord.js";
 import { Abbrev } from "./chain/abbrev.ts";
 import { BotAuthorGuard } from "./chain/bot-author-guard.ts";
 import { DeleteReply } from "./chain/delete-reply.ts";
 import { GitHubIssue } from "./chain/github-issue.ts";
 import { linkChain } from "./chain/link-chain.ts";
+import { MP3 } from "./chain/mp3.ts";
 import { PragTip } from "./chain/pragtip.ts";
 import { Repeat } from "./chain/repeat.ts";
 import { Reply } from "./chain/reply.ts";
+import { Say } from "./chain/say.ts";
 import { Timeout } from "./chain/timeout.ts";
 import { XKCD } from "./chain/xkcd.ts";
 import {
@@ -16,6 +19,7 @@ import {
   initializeSoundCloud,
 } from "./commands/mp3.ts";
 import { registerCommands } from "./commands/register.ts";
+import { SayCommand } from "./commands/say.ts";
 import { Config } from "./config.ts";
 import { livefireTextChannelID, purpurinaTextChannelID } from "./const.ts";
 import { AccountantBot } from "./crons/accountant-bot.ts";
@@ -32,6 +36,7 @@ import { WebhookBot } from "./discord/webhook-bot.ts";
 import { ClaudeStatusAPI } from "./lib/claude-status-api.ts";
 import { BunScheduler } from "./lib/bun-scheduler.ts";
 import { ExchangeRates } from "./lib/exchange-rates.ts";
+import { MistralSpeech } from "./lib/mistral-speech.ts";
 import { NativeClock } from "./lib/native-clock.ts";
 import { MyinstantsAPI } from "./lib/myinstants-api.ts";
 import { MathRandom } from "./lib/random.ts";
@@ -39,9 +44,11 @@ import { JimpSlicer } from "./lib/slicer.ts";
 import { SoundCloudAPI } from "./lib/soundcloud-api.ts";
 import time from "./lib/time.ts";
 import { XKCDAPI } from "./lib/xkcd-api.ts";
-import { MP3 } from "./chain/mp3.ts";
 
 const config = Config.fromEnv();
+const say = new SayCommand(
+  new MistralSpeech(new Speech({ apiKey: config.mistralApiKey })),
+);
 const random = new MathRandom();
 const scheduler = new BunScheduler();
 const soundcloudApi = new SoundCloudAPI(
@@ -78,6 +85,7 @@ const messageDeleteChain = linkChain(new BotAuthorGuard(), new DeleteReply());
 
 const interactionCreateChain = linkChain(
   new MP3(handleMp3Autocomplete, handleMp3Command),
+  new Say(say),
 );
 
 const crons = [
