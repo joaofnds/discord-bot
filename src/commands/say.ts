@@ -79,7 +79,7 @@ export class SayCommand {
       )
       .slice(0, 25)
       .map(([slug, voice]) => ({
-        name: `${voice.name} (${slug})`,
+        name: voice.name,
         value: slug,
       }));
 

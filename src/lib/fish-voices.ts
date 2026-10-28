@@ -70,7 +70,7 @@ export const fishVoices = {
     id: FishVoicesIDsEnum.Eneas,
   },
   [FishVoicesEnum.TobeyMaguire]: {
-    name: "Tobey Maguire (Homem-Aranha)",
+    name: "Tobey Maguire",
     id: FishVoicesIDsEnum.TobeyMaguire,
   },
   [FishVoicesEnum.WilliamBonner]: {
@@ -114,11 +114,11 @@ export const fishVoices = {
     id: FishVoicesIDsEnum.Goku,
   },
   [FishVoicesEnum.LulaFlavioCosta]: {
-    name: "Lula (Flavio Costa)",
+    name: "Lula 1",
     id: FishVoicesIDsEnum.LulaFlavioCosta,
   },
   [FishVoicesEnum.BolsonaroFlavioCosta]: {
-    name: "Bolsonaro (Flavio Costa)",
+    name: "Bolsonaro 1",
     id: FishVoicesIDsEnum.BolsonaroFlavioCosta,
   },
   [FishVoicesEnum.Maurilio]: {
@@ -130,7 +130,7 @@ export const fishVoices = {
     id: FishVoicesIDsEnum.Vegeta,
   },
   [FishVoicesEnum.NarradorChris]: {
-    name: "Narrador do Todo Mundo Odeia o Chris",
+    name: "Todo Mundo Odeia o Chris",
     id: FishVoicesIDsEnum.NarradorChris,
   },
   [FishVoicesEnum.DonaldTrump]: {
@@ -142,7 +142,7 @@ export const fishVoices = {
     id: FishVoicesIDsEnum.CapitaoNascimento,
   },
   [FishVoicesEnum.LulaFranciscoJunior]: {
-    name: "Lula (Francisco Júnior)",
+    name: "Lula 2",
     id: FishVoicesIDsEnum.LulaFranciscoJunior,
   },
   [FishVoicesEnum.CleberMachado]: {
@@ -154,7 +154,7 @@ export const fishVoices = {
     id: FishVoicesIDsEnum.Coringa,
   },
   [FishVoicesEnum.BolsonaroBrunoVieira]: {
-    name: "Bolsonaro (Bruno Vieira)",
+    name: "Bolsonaro 2",
     id: FishVoicesIDsEnum.BolsonaroBrunoVieira,
   },
   [FishVoicesEnum.RickSanchez]: {
@@ -162,7 +162,7 @@ export const fishVoices = {
     id: FishVoicesIDsEnum.RickSanchez,
   },
   [FishVoicesEnum.RickSanchezPrimeiraTemporada]: {
-    name: "Rick Sanchez (primeira temporada)",
+    name: "Rick Sanchez(1st season)",
     id: FishVoicesIDsEnum.RickSanchezPrimeiraTemporada,
   },
   [FishVoicesEnum.PeterGriffin]: {

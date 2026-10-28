@@ -86,7 +86,7 @@ const voices = Object.entries(fishVoices).map(([slug, voice]) => ({
 }));
 
 function choice(voice: { slug: string; name: string }) {
-  return { name: `${voice.name} (${voice.slug})`, value: voice.slug };
+  return { name: voice.name, value: voice.slug };
 }
 
 describe("say command definition", () => {
@@ -144,7 +144,7 @@ describe("SayCommand autocomplete", () => {
     await new SayCommand(new FakeSpeechGenerator()).autocomplete(interaction);
     expect(interaction.choices).toEqual([
       {
-        name: "Capitão Nascimento (capitao-nascimento)",
+        name: "Capitão Nascimento",
         value: "capitao-nascimento",
       },
     ]);

@@ -139,9 +139,7 @@ describe("interaction chain", () => {
     const { chain, speech, next, autocomplete, mp3 } = setup();
     const interaction = new FakeInteraction("say", "autocomplete");
     await chain.handle(interaction);
-    expect(interaction.choices).toEqual([
-      { name: "Eneas (eneas)", value: "eneas" },
-    ]);
+    expect(interaction.choices).toEqual([{ name: "Eneas", value: "eneas" }]);
     expect({
       speech: speech.requests,
       next: next.interactions,
