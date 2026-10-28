@@ -25,7 +25,7 @@ function setup() {
 }
 
 describe("MistralSpeech", () => {
-  it("requests MP3 speech and decodes the audio", async () => {
+  it("requests WAV speech with the UI model and decodes the audio", async () => {
     const { httpClient, speech } = setup();
 
     expect(await speech.generate("Olá", "custom-voice")).toEqual(
@@ -37,10 +37,10 @@ describe("MistralSpeech", () => {
     expect(request.method).toEqual("POST");
     expect(request.headers.get("authorization")).toEqual("Bearer test-key");
     expect(await request.json()).toEqual({
-      model: "voxtral-mini-tts-3-0",
+      model: "voxtral-mini-tts-latest",
       input: "Olá",
       voice_id: "custom-voice",
-      response_format: "mp3",
+      response_format: "wav",
       stream: false,
     });
   });

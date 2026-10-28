@@ -105,7 +105,7 @@ describe("say command definition", () => {
 
 describe("SayCommand", () => {
   for (const voice of voices) {
-    it(`sends an MP3 using ${voice.name}`, async () => {
+    it(`sends a WAV file using ${voice.name}`, async () => {
       const speech = new FakeSpeechGenerator();
       const interaction = new FakeSayInteraction();
       interaction.slug = voice.slug;
@@ -120,7 +120,7 @@ describe("SayCommand", () => {
         {
           edit: {
             files: [
-              { attachment: Buffer.from(speech.audio), name: "speech.mp3" },
+              { attachment: Buffer.from(speech.audio), name: "speech.wav" },
             ],
             allowedMentions: { parse: [] },
           },
@@ -221,7 +221,7 @@ describe("SayCommand", () => {
       {
         edit: {
           files: [
-            { attachment: Buffer.from(speech.audio), name: "speech.mp3" },
+            { attachment: Buffer.from(speech.audio), name: "speech.wav" },
           ],
           allowedMentions: { parse: [] },
         },

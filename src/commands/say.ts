@@ -122,7 +122,7 @@ export class SayCommand {
     }
 
     await interaction.editReply({
-      files: [{ attachment: Buffer.from(audio), name: "speech.mp3" }],
+      files: [{ attachment: Buffer.from(audio), name: "speech.wav" }],
       allowedMentions: { parse: [] },
     });
   }

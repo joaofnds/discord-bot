@@ -67,8 +67,8 @@ export class MistralSpeech implements SpeechGenerator {
       .complete(
         {
           ...request.data,
-          model: "voxtral-mini-tts-3-0",
-          responseFormat: "mp3",
+          model: "voxtral-mini-tts-latest",
+          responseFormat: "wav",
           stream: false,
         },
         { timeoutMs: 30_000, retries: { strategy: "none" } },
