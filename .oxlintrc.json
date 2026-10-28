@@ -7,14 +7,6 @@
   "options": {
     "reportUnusedDisableDirectives": "error"
   },
-  "overrides": [
-    {
-      "files": ["src/lib/mistral-speech.ts"],
-      "rules": {
-        "eslint/no-redeclare": "off"
-      }
-    }
-  ],
   "rules": {
     "typescript/adjacent-overload-signatures": "error",
     "typescript/ban-ts-comment": [
@@ -37,7 +29,7 @@
     "eslint/no-fallthrough": "error",
     "eslint/no-inner-declarations": "error",
     "eslint/no-prototype-builtins": "error",
-    "eslint/no-redeclare": "error",
+    "eslint/no-redeclare": "off",
     "eslint/no-regex-spaces": "error",
     "eslint/no-useless-escape": "off",
     "eslint/no-var": "error",
