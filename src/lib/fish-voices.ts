@@ -27,6 +27,21 @@ export const FishVoicesEnum = {
   RickSanchez: "rick-sanchez",
   RickSanchezPrimeiraTemporada: "rick-sanchez-primeira-temporada",
   PeterGriffin: "peter-griffin",
+  MortyEn: "morty-en",
+  MortySmith: "morty-smith",
+  RickEn: "rick-en",
+  RickSanchezEn: "rick-sanchez-en",
+  PeterGriffinEn: "peter-griffin-en",
+  MorganFreemanEn: "morgan-freeman-en",
+  ElonEn: "elon-en",
+  MortalKombatEn: "mortal-kombat-en",
+  IngloriousBsterdsEn: "inglorious-bsterds-en",
+  AH64ApacheCPG2En: "ah-64-apache-cpg-2-en",
+  AH64ApacheCPGEn: "ah-64-apache-cpg-en",
+  HomelanderEn: "homelander-en",
+  Pateta: "pateta",
+  CapitaoPatria: "capitao-patria",
+  MickeyMouse: "mickey-mouse",
 } as const;
 
 export type FishVoicesEnum =
@@ -59,6 +74,21 @@ export const FishVoicesIDsEnum = {
   RickSanchez: "9318b32b5477496a960e2958dd51c7ea",
   RickSanchezPrimeiraTemporada: "bdb4986093f8403d8dad0858c0628aa1",
   PeterGriffin: "6a88fe5df52d49d3a063241edc9f32b9",
+  MortyEn: "c57c01edfe2f440aade02b6b8477b141",
+  MortySmith: "2acb7bbb60dc4fca92c00deaaae90de3",
+  RickEn: "d66ff3b436674d9987b71743365ba79b",
+  RickSanchezEn: "d2e75a3e3fd6419893057c02a375a113",
+  PeterGriffinEn: "d75c270eaee14c8aa1e9e980cc37cf1b",
+  MorganFreemanEn: "3ad4d432023c47ee9e6c7805b973630a",
+  ElonEn: "2d68791e46f34687bd1231e2086ee925",
+  MortalKombatEn: "d13f84b987ad4f22b56d2b47f4eb838e",
+  IngloriousBsterdsEn: "b0fb196082c845d681975b5178711f72",
+  AH64ApacheCPG2En: "74a39b3469894c34b0e4e560dec3a3ed",
+  AH64ApacheCPGEn: "86170265b11a4d6187cabffcb9e87f8b",
+  HomelanderEn: "a204d00fe33d4613bc7737a39323201c",
+  Pateta: "ed7f998788b44fa59b680d92226480b7",
+  CapitaoPatria: "9b3d632eeba6485d9f433139a675731b",
+  MickeyMouse: "6bdf37402f6041b9bd3e2de6f6dc693c",
 } as const;
 
 export type FishVoicesIDsEnum =
@@ -168,6 +198,66 @@ export const fishVoices = {
   [FishVoicesEnum.PeterGriffin]: {
     name: "Peter Griffin",
     id: FishVoicesIDsEnum.PeterGriffin,
+  },
+  [FishVoicesEnum.MortyEn]: {
+    name: "Morty (en)",
+    id: FishVoicesIDsEnum.MortyEn,
+  },
+  [FishVoicesEnum.MortySmith]: {
+    name: "Morty Smith",
+    id: FishVoicesIDsEnum.MortySmith,
+  },
+  [FishVoicesEnum.RickEn]: {
+    name: "Rick (en)",
+    id: FishVoicesIDsEnum.RickEn,
+  },
+  [FishVoicesEnum.RickSanchezEn]: {
+    name: "Rick Sanchez (en)",
+    id: FishVoicesIDsEnum.RickSanchezEn,
+  },
+  [FishVoicesEnum.PeterGriffinEn]: {
+    name: "Peter Griffin (en)",
+    id: FishVoicesIDsEnum.PeterGriffinEn,
+  },
+  [FishVoicesEnum.MorganFreemanEn]: {
+    name: "Morgan Freeman (en)",
+    id: FishVoicesIDsEnum.MorganFreemanEn,
+  },
+  [FishVoicesEnum.ElonEn]: {
+    name: "Elon (en)",
+    id: FishVoicesIDsEnum.ElonEn,
+  },
+  [FishVoicesEnum.MortalKombatEn]: {
+    name: "Mortal Kombat (en)",
+    id: FishVoicesIDsEnum.MortalKombatEn,
+  },
+  [FishVoicesEnum.IngloriousBsterdsEn]: {
+    name: "Inglorious Bsterds (en)",
+    id: FishVoicesIDsEnum.IngloriousBsterdsEn,
+  },
+  [FishVoicesEnum.AH64ApacheCPG2En]: {
+    name: "AH-64 Apache CPG 2 (en)",
+    id: FishVoicesIDsEnum.AH64ApacheCPG2En,
+  },
+  [FishVoicesEnum.AH64ApacheCPGEn]: {
+    name: "AH-64 Apache CPG (en)",
+    id: FishVoicesIDsEnum.AH64ApacheCPGEn,
+  },
+  [FishVoicesEnum.HomelanderEn]: {
+    name: "Homelander (en)",
+    id: FishVoicesIDsEnum.HomelanderEn,
+  },
+  [FishVoicesEnum.Pateta]: {
+    name: "Pateta",
+    id: FishVoicesIDsEnum.Pateta,
+  },
+  [FishVoicesEnum.CapitaoPatria]: {
+    name: "Capitão Pátria",
+    id: FishVoicesIDsEnum.CapitaoPatria,
+  },
+  [FishVoicesEnum.MickeyMouse]: {
+    name: "Mickey Mouse",
+    id: FishVoicesIDsEnum.MickeyMouse,
   },
 };
 

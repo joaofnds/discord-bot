@@ -147,6 +147,10 @@ describe("SayCommand autocomplete", () => {
         name: "Capitão Nascimento",
         value: "capitao-nascimento",
       },
+      {
+        name: "Capitão Pátria",
+        value: "capitao-patria",
+      },
     ]);
   });
 
