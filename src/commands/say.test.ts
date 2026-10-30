@@ -154,6 +154,39 @@ describe("SayCommand autocomplete", () => {
     ]);
   });
 
+  it("finds Aldo Apache by name", async () => {
+    const interaction = new FakeAutocompleteInteraction();
+    interaction.query = "aldo";
+    await new SayCommand(new FakeSpeechGenerator()).autocomplete(interaction);
+    expect(interaction.choices).toEqual([
+      { name: "Waldo Moraes", value: "waldo-moraes" },
+      { name: "Aldo Apache (en)", value: "inglorious-bsterds-en" },
+    ]);
+  });
+
+  it("finds Japanese voices by their language label", async () => {
+    const interaction = new FakeAutocompleteInteraction();
+    interaction.query = "(jp)";
+    await new SayCommand(new FakeSpeechGenerator()).autocomplete(interaction);
+    expect(interaction.choices).toEqual([
+      { name: "Obito 1 (jp)", value: "obito-jp" },
+      { name: "Madara (jp)", value: "madara-jp" },
+      { name: "Pain 1 (jp)", value: "pain-1-jp" },
+      { name: "Pain 2 (jp)", value: "pain-2-jp" },
+      { name: "Naruto (jp)", value: "naruto-jp" },
+      { name: "Obito 2 (jp)", value: "obito-2-jp" },
+    ]);
+  });
+
+  it("labels Donald Trump as English", async () => {
+    const interaction = new FakeAutocompleteInteraction();
+    interaction.query = "donald";
+    await new SayCommand(new FakeSpeechGenerator()).autocomplete(interaction);
+    expect(interaction.choices).toEqual([
+      { name: "Donald Trump (en)", value: "donald-trump" },
+    ]);
+  });
+
   it("returns no choices for an unknown query", async () => {
     const interaction = new FakeAutocompleteInteraction();
     interaction.query = "unknown";
@@ -171,6 +204,38 @@ describe("SayCommand autocomplete", () => {
 });
 
 describe("SayCommand", () => {
+  const bookmarkedVoices = [
+    { slug: "obito-jp", id: "00be8badfdf84dc0839353820d448726" },
+    { slug: "madara-jp", id: "6c67208e439b42158c887c79af30a20a" },
+    { slug: "pain-1-jp", id: "dd9aaa6a4ec44055bb53ec6a615d1fc5" },
+    { slug: "pain-2-jp", id: "edff2a83cfe94bfd8c9abc00499d705d" },
+    { slug: "primeagen", id: "06ba5b192f9a49f2942f72febea29fde" },
+    { slug: "guerrinha", id: "bfe77956a85f44a9be040ce16e87ecf0" },
+    { slug: "samir", id: "2a52afa29cd74ae5802ba7b516c929e7" },
+    { slug: "bob-esponja", id: "0d604d0f2e834f7b82f97f6e81ec1bc5" },
+    { slug: "sasuke", id: "aedb06f6daa84a1db52c7479c7235910" },
+    { slug: "cartman", id: "ba6fb26d7d094e9888ac71c7dba651ee" },
+    { slug: "stewie", id: "26f644d9279841c5b41961991c9f9e06" },
+    { slug: "itoshi-sae", id: "2bb270d0dc344007b53ae25cd00a4e85" },
+    { slug: "satoru-gojo", id: "96a2c896ed7846848cdd83e484b23eb3" },
+    { slug: "anya", id: "ffe41701970d4b339ef7906300716f99" },
+    { slug: "galvao-bueno", id: "7fe10a00249247aabb495bae57ac80e1" },
+    { slug: "naruto-jp", id: "fc30849cffd24f49824775fdeff53ff8" },
+    { slug: "obito-2-jp", id: "01cf6bc227f54b6eace8eb2427b2642a" },
+  ];
+
+  for (const voice of bookmarkedVoices) {
+    it(`uses the bookmarked ID for ${voice.slug}`, async () => {
+      const speech = new FakeSpeechGenerator();
+      const interaction = new FakeSayInteraction();
+      interaction.slug = voice.slug;
+      await new SayCommand(speech).handle(interaction);
+      expect(speech.requests).toEqual([
+        { text: interaction.text, voiceId: voice.id },
+      ]);
+    });
+  }
+
   for (const voice of voices) {
     it(`sends a WAV file using ${voice.slug}`, async () => {
       const speech = new FakeSpeechGenerator();

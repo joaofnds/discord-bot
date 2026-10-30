@@ -42,6 +42,23 @@ export const FishVoicesEnum = {
   Pateta: "pateta",
   CapitaoPatria: "capitao-patria",
   MickeyMouse: "mickey-mouse",
+  ObitoJp: "obito-jp",
+  MadaraJp: "madara-jp",
+  Pain1Jp: "pain-1-jp",
+  Pain2Jp: "pain-2-jp",
+  Primeagen: "primeagen",
+  Guerrinha: "guerrinha",
+  Samir: "samir",
+  BobEsponja: "bob-esponja",
+  Sasuke: "sasuke",
+  Cartman: "cartman",
+  Stewie: "stewie",
+  ItoshiSae: "itoshi-sae",
+  SatoruGojo: "satoru-gojo",
+  Anya: "anya",
+  GalvaoBueno: "galvao-bueno",
+  NarutoJp: "naruto-jp",
+  Obito2Jp: "obito-2-jp",
 } as const;
 
 export type FishVoicesEnum =
@@ -89,6 +106,23 @@ export const FishVoicesIDsEnum = {
   Pateta: "ed7f998788b44fa59b680d92226480b7",
   CapitaoPatria: "9b3d632eeba6485d9f433139a675731b",
   MickeyMouse: "6bdf37402f6041b9bd3e2de6f6dc693c",
+  ObitoJp: "00be8badfdf84dc0839353820d448726",
+  MadaraJp: "6c67208e439b42158c887c79af30a20a",
+  Pain1Jp: "dd9aaa6a4ec44055bb53ec6a615d1fc5",
+  Pain2Jp: "edff2a83cfe94bfd8c9abc00499d705d",
+  Primeagen: "06ba5b192f9a49f2942f72febea29fde",
+  Guerrinha: "bfe77956a85f44a9be040ce16e87ecf0",
+  Samir: "2a52afa29cd74ae5802ba7b516c929e7",
+  BobEsponja: "0d604d0f2e834f7b82f97f6e81ec1bc5",
+  Sasuke: "aedb06f6daa84a1db52c7479c7235910",
+  Cartman: "ba6fb26d7d094e9888ac71c7dba651ee",
+  Stewie: "26f644d9279841c5b41961991c9f9e06",
+  ItoshiSae: "2bb270d0dc344007b53ae25cd00a4e85",
+  SatoruGojo: "96a2c896ed7846848cdd83e484b23eb3",
+  Anya: "ffe41701970d4b339ef7906300716f99",
+  GalvaoBueno: "7fe10a00249247aabb495bae57ac80e1",
+  NarutoJp: "fc30849cffd24f49824775fdeff53ff8",
+  Obito2Jp: "01cf6bc227f54b6eace8eb2427b2642a",
 } as const;
 
 export type FishVoicesIDsEnum =
@@ -164,7 +198,7 @@ export const fishVoices = {
     id: FishVoicesIDsEnum.NarradorChris,
   },
   [FishVoicesEnum.DonaldTrump]: {
-    name: "Donald Trump",
+    name: "Donald Trump (en)",
     id: FishVoicesIDsEnum.DonaldTrump,
   },
   [FishVoicesEnum.CapitaoNascimento]: {
@@ -232,7 +266,7 @@ export const fishVoices = {
     id: FishVoicesIDsEnum.MortalKombatEn,
   },
   [FishVoicesEnum.IngloriousBsterdsEn]: {
-    name: "Inglorious Bsterds (en)",
+    name: "Aldo Apache (en)",
     id: FishVoicesIDsEnum.IngloriousBsterdsEn,
   },
   [FishVoicesEnum.AH64ApacheCPG2En]: {
@@ -258,6 +292,74 @@ export const fishVoices = {
   [FishVoicesEnum.MickeyMouse]: {
     name: "Mickey Mouse",
     id: FishVoicesIDsEnum.MickeyMouse,
+  },
+  [FishVoicesEnum.ObitoJp]: {
+    name: "Obito 1 (jp)",
+    id: FishVoicesIDsEnum.ObitoJp,
+  },
+  [FishVoicesEnum.MadaraJp]: {
+    name: "Madara (jp)",
+    id: FishVoicesIDsEnum.MadaraJp,
+  },
+  [FishVoicesEnum.Pain1Jp]: {
+    name: "Pain (jp)",
+    id: FishVoicesIDsEnum.Pain1Jp,
+  },
+  [FishVoicesEnum.Pain2Jp]: {
+    name: "Pain 2 (jp)",
+    id: FishVoicesIDsEnum.Pain2Jp,
+  },
+  [FishVoicesEnum.Primeagen]: {
+    name: "Primeagen",
+    id: FishVoicesIDsEnum.Primeagen,
+  },
+  [FishVoicesEnum.Guerrinha]: {
+    name: "Guerrinha",
+    id: FishVoicesIDsEnum.Guerrinha,
+  },
+  [FishVoicesEnum.Samir]: {
+    name: "Samir",
+    id: FishVoicesIDsEnum.Samir,
+  },
+  [FishVoicesEnum.BobEsponja]: {
+    name: "Bob Esponja",
+    id: FishVoicesIDsEnum.BobEsponja,
+  },
+  [FishVoicesEnum.Sasuke]: {
+    name: "Sasuke",
+    id: FishVoicesIDsEnum.Sasuke,
+  },
+  [FishVoicesEnum.Cartman]: {
+    name: "Cartman",
+    id: FishVoicesIDsEnum.Cartman,
+  },
+  [FishVoicesEnum.Stewie]: {
+    name: "Stewie",
+    id: FishVoicesIDsEnum.Stewie,
+  },
+  [FishVoicesEnum.ItoshiSae]: {
+    name: "Itoshi Sae",
+    id: FishVoicesIDsEnum.ItoshiSae,
+  },
+  [FishVoicesEnum.SatoruGojo]: {
+    name: "Satoru Gojo",
+    id: FishVoicesIDsEnum.SatoruGojo,
+  },
+  [FishVoicesEnum.Anya]: {
+    name: "Anya",
+    id: FishVoicesIDsEnum.Anya,
+  },
+  [FishVoicesEnum.GalvaoBueno]: {
+    name: "Galvão Bueno",
+    id: FishVoicesIDsEnum.GalvaoBueno,
+  },
+  [FishVoicesEnum.NarutoJp]: {
+    name: "Naruto (jp)",
+    id: FishVoicesIDsEnum.NarutoJp,
+  },
+  [FishVoicesEnum.Obito2Jp]: {
+    name: "Obito 2 (jp)",
+    id: FishVoicesIDsEnum.Obito2Jp,
   },
 };
 
