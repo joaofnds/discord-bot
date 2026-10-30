@@ -59,6 +59,7 @@ export const FishVoicesEnum = {
   GalvaoBueno: "galvao-bueno",
   NarutoJp: "naruto-jp",
   Obito2Jp: "obito-2-jp",
+  Ye: "ye",
 } as const;
 
 export type FishVoicesEnum =
@@ -123,6 +124,7 @@ export const FishVoicesIDsEnum = {
   GalvaoBueno: "7fe10a00249247aabb495bae57ac80e1",
   NarutoJp: "fc30849cffd24f49824775fdeff53ff8",
   Obito2Jp: "01cf6bc227f54b6eace8eb2427b2642a",
+  Ye: "6fbd0d4b864f462d9a80aad6b984c7bf",
 } as const;
 
 export type FishVoicesIDsEnum =
@@ -360,6 +362,10 @@ export const fishVoices = {
   [FishVoicesEnum.Obito2Jp]: {
     name: "Obito 2 (jp)",
     id: FishVoicesIDsEnum.Obito2Jp,
+  },
+  [FishVoicesEnum.Ye]: {
+    name: "Ye",
+    id: FishVoicesIDsEnum.Ye,
   },
 };
 

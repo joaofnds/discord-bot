@@ -171,7 +171,7 @@ describe("SayCommand autocomplete", () => {
     expect(interaction.choices).toEqual([
       { name: "Obito 1 (jp)", value: "obito-jp" },
       { name: "Madara (jp)", value: "madara-jp" },
-      { name: "Pain 1 (jp)", value: "pain-1-jp" },
+      { name: "Pain (jp)", value: "pain-1-jp" },
       { name: "Pain 2 (jp)", value: "pain-2-jp" },
       { name: "Naruto (jp)", value: "naruto-jp" },
       { name: "Obito 2 (jp)", value: "obito-2-jp" },
@@ -222,6 +222,7 @@ describe("SayCommand", () => {
     { slug: "galvao-bueno", id: "7fe10a00249247aabb495bae57ac80e1" },
     { slug: "naruto-jp", id: "fc30849cffd24f49824775fdeff53ff8" },
     { slug: "obito-2-jp", id: "01cf6bc227f54b6eace8eb2427b2642a" },
+    { slug: "ye", id: "6fbd0d4b864f462d9a80aad6b984c7bf" },
   ];
 
   for (const voice of bookmarkedVoices) {
