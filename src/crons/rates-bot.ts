@@ -1,11 +1,15 @@
 import { CronJob, Scheduler } from "../lib/cron.ts";
 import { Bot } from "../discord/bot.ts";
-import { ExchangeRates } from "../lib/exchange-rates.ts";
+
+type ExchangeRates = {
+  fetchLatest(): Promise<Record<string, number>>;
+};
 
 export class RatesBot implements Disposable {
   private readonly cron: CronJob;
 
   constructor(
+    private readonly billionaireDadBot: Bot,
     private readonly richDadBot: Bot,
     private readonly poorDadBot: Bot,
     private readonly brokeDadBot: Bot,
@@ -40,7 +44,7 @@ export class RatesBot implements Disposable {
     this.stop();
   }
 
-  private async run() {
+  async run() {
     const rates = await this.exchangeRates.fetchLatest();
 
     const arsbrl = (1 / rates.ARS) * rates.BRL;
@@ -61,6 +65,7 @@ export class RatesBot implements Disposable {
   }
 
   private pickBot(usdbrl: number): Bot {
+    if (usdbrl > 5.8) return this.billionaireDadBot;
     if (usdbrl >= 5.5) return this.richDadBot;
     if (usdbrl < 5) return this.brokeDadBot;
     return this.poorDadBot;
