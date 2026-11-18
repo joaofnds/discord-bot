@@ -19,9 +19,30 @@ jobs:
       - run: bun run format:check
       - run: bun run test
 
+  commits:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: check conventional commit subjects
+        env:
+          BEFORE: ${{ github.event.before }}
+        run: |
+          range="$BEFORE..HEAD"
+          if [[ -z "$BEFORE" || "$BEFORE" =~ ^0+$ ]]; then range="HEAD~1..HEAD"; fi
+          bad=$(git log --no-merges --format='%h %s' "$range" \
+            | grep -Ev '^[0-9a-f]+ ((build|chore|ci|docs|feat|fix|perf|refactor|revert|style|test)(\([^)]+\))?!?: [^ ]|Revert ")' \
+            || true)
+          if [[ -n "$bad" ]]; then
+            echo "::error::semantic-release cannot parse these subjects and skips them; write 'type(scope): subject'"
+            echo "$bad"
+            exit 1
+          fi
+
   release:
     if: github.ref == 'refs/heads/main'
-    needs: [test]
+    needs: [test, commits]
     runs-on: ubuntu-latest
     steps:
       - uses: joaofnds/semantic-release-action@v1.4.0
