@@ -12,6 +12,7 @@ class FakeExchangeRates {
 }
 
 describe(RatesBot.name, () => {
+  let trillionaireDad: WebhookBotMock;
   let billionaireDad: WebhookBotMock;
   let richDad: WebhookBotMock;
   let poorDad: WebhookBotMock;
@@ -28,12 +29,14 @@ describe(RatesBot.name, () => {
   });
 
   beforeEach(() => {
+    trillionaireDad = new WebhookBotMock("trillionaire dad");
     billionaireDad = new WebhookBotMock("billionaire dad");
     richDad = new WebhookBotMock("rich dad");
     poorDad = new WebhookBotMock("poor dad");
     brokeDad = new WebhookBotMock("broke dad");
     exchangeRates = new FakeExchangeRates();
     bot = new RatesBot(
+      trillionaireDad,
       billionaireDad,
       richDad,
       poorDad,
@@ -56,8 +59,11 @@ describe(RatesBot.name, () => {
   });
 
   it.each([
-    ["billionaire dad", 5.81],
-    ["rich dad", 5.8],
+    ["trillionaire dad", 6.01],
+    ["trillionaire dad", 6],
+    ["billionaire dad", 5.99],
+    ["billionaire dad", 5.8],
+    ["rich dad", 5.79],
     ["rich dad", 5.5],
     ["poor dad", 5.49],
     ["poor dad", 5],
@@ -67,7 +73,13 @@ describe(RatesBot.name, () => {
 
     await bot.run();
 
-    const posters = [billionaireDad, richDad, poorDad, brokeDad]
+    const posters = [
+      trillionaireDad,
+      billionaireDad,
+      richDad,
+      poorDad,
+      brokeDad,
+    ]
       .filter((dad) => dad.messages.length > 0)
       .map((dad) => dad.name);
     expect(posters).toEqual([name]);

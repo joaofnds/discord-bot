@@ -9,6 +9,7 @@ export class RatesBot implements Disposable {
   private readonly cron: CronJob;
 
   constructor(
+    private readonly trillionaireDadBot: Bot,
     private readonly billionaireDadBot: Bot,
     private readonly richDadBot: Bot,
     private readonly poorDadBot: Bot,
@@ -65,7 +66,8 @@ export class RatesBot implements Disposable {
   }
 
   private pickBot(usdbrl: number): Bot {
-    if (usdbrl > 5.8) return this.billionaireDadBot;
+    if (usdbrl >= 6) return this.trillionaireDadBot;
+    if (usdbrl >= 5.8) return this.billionaireDadBot;
     if (usdbrl >= 5.5) return this.richDadBot;
     if (usdbrl < 5) return this.brokeDadBot;
     return this.poorDadBot;

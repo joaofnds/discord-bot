@@ -88,6 +88,7 @@ const interactionCreateChain = linkChain(
 const crons = [
   new PragTipBot(new WebhookBot(config.pragTipBotURL), random, scheduler),
   new RatesBot(
+    new WebhookBot(config.trillionaireDadBotURL),
     new WebhookBot(config.billionaireDadBotURL),
     new WebhookBot(config.richDadBotURL),
     new WebhookBot(config.poorDadBotURL),
